@@ -12,16 +12,13 @@
 
 TokenLens is a Chrome extension that extracts design tokens from websites you visit. This policy explains clearly and completely what data TokenLens accesses, what it stores, and what it never does.
 
-> **Short version:** TokenLens does not collect, transmit, or share any of your data. Everything stays on your device.
-
 ---
 
 ## 👤 Who We Are
 
 **Extension Name:** TokenLens — Design Token Extractor  
 **Developer:** Phe0nix  
-**Repository:** https://github.com/Phe0nix/TokenLens  
-**Contact:** *(Replace with your contact email)*
+**Repository:** https://github.com/Phe0nix/TokenLens
 
 ---
 
@@ -104,7 +101,6 @@ If this privacy policy is updated, the **Last Updated** date at the top of this 
 If you have any questions about this privacy policy or how TokenLens works, please contact:
 
 - **GitHub:** https://github.com/Phe0nix/TokenLens/issues
-- **Email:** *(Replace with your contact email)*
 
 ---
 
