@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>TokenLens</title>
+  <link rel="stylesheet" href="css/popup.css" />
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" role="banner">
+  <div class="logo" aria-hidden="true">TL</div>
+  <div class="brand">
+    <div class="brand-name">TokenLens</div>
+    <div class="brand-url" id="siteDomain">Scanning page...</div>
+  </div>
+  <div class="header-btns">
+    <button class="mode-btn" id="modeBtn" aria-label="Switch between Beginner and Pro mode" title="Switch mode">Beginner</button>
+    <button class="icon-btn" id="inspectBtn" aria-label="Pick an element on the page to see its tokens" title="Pick Element">⊕</button>
+    <button class="icon-btn" id="refreshBtn" aria-label="Re-scan page" title="Re-scan">↺</button>
+    <button class="icon-btn" id="saveBtn" aria-label="Save this site's tokens" title="Save">🔖</button>
+    <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">☀️</button>
+  </div>
+</header>
+
+<!-- Stats -->
+<div class="site-stats" id="siteStats" aria-live="polite">Extracting design tokens...</div>
+
+<!-- Tabs -->
+<nav aria-label="Token categories">
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="colors" role="tab" aria-selected="true">
+      🎨 Colors <span class="tab-count" id="cnt_colors">0</span>
+    </button>
+    <button class="tab-btn" data-tab="fonts" role="tab" aria-selected="false">
+      Aa Fonts <span class="tab-count" id="cnt_fonts">0</span>
+    </button>
+    <button class="tab-btn" data-tab="spacing" role="tab" aria-selected="false">
+      ⬜ Spacing <span class="tab-count" id="cnt_spacing">0</span>
+    </button>
+    <button class="tab-btn" data-tab="shadows" role="tab" aria-selected="false">
+      🌑 Shadows <span class="tab-count" id="cnt_shadows">0</span>
+    </button>
+    <button class="tab-btn" data-tab="vars" data-pro-only="true" role="tab" aria-selected="false">
+      — Variables <span class="tab-count" id="cnt_vars">0</span>
+    </button>
+    <button class="tab-btn" data-tab="insights" role="tab" aria-selected="false">
+      ✨ Insights <span class="tab-count" id="cnt_insights">0</span>
+    </button>
+    <button class="tab-btn" data-tab="history" role="tab" aria-selected="false">
+      🕘 History <span class="tab-count" id="cnt_history">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Export bar -->
+<div class="export-bar" aria-label="Export options">
+  <span class="export-label">Export:</span>
+  <select id="exportPreset" class="exp-select" aria-label="Export preset">
+    <option value="all">All tokens</option>
+    <option value="colors-radius">Colors + Radius</option>
+    <option value="colors-only">Colors only</option>
+    <option value="custom" data-pro-only="true">Custom</option>
+  </select>
+  <button class="exp-btn" id="customizeExportBtn" data-pro-only="true" aria-label="Customize export tokens">Customize</button>
+  <button class="exp-btn" data-export="css" aria-label="Export as CSS variables">CSS Vars</button>
+  <button class="exp-btn" data-export="scss" data-pro-only="true" aria-label="Export as SCSS variables">SCSS</button>
+  <button class="exp-btn" data-export="tailwind" data-pro-only="true" aria-label="Export as Tailwind config">Tailwind</button>
+  <button class="exp-btn" data-export="figma" data-pro-only="true" aria-label="Export as Figma Tokens JSON">Figma</button>
+  <button class="exp-btn" data-export="dtcg" data-pro-only="true" aria-label="Export as W3C DTCG JSON">DTCG</button>
+  <button class="exp-btn" data-export="json" aria-label="Export as JSON">JSON</button>
+</div>
+
+<div class="export-customize hidden" id="exportCustomize" data-pro-only="true" aria-label="Custom export categories">
+  <label><input type="checkbox" data-exp-cat="colors" /> Colors</label>
+  <label><input type="checkbox" data-exp-cat="typography" /> Typography</label>
+  <label><input type="checkbox" data-exp-cat="spacing" /> Spacing</label>
+  <label><input type="checkbox" data-exp-cat="radius" /> Radius</label>
+  <label><input type="checkbox" data-exp-cat="shadows" /> Shadows</label>
+  <label><input type="checkbox" data-exp-cat="gradients" /> Gradients</label>
+  <label><input type="checkbox" data-exp-cat="variables" /> Variables</label>
+</div>
+
+<!-- Error -->
+<div class="error-msg hidden" id="errorMsg" role="alert"></div>
+
+<!-- Loader -->
+<div class="loader-wrap" id="loader">
+  <div class="spinner" aria-hidden="true"></div>
+  <div class="loader-text">Scanning design tokens…</div>
+</div>
+
+<!-- Content -->
+<div id="content" class="hidden">
+  <div class="panel-wrap">
+    <div id="panel" role="region" aria-live="polite" aria-label="Extracted tokens"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/popup.js"></script>
+</body>
+</html>
