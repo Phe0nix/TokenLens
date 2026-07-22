@@ -1,16 +1,14 @@
 // background.js - Palext background worker
-// Keeps inspect capture aligned with the currently open UI surface.
+// Icon click opens floating page tool. Keyboard shortcut opens classic popup window.
 
 const uiPorts = {
-  popup: new Set(),
-  sidepanel: new Set()
+  popup: new Set()
 };
 
 chrome.runtime.onConnect.addListener((port) => {
-  if (port.name !== 'palext-popup' && port.name !== 'palext-sidepanel') return;
-  const surface = port.name === 'palext-sidepanel' ? 'sidepanel' : 'popup';
-  uiPorts[surface].add(port);
-  port.onDisconnect.addListener(() => uiPorts[surface].delete(port));
+  if (port.name !== 'palext-popup') return;
+  uiPorts.popup.add(port);
+  port.onDisconnect.addListener(() => uiPorts.popup.delete(port));
 });
 
 async function getActiveTabInCurrentWindow() {
@@ -21,39 +19,93 @@ async function getActiveTabInCurrentWindow() {
   return tab || null;
 }
 
-async function openPalextSidePanel() {
-  if (!chrome.sidePanel) {
-    return { ok: false, error: 'This browser does not support the Chrome Side Panel API.' };
-  }
-
-  const tab = await getActiveTabInCurrentWindow();
-  if (!tab || !tab.id || !tab.windowId) {
-    return { ok: false, error: 'Open any normal website tab, then try again.' };
-  }
-
-  await chrome.sidePanel.setOptions({
-    tabId: tab.id,
-    path: 'sidepanel.html',
-    enabled: true
+async function openClassicPopupWindow(size = {}) {
+  const width = Math.max(360, Math.min(520, Number(size.width) || 410));
+  const height = Math.max(520, Math.min(760, Number(size.height) || 620));
+  await chrome.windows.create({
+    url: chrome.runtime.getURL('popup.html?classic=1'),
+    type: 'popup',
+    width,
+    height
   });
+  return { ok: true, width, height };
+}
+
+async function tryInjectContentScript(tabId) {
+  if (!chrome.scripting || !chrome.scripting.executeScript) return false;
   try {
-    await chrome.sidePanel.open({ tabId: tab.id });
-    return { ok: true, message: 'Palext opened in the side panel.' };
+    await chrome.scripting.executeScript({
+      target: { tabId },
+      files: ['js/content.js']
+    });
+    return true;
   } catch (_) {
-    await chrome.sidePanel.open({ windowId: tab.windowId });
-    return { ok: true, message: 'Palext opened in the side panel.' };
+    return false;
   }
 }
+
+function sendOpenFloatingMessage(tabId, startInspect = false) {
+  return new Promise((resolve) => {
+    chrome.tabs.sendMessage(tabId, { type: 'OPEN_FLOATING_TOOL', startInspect: !!startInspect }, (resp) => {
+      if (chrome.runtime.lastError) {
+        resolve({ ok: false, error: chrome.runtime.lastError.message || 'Could not open floating tool.' });
+        return;
+      }
+      resolve(resp && resp.ok ? { ok: true } : { ok: false, error: 'Could not open floating tool.' });
+    });
+  });
+}
+
+async function openFloatingToolOnTab(tabId, startInspect = false) {
+  const first = await sendOpenFloatingMessage(tabId, startInspect);
+  if (first.ok) return first;
+
+  const reason = String(first.error || '').toLowerCase();
+  const missingReceiver = reason.includes('receiving end does not exist') || reason.includes('could not establish connection');
+  if (!missingReceiver) return first;
+
+  const injected = await tryInjectContentScript(tabId);
+  if (!injected) return first;
+
+  return sendOpenFloatingMessage(tabId, startInspect);
+}
+
+chrome.action.onClicked.addListener(async (tab) => {
+  try {
+    if (!tab || !tab.id || !/^https?:\/\//i.test(String(tab.url || ''))) {
+      await openClassicPopupWindow();
+      return;
+    }
+    const opened = await openFloatingToolOnTab(tab.id, false);
+    if (!opened.ok) {
+      await openClassicPopupWindow();
+    }
+  } catch (_) {
+    void openClassicPopupWindow();
+  }
+});
+
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command !== 'open_classic_popup') return;
+  try {
+    const tab = await getActiveTabInCurrentWindow();
+    if (tab && tab.id && /^https?:\/\//i.test(String(tab.url || ''))) {
+      const opened = await openFloatingToolOnTab(tab.id, false);
+      if (opened.ok) return;
+    }
+    await openClassicPopupWindow({ width: 420, height: 640 });
+  } catch (_) {}
+});
 
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (!msg) return false;
 
-  if (msg.type === 'OPEN_SIDE_PANEL') {
+  if (msg.type === 'OPEN_DETACHED_POPUP') {
     (async () => {
       try {
-        sendResponse(await openPalextSidePanel());
+        sendResponse(await openClassicPopupWindow(msg));
       } catch (e) {
-        sendResponse({ ok: false, error: e && e.message ? e.message : 'Could not open side panel.' });
+        sendResponse({ ok: false, error: e && e.message ? e.message : 'Could not open detached window.' });
       }
     })();
     return true;
@@ -63,19 +115,12 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 
   (async () => {
     try {
-      if (msg.sourceSurface === 'sidepanel') {
-        chrome.runtime.sendMessage({ type: 'PAL_EXT_INSPECT_CAPTURED' }, () => {
-          void chrome.runtime.lastError;
-        });
-        sendResponse({ ok: true, reopened: false, surface: 'sidepanel' });
-        return;
-      }
+      chrome.runtime.sendMessage({ type: 'PAL_EXT_INSPECT_CAPTURED' }, () => {
+        void chrome.runtime.lastError;
+      });
 
-      if (uiPorts.sidepanel.size > 0) {
-        chrome.runtime.sendMessage({ type: 'PAL_EXT_INSPECT_CAPTURED' }, () => {
-          void chrome.runtime.lastError;
-        });
-        sendResponse({ ok: true, reopened: false, surface: 'sidepanel' });
+      if (uiPorts.popup.size > 0) {
+        sendResponse({ ok: true, reopened: false, surface: 'popup' });
         return;
       }
 
@@ -85,12 +130,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         return;
       }
 
-      await chrome.windows.create({
-        url: chrome.runtime.getURL('popup.html'),
-        type: 'popup',
-        width: 430,
-        height: 650
-      });
+      await openClassicPopupWindow({ width: 410, height: 620 });
       sendResponse({ ok: true, reopened: true, surface: 'popup' });
     } catch (_) {
       sendResponse({ ok: false, reopened: false });

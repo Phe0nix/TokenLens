@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palext Color Variants Mockup</title>
+  <style>
+    :root {
+      --bg: #0d1623;
+      --bg2: #132334;
+      --panel: #1a2d41;
+      --line: #29465e;
+      --line-soft: rgba(154, 193, 221, 0.18);
+      --text: #e8f3ff;
+      --text2: #bfd6ea;
+      --text3: #8eafc8;
+      --accent: #39a8a2;
+      --accent2: #7bd8d2;
+      --warn: #f1b666;
+      --shadow: 0 20px 42px rgba(4, 10, 18, 0.55);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 90% 10%, rgba(57, 168, 162, 0.22), transparent 34%),
+        radial-gradient(circle at 10% 90%, rgba(95, 145, 185, 0.18), transparent 36%),
+        var(--bg);
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .page {
+      width: min(1500px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      background: linear-gradient(170deg, rgba(20, 35, 52, 0.96), rgba(14, 25, 38, 0.96));
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+    }
+
+    .hero p {
+      margin: 6px 0 0;
+      color: var(--text2);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .tab-comparison {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .tab-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(25, 41, 59, 0.78);
+      padding: 10px;
+    }
+
+    .tab-card h3 {
+      margin: 0 0 7px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+      color: var(--accent2);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 5px;
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      background: rgba(16, 28, 40, 0.8);
+    }
+
+    .tab {
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--text3);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 9px;
+      flex-shrink: 0;
+    }
+
+    .tab.active {
+      color: #fff;
+      border-color: rgba(57, 168, 162, 0.7);
+      background: linear-gradient(180deg, rgba(79, 203, 196, 0.84), rgba(48, 143, 136, 0.92));
+    }
+
+    .tab.small { font-size: 10px; font-weight: 700; }
+    .tab.small .icon { font-size: 10px; }
+
+    .tab.balanced { font-size: 11.5px; font-weight: 700; }
+    .tab.balanced .icon { font-size: 12px; }
+
+    .tab.bold { font-size: 12.5px; font-weight: 700; }
+    .tab.bold .icon { font-size: 14px; }
+
+    .variant-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .variant {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(22, 37, 54, 0.95), rgba(13, 24, 37, 0.96));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .variant-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line-soft);
+      background: linear-gradient(180deg, rgba(30, 50, 72, 0.78), rgba(20, 34, 50, 0.78));
+    }
+
+    .variant-title {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .variant-sub {
+      margin: 2px 0 0;
+      font-size: 10px;
+      color: var(--text3);
+    }
+
+    .tag {
+      border: 1px solid rgba(241, 182, 102, 0.68);
+      background: rgba(241, 182, 102, 0.18);
+      color: #ffdba9;
+      font-size: 10px;
+      border-radius: 999px;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+
+    .screen {
+      padding: 12px;
+      min-height: 320px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 10px;
+      color: var(--text2);
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: rgba(30, 50, 72, 0.76);
+      border-radius: 999px;
+      padding: 3px 8px;
+    }
+
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .swatch-card {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #0f1d2d;
+    }
+
+    .tone {
+      height: 52px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .meta {
+      padding: 6px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .hex {
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+      color: var(--text3);
+      font-size: 9px;
+    }
+
+    .icon-mini {
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: 10px;
+      color: var(--text2);
+      background: rgba(31, 50, 69, 0.86);
+    }
+
+    .list {
+      display: grid;
+      gap: 7px;
+    }
+
+    .list-row {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px;
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      align-items: center;
+      gap: 8px;
+      background: rgba(24, 40, 58, 0.8);
+    }
+
+    .dot {
+      width: 42px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .list-title {
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .list-code {
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-size: 10px;
+      color: var(--text2);
+    }
+
+    .actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .drawer-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .compact-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .compact-cell {
+      border-radius: 8px;
+      height: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      position: relative;
+    }
+
+    .compact-cell span {
+      position: absolute;
+      right: 4px;
+      bottom: 3px;
+      font-size: 8px;
+      font-family: Consolas, "JetBrains Mono", monospace;
+      background: rgba(11, 20, 31, 0.65);
+      padding: 1px 4px;
+      border-radius: 999px;
+    }
+
+    .drawer {
+      border: 1px solid rgba(57, 168, 162, 0.54);
+      background: rgba(17, 32, 46, 0.9);
+      border-radius: 10px;
+      padding: 8px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .drawer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .drawer-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+    }
+
+    .drawer-title {
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .drawer-code {
+      font-size: 10px;
+      font-family: Consolas, "JetBrains Mono", monospace;
+      color: var(--text2);
+    }
+
+    .group-stack {
+      display: grid;
+      gap: 8px;
+    }
+
+    .group {
+      border: 1px solid var(--line);
+      background: rgba(22, 37, 54, 0.82);
+      border-radius: 10px;
+      padding: 8px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .group-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 10px;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      font-weight: 700;
+    }
+
+    .strip {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 5px;
+    }
+
+    .strip-item {
+      border-radius: 8px;
+      height: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      position: relative;
+    }
+
+    .strip-item b {
+      position: absolute;
+      left: 4px;
+      bottom: 2px;
+      font-size: 8px;
+      font-family: Consolas, "JetBrains Mono", monospace;
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .footer-note {
+      border: 1px solid var(--line);
+      background: rgba(20, 35, 52, 0.88);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 11px;
+      color: var(--text2);
+      line-height: 1.45;
+    }
+
+    @media (max-width: 1220px) {
+      .variant-grid {
+        grid-template-columns: 1fr;
+      }
+      .tab-comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>Color Tab Variants - Decision Mockup</h1>
+      <p>Each screen below shows a different way to present colors so icon size, text readability, and code visibility stay balanced. This is static visual exploration only.</p>
+
+      <div class="tab-comparison">
+        <article class="tab-card">
+          <h3>Tab Scale A (Current-ish)</h3>
+          <div class="tabs">
+            <span class="tab small active"><span class="icon">🎨</span> Colors</span>
+            <span class="tab small"><span class="icon">Aa</span> Type</span>
+            <span class="tab small"><span class="icon">🧱</span> Layout</span>
+          </div>
+        </article>
+        <article class="tab-card">
+          <h3>Tab Scale B (Balanced)</h3>
+          <div class="tabs">
+            <span class="tab balanced active"><span class="icon">🎨</span> Colors</span>
+            <span class="tab balanced"><span class="icon">Aa</span> Type</span>
+            <span class="tab balanced"><span class="icon">🧱</span> Layout</span>
+          </div>
+        </article>
+        <article class="tab-card">
+          <h3>Tab Scale C (Bold)</h3>
+          <div class="tabs">
+            <span class="tab bold active"><span class="icon">🎨</span> Colors</span>
+            <span class="tab bold"><span class="icon">Aa</span> Type</span>
+            <span class="tab bold"><span class="icon">🧱</span> Layout</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="variant-grid">
+      <article class="variant">
+        <header class="variant-head">
+          <div>
+            <h2 class="variant-title">Variant 1: Split Swatch Card</h2>
+            <p class="variant-sub">Large color preview + fixed metadata zone (best overall balance)</p>
+          </div>
+          <span class="tag">Recommended</span>
+        </header>
+        <div class="screen">
+          <div class="toolbar">
+            <span>12 colors found</span>
+            <span class="chip">Quick Scan View</span>
+          </div>
+          <div class="swatch-grid">
+            <div class="swatch-card"><div class="tone" style="background:#2563eb"></div><div class="meta"><div class="hex">#2563EB</div><div class="meta-row"><span>brand-500</span><span class="icon-mini">⎘</span></div></div></div>
+            <div class="swatch-card"><div class="tone" style="background:#0ea5e9"></div><div class="meta"><div class="hex">#0EA5E9</div><div class="meta-row"><span>info-500</span><span class="icon-mini">◎</span></div></div></div>
+            <div class="swatch-card"><div class="tone" style="background:#14b8a6"></div><div class="meta"><div class="hex">#14B8A6</div><div class="meta-row"><span>accent-500</span><span class="icon-mini">⎘</span></div></div></div>
+            <div class="swatch-card"><div class="tone" style="background:#f59e0b"></div><div class="meta"><div class="hex">#F59E0B</div><div class="meta-row"><span>warn-500</span><span class="icon-mini">◎</span></div></div></div>
+            <div class="swatch-card"><div class="tone" style="background:#ef4444"></div><div class="meta"><div class="hex">#EF4444</div><div class="meta-row"><span>danger-500</span><span class="icon-mini">⎘</span></div></div></div>
+            <div class="swatch-card"><div class="tone" style="background:#10b981"></div><div class="meta"><div class="hex">#10B981</div><div class="meta-row"><span>success-500</span><span class="icon-mini">◎</span></div></div></div>
+            <div class="swatch-card"><div class="tone" style="background:#a855f7"></div><div class="meta"><div class="hex">#A855F7</div><div class="meta-row"><span>violet-500</span><span class="icon-mini">⎘</span></div></div></div>
+            <div class="swatch-card"><div class="tone" style="background:#64748b"></div><div class="meta"><div class="hex">#64748B</div><div class="meta-row"><span>slate-500</span><span class="icon-mini">◎</span></div></div></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="variant">
+        <header class="variant-head">
+          <div>
+            <h2 class="variant-title">Variant 2: Left Swatch + Metadata List</h2>
+            <p class="variant-sub">Highest readability for names and color codes (audit-friendly)</p>
+          </div>
+          <span class="tag">Data First</span>
+        </header>
+        <div class="screen">
+          <div class="toolbar">
+            <span>Role Group: Brand + Surface</span>
+            <span class="chip">List Mode</span>
+          </div>
+          <div class="list">
+            <div class="list-row"><div class="dot" style="background:#2563eb"></div><div><div class="list-title">Brand / Primary</div><div class="list-code">#2563EB · hsl(221, 83%, 54%)</div></div><div class="actions"><span class="icon-mini">⎘</span><span class="icon-mini">◎</span></div></div>
+            <div class="list-row"><div class="dot" style="background:#0ea5e9"></div><div><div class="list-title">Info / Secondary</div><div class="list-code">#0EA5E9 · hsl(199, 89%, 49%)</div></div><div class="actions"><span class="icon-mini">⎘</span><span class="icon-mini">◎</span></div></div>
+            <div class="list-row"><div class="dot" style="background:#14b8a6"></div><div><div class="list-title">Accent / Action</div><div class="list-code">#14B8A6 · hsl(174, 80%, 40%)</div></div><div class="actions"><span class="icon-mini">⎘</span><span class="icon-mini">◎</span></div></div>
+            <div class="list-row"><div class="dot" style="background:#f1f5f9"></div><div><div class="list-title">Surface / Elevated</div><div class="list-code">#F1F5F9 · hsl(210, 40%, 96%)</div></div><div class="actions"><span class="icon-mini">⎘</span><span class="icon-mini">◎</span></div></div>
+            <div class="list-row"><div class="dot" style="background:#0f172a"></div><div><div class="list-title">Text / Strong</div><div class="list-code">#0F172A · hsl(222, 47%, 11%)</div></div><div class="actions"><span class="icon-mini">⎘</span><span class="icon-mini">◎</span></div></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="variant">
+        <header class="variant-head">
+          <div>
+            <h2 class="variant-title">Variant 3: Compact Grid + Detail Drawer</h2>
+            <p class="variant-sub">Minimal surface for fast scan, details appear in selected drawer</p>
+          </div>
+          <span class="tag">Modern</span>
+        </header>
+        <div class="screen">
+          <div class="toolbar">
+            <span>Density: High</span>
+            <span class="chip">Selected: #14B8A6</span>
+          </div>
+          <div class="drawer-layout">
+            <div class="compact-grid">
+              <div class="compact-cell" style="background:#2563eb"><span>EB</span></div>
+              <div class="compact-cell" style="background:#0ea5e9"><span>E9</span></div>
+              <div class="compact-cell" style="background:#14b8a6"><span>A6</span></div>
+              <div class="compact-cell" style="background:#f59e0b"><span>0B</span></div>
+              <div class="compact-cell" style="background:#ef4444"><span>44</span></div>
+              <div class="compact-cell" style="background:#10b981"><span>81</span></div>
+              <div class="compact-cell" style="background:#a855f7"><span>F7</span></div>
+              <div class="compact-cell" style="background:#6366f1"><span>F1</span></div>
+              <div class="compact-cell" style="background:#f43f5e"><span>5E</span></div>
+              <div class="compact-cell" style="background:#64748b"><span>8B</span></div>
+              <div class="compact-cell" style="background:#22c55e"><span>5E</span></div>
+              <div class="compact-cell" style="background:#f97316"><span>16</span></div>
+            </div>
+            <div class="drawer">
+              <div class="drawer-top">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <div class="drawer-dot" style="background:#14b8a6"></div>
+                  <div>
+                    <div class="drawer-title">Accent / Action</div>
+                    <div class="drawer-code">#14B8A6</div>
+                  </div>
+                </div>
+                <div class="actions"><span class="icon-mini">⎘</span><span class="icon-mini">◎</span></div>
+              </div>
+              <div class="drawer-code">hsl(174, 80%, 40%) · WCAG AA pass on white</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="variant">
+        <header class="variant-head">
+          <div>
+            <h2 class="variant-title">Variant 4: Grouped Palette Strips</h2>
+            <p class="variant-sub">Design-system storytelling with role buckets and clean scan lines</p>
+          </div>
+          <span class="tag">System View</span>
+        </header>
+        <div class="screen">
+          <div class="toolbar">
+            <span>Semantic grouping on</span>
+            <span class="chip">Review + Handoff</span>
+          </div>
+          <div class="group-stack">
+            <div class="group">
+              <div class="group-head"><span>Brand</span><span>4 tokens</span></div>
+              <div class="strip">
+                <div class="strip-item" style="background:#1d4ed8"><b>4ED8</b></div>
+                <div class="strip-item" style="background:#2563eb"><b>63EB</b></div>
+                <div class="strip-item" style="background:#3b82f6"><b>82F6</b></div>
+                <div class="strip-item" style="background:#60a5fa"><b>A5FA</b></div>
+                <div class="strip-item" style="background:#93c5fd"><b>C5FD</b></div>
+                <div class="strip-item" style="background:#bfdbfe"><b>DBFE</b></div>
+              </div>
+            </div>
+            <div class="group">
+              <div class="group-head"><span>Status</span><span>6 tokens</span></div>
+              <div class="strip">
+                <div class="strip-item" style="background:#10b981"><b>B981</b></div>
+                <div class="strip-item" style="background:#22c55e"><b>C55E</b></div>
+                <div class="strip-item" style="background:#f59e0b"><b>9E0B</b></div>
+                <div class="strip-item" style="background:#f97316"><b>7316</b></div>
+                <div class="strip-item" style="background:#ef4444"><b>4444</b></div>
+                <div class="strip-item" style="background:#f43f5e"><b>3F5E</b></div>
+              </div>
+            </div>
+            <div class="group">
+              <div class="group-head"><span>Surface and Text</span><span>5 tokens</span></div>
+              <div class="strip">
+                <div class="strip-item" style="background:#f8fafc"><b>FAFC</b></div>
+                <div class="strip-item" style="background:#e2e8f0"><b>E8F0</b></div>
+                <div class="strip-item" style="background:#94a3b8"><b>A3B8</b></div>
+                <div class="strip-item" style="background:#334155"><b>4155</b></div>
+                <div class="strip-item" style="background:#0f172a"><b>172A</b></div>
+                <div class="strip-item" style="background:#020617"><b>0617</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="footer-note">
+      Decision shortcut: if you want best overall balance, pick Variant 1. If your priority is audit readability and less visual noise, pick Variant 2. If you want modern density for power users, pick Variant 3. If you want design-system communication for teams, pick Variant 4.
+    </section>
+  </main>
+</body>
+</html>

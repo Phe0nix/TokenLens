@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Effects / Shadows UI Mockups</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg2: #111d33;
+      --bg3: #13243d;
+      --card: #12243f;
+      --text: #e6f0ff;
+      --text2: #a4b9d6;
+      --text3: #6b82a8;
+      --border: #2a3f60;
+      --accent: #55b8d9;
+      --accent2: #7ed0e8;
+      --radius: 12px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 700px at 20% -10%, #1b3152, var(--bg));
+    }
+
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mockup {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: linear-gradient(180deg, rgba(17,29,51,0.94), rgba(17,29,51,0.84));
+      box-shadow: 0 10px 22px rgba(4, 10, 21, 0.35);
+    }
+
+    .mockup-title {
+      margin: 0 0 12px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .mockup-desc {
+      margin: 0 0 12px;
+      font-size: 10px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    .mockup-content {
+      display: grid;
+      gap: 10px;
+    }
+
+    /* ─── Design 1: Card Grid (2 columns, shadow in white box) ─── */
+    .design1-card {
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--bg3);
+      padding: 11px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .design1-preview {
+      width: 100%;
+      height: 60px;
+      background: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .design1-preview.shadow1 {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .design1-preview.shadow2 {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .design1-preview.shadow3 {
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .design1-info {
+      display: grid;
+      gap: 4px;
+    }
+
+    .design1-name {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .design1-value {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--text2);
+      word-break: break-all;
+    }
+
+    .design1-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .design1-actions button {
+      flex: 1;
+      height: 24px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: color-mix(in srgb, var(--bg2) 90%, var(--accent) 10%);
+      color: var(--text2);
+      font-size: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ─── Design 2: Horizontal Row (white preview on left) ─── */
+    .design2-row {
+      display: grid;
+      grid-template-columns: 80px 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg3);
+    }
+
+    .design2-preview {
+      width: 80px;
+      height: 50px;
+      background: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .design2-preview.shadow1 {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .design2-preview.shadow2 {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .design2-preview.shadow3 {
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .design2-main {
+      display: grid;
+      gap: 4px;
+    }
+
+    .design2-name {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .design2-value {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--text2);
+      word-break: break-all;
+    }
+
+    .design2-btn {
+      height: 24px;
+      padding: 0 8px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: color-mix(in srgb, var(--bg2) 90%, var(--accent) 10%);
+      color: var(--text2);
+      font-size: 9px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    /* ─── Design 3: Card Grid with large preview ─── */
+    .design3-card {
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--bg3);
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .design3-preview {
+      width: 100%;
+      height: 80px;
+      background: white;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .design3-preview.shadow1 {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .design3-preview.shadow2 {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .design3-preview.shadow3 {
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .design3-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .design3-name {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .design3-badge {
+      font-size: 9px;
+      color: var(--text3);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px 7px;
+      background: color-mix(in srgb, var(--bg2) 90%, var(--accent) 10%);
+    }
+
+    .design3-value {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--text2);
+      word-break: break-all;
+      line-height: 1.4;
+    }
+
+    .design3-actions {
+      display: flex;
+      gap: 6px;
+      padding-top: 8px;
+      border-top: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+    }
+
+    .design3-actions button {
+      flex: 1;
+      height: 24px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: color-mix(in srgb, var(--bg2) 90%, var(--accent) 10%);
+      color: var(--text2);
+      font-size: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ─── Design 4: Compact Row with inline white preview ─── */
+    .design4-row {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg3);
+    }
+
+    .design4-top {
+      display: grid;
+      grid-template-columns: 60px 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .design4-preview {
+      width: 60px;
+      height: 40px;
+      background: white;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .design4-preview.shadow1 {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .design4-preview.shadow2 {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .design4-preview.shadow3 {
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .design4-main {
+      display: grid;
+      gap: 3px;
+    }
+
+    .design4-name {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .design4-value {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--text2);
+    }
+
+    .design4-btn {
+      height: 24px;
+      padding: 0 8px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: color-mix(in srgb, var(--bg2) 90%, var(--accent) 10%);
+      color: var(--text2);
+      font-size: 9px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .design4-value-full {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--text3);
+      word-break: break-all;
+      padding-top: 8px;
+      border-top: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1200px) {
+      .wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mockup">
+      <h3 class="mockup-title">Design 1: Card Grid (2 columns)</h3>
+      <p class="mockup-desc">Shadow in white box card. Each shadow as a card. Shows name, value, and two buttons (Locate, Copy). Good for scanning multiple shadows.</p>
+      <div class="mockup-content">
+        <div class="design1-card">
+          <div class="design1-preview shadow1"></div>
+          <div class="design1-info">
+            <div class="design1-name">Subtle Elevation</div>
+            <div class="design1-value">0 2px 4px rgba(0,0,0,0.1)</div>
+          </div>
+          <div class="design1-actions">
+            <button>◎ Locate</button>
+            <button>⎘ Copy</button>
+          </div>
+        </div>
+        <div class="design1-card">
+          <div class="design1-preview shadow2"></div>
+          <div class="design1-info">
+            <div class="design1-name">Medium Elevation</div>
+            <div class="design1-value">0 8px 16px rgba(0,0,0,0.2)</div>
+          </div>
+          <div class="design1-actions">
+            <button>◎ Locate</button>
+            <button>⎘ Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mockup">
+      <h3 class="mockup-title">Design 2: Horizontal Row</h3>
+      <p class="mockup-desc">Horizontal layout with white preview on left. Value truncated in middle. Locate and Copy buttons on right. Compact vertical space.</p>
+      <div class="mockup-content">
+        <div class="design2-row">
+          <div class="design2-preview shadow1"></div>
+          <div class="design2-main">
+            <div class="design2-name">Subtle Elevation</div>
+            <div class="design2-value">0 2px 4px rgba(0,0,0,0.1)</div>
+          </div>
+          <button class="design2-btn">◎ Locate</button>
+          <button class="design2-btn">⎘ Copy</button>
+        </div>
+        <div class="design2-row">
+          <div class="design2-preview shadow2"></div>
+          <div class="design2-main">
+            <div class="design2-name">Medium Elevation</div>
+            <div class="design2-value">0 8px 16px rgba(0,0,0,0.2)</div>
+          </div>
+          <button class="design2-btn">◎ Locate</button>
+          <button class="design2-btn">⎘ Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mockup">
+      <h3 class="mockup-title">Design 3: Premium Cards (2 columns)</h3>
+      <p class="mockup-desc">Larger white preview area (visual-first). Header with name and intensity badge. Full value display. Buttons below. Best for focus on visual.</p>
+      <div class="mockup-content">
+        <div class="design3-card">
+          <div class="design3-preview shadow1"></div>
+          <div class="design3-header">
+            <div class="design3-name">Subtle</div>
+            <div class="design3-badge">2px blur</div>
+          </div>
+          <div class="design3-value">0 2px 4px rgba(0,0,0,0.1)</div>
+          <div class="design3-actions">
+            <button>◎ Locate</button>
+            <button>⎘ Copy</button>
+          </div>
+        </div>
+        <div class="design3-card">
+          <div class="design3-preview shadow2"></div>
+          <div class="design3-header">
+            <div class="design3-name">Medium</div>
+            <div class="design3-badge">16px blur</div>
+          </div>
+          <div class="design3-value">0 8px 16px rgba(0,0,0,0.2)</div>
+          <div class="design3-actions">
+            <button>◎ Locate</button>
+            <button>⎘ Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mockup">
+      <h3 class="mockup-title">Design 4: Compact + Expandable</h3>
+      <p class="mockup-desc">Compact row with small white preview. Shows name + truncated value. Buttons always visible. Value expands below on hover. Space efficient.</p>
+      <div class="mockup-content">
+        <div class="design4-row">
+          <div class="design4-top">
+            <div class="design4-preview shadow1"></div>
+            <div class="design4-main">
+              <div class="design4-name">Subtle Elevation</div>
+              <div class="design4-value">0 2px 4px rgba...</div>
+            </div>
+            <button class="design4-btn">◎ Locate</button>
+            <button class="design4-btn">⎘ Copy</button>
+          </div>
+          <div class="design4-value-full">0 2px 4px rgba(0,0,0,0.1)</div>
+        </div>
+        <div class="design4-row">
+          <div class="design4-top">
+            <div class="design4-preview shadow2"></div>
+            <div class="design4-main">
+              <div class="design4-name">Medium Elevation</div>
+              <div class="design4-value">0 8px 16px rgba...</div>
+            </div>
+            <button class="design4-btn">◎ Locate</button>
+            <button class="design4-btn">⎘ Copy</button>
+          </div>
+          <div class="design4-value-full">0 8px 16px rgba(0,0,0,0.2)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

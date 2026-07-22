@@ -3,26 +3,22 @@
   "name": "Palext — Design Token Extractor",
   "version": "1.0.0",
   "description": "Extract design tokens from websites, inspect elements, and export via unified modal to CSS, SCSS, Tailwind, MUI, Ant Design, Chakra UI, Figma, DTCG, and JSON.",
-  "permissions": ["storage", "activeTab", "clipboardWrite", "scripting", "sidePanel"],
+  "permissions": ["storage", "activeTab", "clipboardWrite", "scripting"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "action": {
-    "default_popup": "popup.html",
     "default_title": "Palext",
     "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
-  },
-  "side_panel": {
-    "default_path": "sidepanel.html"
   },
   "background": {
     "service_worker": "js/background.js"
   },
   "commands": {
-    "_execute_action": {
+    "open_classic_popup": {
       "suggested_key": {
         "default": "Ctrl+Shift+Y",
         "mac": "Command+Shift+Y"
       },
-      "description": "Open Palext"
+      "description": "Open Palext floating tool"
     }
   },
   "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
@@ -30,5 +26,14 @@
     "matches": ["http://*/*", "https://*/*"],
     "js": ["js/content.js"],
     "run_at": "document_idle"
+  }],
+  "web_accessible_resources": [{
+    "resources": [
+      "popup.html",
+      "css/popup.css",
+      "js/popup.js",
+      "icons/*.png"
+    ],
+    "matches": ["http://*/*", "https://*/*"]
   }]
 }

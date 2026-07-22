@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palext | All Feature Variants Mockup</title>
+  <meta name="description" content="All homepage feature section variants in one page, including an auto-rotating slideshow card variant." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../website/website.css" />
+  <link rel="stylesheet" href="feature-showcase-mockups.css" />
+  <style>
+    .layout-slideshow {
+      display: grid;
+      gap: 14px;
+    }
+
+    .slideshow-shell {
+      border: 1px solid var(--fd-line);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 14px;
+      box-shadow: 0 10px 24px rgba(24, 37, 48, 0.09);
+    }
+
+    .slideshow-viewport {
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--fd-line);
+      background: #fff;
+      min-height: 280px;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateX(18px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 12px;
+      padding: 12px;
+      pointer-events: none;
+    }
+
+    .slide.is-active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--fd-line);
+    }
+
+    .slide-body {
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .slide-body h3 {
+      margin: 0;
+      font-size: 1.08rem;
+    }
+
+    .slide-body p {
+      margin: 0;
+      color: var(--fd-muted);
+      line-height: 1.58;
+      font-size: 0.92rem;
+    }
+
+    .slide-points {
+      margin: 2px 0 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+      color: #3f5b6b;
+      font-size: 0.88rem;
+    }
+
+    .slide-points li {
+      line-height: 1.45;
+    }
+
+    .slideshow-controls {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .slideshow-dots {
+      display: inline-flex;
+      gap: 8px;
+    }
+
+    .slideshow-dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 0;
+      background: #a6b8c3;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+
+    .slideshow-dots button.is-active {
+      width: 28px;
+      background: linear-gradient(145deg, var(--fd-accent), #0f6f78);
+      opacity: 1;
+    }
+
+    .slideshow-note {
+      margin: 0;
+      color: #56707f;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .auto-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 0 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 143, 128, 0.35);
+      color: #0f7166;
+      background: rgba(15, 143, 128, 0.11);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 980px) {
+      .slide {
+        grid-template-columns: 1fr;
+      }
+
+      .slideshow-viewport {
+        min-height: 450px;
+      }
+
+      .slide img {
+        max-height: 220px;
+      }
+    }
+  </style>
+</head>
+<body class="feature-demo-page">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="../website/index.html" class="brand" aria-label="Palext home">
+        <img src="../website/images/icon48.png" alt="Palext logo" />
+        <span>Palext</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="../website/index.html">Home</a>
+        <a href="../website/docs.html">Docs</a>
+        <a href="../website/pricing-mockup.html">Pricing</a>
+        <a href="../website/tool-mode-mockup.html">Tool Preview</a>
+      </nav>
+      <a class="btn btn-sm" href="../website/index.html#features">Back to Features</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="demo-hero">
+      <p class="eyebrow">Feature Section Explorations</p>
+      <h1>All homepage feature variants in one place.</h1>
+      <p>This page shows all variants one after another so you can compare clarity, trust, readability, and conversion potential before selecting one for the live homepage.</p>
+      <div class="demo-nav">
+        <a href="#option-1">Option 1: Editorial Split</a>
+        <a href="#option-2">Option 2: Story Timeline</a>
+        <a href="#option-3">Option 3: Bento Grid</a>
+        <a href="#option-4">Option 4: Sticky Showcase</a>
+        <a href="#option-5">Option 5: Tabbed Families</a>
+        <a href="#option-6">Option 6: Auto Slideshow</a>
+      </div>
+    </section>
+
+    <section id="option-1" class="feature-demo-section">
+      <div class="feature-demo-head">
+        <p class="eyebrow">Option 1</p>
+        <h2>Editorial Split Layout</h2>
+        <p>Large narrative screenshot on one side, capability proofs on the other.</p>
+        <div class="meta-row">
+          <span>Live UI evidence</span>
+          <span>Free vs Pro tags</span>
+          <span>Narrative hierarchy</span>
+        </div>
+      </div>
+      <div class="demo-body layout-editorial">
+        <figure class="shot-card">
+          <img src="../website/images/feature1.jpg" alt="Palext inspect mode screenshot" />
+          <figcaption>Primary screenshot anchors trust by showing real in-product context.</figcaption>
+        </figure>
+        <div class="proof-stack">
+          <article>
+            <h3>Inspect Mode + Token Readout</h3>
+            <p>Capture computed values with immediate element-level clarity.</p>
+            <div class="plan-row"><span class="tag free">Free</span></div>
+          </article>
+          <article>
+            <h3>Locate Color + Typography Instances</h3>
+            <p>Find drift locations on page before handing off to implementation.</p>
+            <div class="plan-row"><span class="tag pro">Pro</span></div>
+          </article>
+          <article>
+            <h3>Unlimited Scans + Snapshot Library</h3>
+            <p>Move from one-off checks to repeatable production audits.</p>
+            <div class="plan-row"><span class="tag pro">Pro</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="option-2" class="feature-demo-section">
+      <div class="feature-demo-head">
+        <p class="eyebrow">Option 2</p>
+        <h2>Story Timeline Layout</h2>
+        <p>Use a visual workflow to explain the product journey from scan to review to export.</p>
+        <div class="meta-row">
+          <span>Workflow storytelling</span>
+          <span>Screenshot per step</span>
+          <span>High comprehension</span>
+        </div>
+      </div>
+      <div class="demo-body layout-timeline">
+        <article class="timeline-step">
+          <span class="step-no">01</span>
+          <h3>Capture</h3>
+          <img src="../website/images/feature1.jpg" alt="Capture step screenshot" />
+          <p>Extract style values and build baseline tokens from live pages.</p>
+        </article>
+        <article class="timeline-step">
+          <span class="step-no">02</span>
+          <h3>Review</h3>
+          <img src="../website/images/feature2.jpg" alt="Review step screenshot" />
+          <p>Detect contrast risks, compare snapshots, and prioritize fixes.</p>
+        </article>
+        <article class="timeline-step">
+          <span class="step-no">03</span>
+          <h3>Export</h3>
+          <img src="../website/images/feature3.jpg" alt="Export step screenshot" />
+          <p>Ship to CSS/JSON quickly, then unlock advanced families with Pro.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="option-3" class="feature-demo-section">
+      <div class="feature-demo-head">
+        <p class="eyebrow">Option 3</p>
+        <h2>Bento Evidence Grid</h2>
+        <p>A mixed-size grid that balances product shots, capability summaries, and proof metrics.</p>
+        <div class="meta-row">
+          <span>Modern SaaS rhythm</span>
+          <span>Strong hierarchy</span>
+          <span>Evidence + metrics</span>
+        </div>
+      </div>
+      <div class="demo-body layout-bento">
+        <article class="bento-tile bento-large">
+          <h3>Live Product Surface</h3>
+          <p>Use one large tile for the most trusted screenshot and keep supporting data around it.</p>
+          <img src="../website/images/feature2.jpg" alt="Large feature screenshot" />
+          <div class="stat-row">
+            <span class="stat-chip">10 scans / month Free</span>
+            <span class="stat-chip">Unlimited Pro</span>
+            <span class="stat-chip">15-25 min audit loop</span>
+          </div>
+        </article>
+        <article class="bento-tile">
+          <h3>Inspect and Layout</h3>
+          <p>Element-level insights with predictable handoff vocabulary.</p>
+        </article>
+        <article class="bento-tile">
+          <h3>Accessibility Review</h3>
+          <p>Contrast and drift checks packed into one workflow space.</p>
+        </article>
+        <article class="bento-tile">
+          <h3>Export Families</h3>
+          <p>Core outputs in Free, advanced families in Pro.</p>
+        </article>
+        <article class="bento-tile">
+          <h3>Reports and History</h3>
+          <p>Visual audit reports and snapshot intelligence for teams.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="option-4" class="feature-demo-section">
+      <div class="feature-demo-head">
+        <p class="eyebrow">Option 4</p>
+        <h2>Sticky Feature Showcase</h2>
+        <p>Keep one screenshot visible while users scan through capability blocks on the right.</p>
+        <div class="meta-row">
+          <span>Screenshot persistence</span>
+          <span>Fast scanning</span>
+          <span>Long-form explanation friendly</span>
+        </div>
+      </div>
+      <div class="demo-body layout-sticky">
+        <aside class="sticky-preview">
+          <figure>
+            <img src="../website/images/feature2.jpg" alt="Sticky showcase screenshot" />
+            <figcaption>Sticky reference image reduces context switching while reading feature points.</figcaption>
+          </figure>
+        </aside>
+        <div class="sticky-list">
+          <article>
+            <h3>Token Capture Layer</h3>
+            <p>Collect color, typography, spacing, and variable evidence in one pass.</p>
+          </article>
+          <article>
+            <h3>Audit and Drift Layer</h3>
+            <p>Pair snapshot comparisons with accessibility checks for higher confidence rollout.</p>
+          </article>
+          <article>
+            <h3>Export and Delivery Layer</h3>
+            <p>Send outputs to developer and design ecosystems without rebuilding mappings.</p>
+          </article>
+          <article>
+            <h3>Pro Efficiency Layer</h3>
+            <p>Use unlimited limits, advanced exports, and recommendations to scale workflows.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="option-5" class="feature-demo-section">
+      <div class="feature-demo-head">
+        <p class="eyebrow">Option 5</p>
+        <h2>Tabbed Feature Families</h2>
+        <p>Keep the section compact by switching between feature families without leaving the page.</p>
+        <div class="meta-row">
+          <span>Compact</span>
+          <span>Interactive</span>
+          <span>Great for many capabilities</span>
+        </div>
+      </div>
+      <div class="demo-body layout-tabs">
+        <div class="tab-head" role="tablist" aria-label="Feature family tabs">
+          <button class="tab-btn is-active" data-tab="inspect" role="tab" aria-selected="true">Inspect</button>
+          <button class="tab-btn" data-tab="audit" role="tab" aria-selected="false">Audit</button>
+          <button class="tab-btn" data-tab="export" role="tab" aria-selected="false">Export</button>
+          <button class="tab-btn" data-tab="history" role="tab" aria-selected="false">History</button>
+        </div>
+        <div class="tab-panel-wrap">
+          <section class="tab-panel is-active" data-panel="inspect" role="tabpanel">
+            <img src="../website/images/feature1.jpg" alt="Inspect family screenshot" />
+            <div>
+              <h3>Inspect Family</h3>
+              <ul>
+                <li>Point-and-click element inspection</li>
+                <li>Color, type, spacing, shadow extraction</li>
+                <li>Layout overlay for structure checks</li>
+              </ul>
+            </div>
+          </section>
+          <section class="tab-panel" data-panel="audit" role="tabpanel">
+            <img src="../website/images/feature2.jpg" alt="Audit family screenshot" />
+            <div>
+              <h3>Audit Family</h3>
+              <ul>
+                <li>Contrast risk visibility</li>
+                <li>Drift compare in history flow</li>
+                <li>Insights analyzer and recommendations (Pro)</li>
+              </ul>
+            </div>
+          </section>
+          <section class="tab-panel" data-panel="export" role="tabpanel">
+            <img src="../website/images/feature3.jpg" alt="Export family screenshot" />
+            <div>
+              <h3>Export Family</h3>
+              <ul>
+                <li>Core CSS/SCSS/JSON in Free</li>
+                <li>Tailwind, JS, TS, Less, Stylus in Pro</li>
+                <li>React UI and Figma/DTCG in Pro</li>
+              </ul>
+            </div>
+          </section>
+          <section class="tab-panel" data-panel="history" role="tabpanel">
+            <img src="../website/images/feature2.jpg" alt="History family screenshot" />
+            <div>
+              <h3>History Family</h3>
+              <ul>
+                <li>Saved snapshots for context</li>
+                <li>Compare with URL and latest state (Pro)</li>
+                <li>Mini crawl and advanced compare workflows (Pro)</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section id="option-6" class="feature-demo-section">
+      <div class="feature-demo-head">
+        <p class="eyebrow">Option 6</p>
+        <h2>Auto-Rotating Slideshow Card</h2>
+        <p>This variant rotates feature cards automatically after a set interval while still allowing manual control. It is useful when you want a dynamic hero-style feature section.</p>
+        <div class="meta-row">
+          <span>Auto cycle</span>
+          <span>Manual dots</span>
+          <span>Pause on hover</span>
+        </div>
+      </div>
+      <div class="demo-body layout-slideshow">
+        <div class="slideshow-shell" data-slideshow>
+          <div class="slideshow-viewport">
+            <article class="slide is-active" data-slide="0">
+              <img src="../website/images/feature1.jpg" alt="Slideshow card for inspect and token capture" />
+              <div class="slide-body">
+                <span class="auto-badge">Auto slide</span>
+                <h3>Inspect and token capture</h3>
+                <p>Show real computed values directly from live pages with instant element inspection.</p>
+                <ul class="slide-points">
+                  <li>Computed style extraction for colors and typography</li>
+                  <li>Element inspect for precise value lookup</li>
+                  <li>Core workflow available in Free</li>
+                </ul>
+              </div>
+            </article>
+            <article class="slide" data-slide="1">
+              <img src="../website/images/feature2.jpg" alt="Slideshow card for accessibility and drift review" />
+              <div class="slide-body">
+                <span class="auto-badge">Auto slide</span>
+                <h3>Accessibility and drift review</h3>
+                <p>Use contrast checks and historical comparisons to prioritize fixes before shipping.</p>
+                <ul class="slide-points">
+                  <li>Quick contrast visibility and color-blindness preview</li>
+                  <li>Snapshot compare workflow for drift detection</li>
+                  <li>Insights and recommendations in Pro</li>
+                </ul>
+              </div>
+            </article>
+            <article class="slide" data-slide="2">
+              <img src="../website/images/feature3.jpg" alt="Slideshow card for export and reports" />
+              <div class="slide-body">
+                <span class="auto-badge">Auto slide</span>
+                <h3>Export and delivery outputs</h3>
+                <p>Ship to engineering and design systems with practical export formats and report outputs.</p>
+                <ul class="slide-points">
+                  <li>CSS, SCSS, JSON in Free</li>
+                  <li>Advanced formats and families in Pro</li>
+                  <li>Markdown and visual HTML reports in Pro</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+          <div class="slideshow-controls">
+            <div class="slideshow-dots" aria-label="Slideshow navigation">
+              <button class="is-active" data-slide-dot="0" aria-label="Go to slide 1"></button>
+              <button data-slide-dot="1" aria-label="Go to slide 2"></button>
+              <button data-slide-dot="2" aria-label="Go to slide 3"></button>
+            </div>
+            <p class="slideshow-note">Changes every 4 seconds. Hover to pause.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="feature-demo-footer">Choose one direction and I can translate it directly into the live homepage feature section with production-ready copy and interactions.</p>
+  </main>
+
+  <script>
+    (() => {
+      const buttons = Array.from(document.querySelectorAll('.tab-btn'));
+      const panels = Array.from(document.querySelectorAll('.tab-panel'));
+      if (buttons.length && panels.length) {
+        buttons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const target = button.getAttribute('data-tab');
+            buttons.forEach((node) => {
+              const active = node === button;
+              node.classList.toggle('is-active', active);
+              node.setAttribute('aria-selected', active ? 'true' : 'false');
+            });
+            panels.forEach((panel) => {
+              const active = panel.getAttribute('data-panel') === target;
+              panel.classList.toggle('is-active', active);
+            });
+          });
+        });
+      }
+
+      const slideshow = document.querySelector('[data-slideshow]');
+      if (!slideshow) return;
+
+      const slides = Array.from(slideshow.querySelectorAll('[data-slide]'));
+      const dots = Array.from(slideshow.querySelectorAll('[data-slide-dot]'));
+      if (!slides.length || !dots.length) return;
+
+      let index = 0;
+      let timer = null;
+
+      const activate = (nextIndex) => {
+        index = nextIndex;
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('is-active', i === index);
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === index);
+        });
+      };
+
+      const start = () => {
+        stop();
+        timer = setInterval(() => {
+          const next = (index + 1) % slides.length;
+          activate(next);
+        }, 4000);
+      };
+
+      const stop = () => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      };
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const next = Number(dot.getAttribute('data-slide-dot'));
+          activate(next);
+          start();
+        });
+      });
+
+      slideshow.addEventListener('mouseenter', stop);
+      slideshow.addEventListener('mouseleave', start);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop();
+        else start();
+      });
+
+      activate(0);
+      start();
+    })();
+  </script>
+</body>
+</html>
