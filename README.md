@@ -10,9 +10,14 @@
   Scan live websites, extract design tokens, inspect elements, compare snapshots with an interactive diff dashboard, and export ready-to-use outputs (including visual HTML audits) for design and development workflows.
 </p>
 
+<p align="center">
+  <a href="https://palext.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-palext.vercel.app-0f8f80?style=for-the-badge" alt="Palext Live Demo" /></a>
+</p>
+
 ## 🛍️ Install from Chrome Web Store
 
-- Install Palext: https://chrome.google.com/webstore/detail/your-extension-id
+- Chrome Web Store listing: Coming soon
+- Live demo: https://palext.vercel.app/
 
 ## 🎯 What Palext Does
 
@@ -23,12 +28,52 @@
 | 🧠 Insights | System score, accessibility score, style summary, quick-fix suggestions, advanced accessibility report |
 | 🕘 History | Save/load/delete snapshots, interactive diff cards, impact filters, drift metrics, sample toggles |
 | 📦 Exports | CSS, SCSS, Tailwind, MUI theme, Ant Design theme, Chakra theme, Figma Tokens JSON, DTCG JSON, JSON, TypeScript/JS token objects, Markdown audit, visual HTML audit |
-| 🧭 Surfaces | Popup + Side panel support with the same workflow |
+| 🧭 Surfaces | Popup workflow with inspect overlays on the active page |
 | ⚙️ UX Modes | Beginner and Pro modes for progressive complexity |
+
+## 🌟 Free vs Pro Experience
+
+Palext has two product experiences so teams can start fast and upgrade only when they need deeper scale.
+
+### 🟢 Free Mode (Great for getting started)
+
+| Included in Free | Why it helps immediately |
+|---|---|
+| 10 scans per month | Validate a design system quickly on real pages |
+| 3 saved snapshots | Keep important reference states without clutter |
+| Inspect mode + layout overlay | Understand values and structure without manual DevTools digging |
+| Core exports: CSS, SCSS, JSON | Move results into implementation in minutes |
+| Color blindness preview + basic insights | Catch visible issues early in the workflow |
+
+### 🔶 Pro Mode (Built for production speed)
+
+| Included in Pro | Why teams upgrade |
+|---|---|
+| Unlimited scans + snapshots | Remove workflow limits during active product delivery |
+| Advanced exports: Tailwind, JS, TS, Less, Stylus | Match engineering stacks without manual conversion |
+| React UI export + design exports (Figma Tokens, DTCG) | Keep design-dev handoff in sync |
+| Audit report export (Markdown + visual HTML) | Share polished, stakeholder-ready reports instantly |
+| Asset extraction + drift compare + recommendations | Find issues faster and prioritize work with confidence |
+| Theme personalization + Smart Apply preview | Customize workflow and accelerate iteration |
+
+## 🔍 At-a-Glance Plan Matrix
+
+| Capability | Free | Pro |
+|---|---|---|
+| Monthly scans | 10 | Unlimited |
+| Saved snapshots | 3 | Unlimited |
+| Measure mode | 3/day | Unlimited |
+| Locate color and typography instances | No | Yes |
+| CSS / SCSS / JSON export | Yes | Yes |
+| Tailwind / JS / TS / Less / Stylus export | No | Yes |
+| Figma Tokens / DTCG export | No | Yes |
+| Audit report export | No | Yes |
+| Asset extraction | No | Yes |
+| Insights recommendations | No | Yes |
 
 ## 📦 Unified Export Flow
 
-- Open **Export** from popup or side panel.
+- Open **Export** from the popup workflow.
 - Choose output type: **Token format**, **Bundle**, or **Audit report**.
 - For format export, choose framework family and format.
 - Select token categories to include.
@@ -91,7 +136,7 @@ Palext generates actionable design-system audits for both developers and designe
 | Actionable Insights | Includes quick fixes, not just pass/fail metrics |
 | Interactive Diff UX | Impact-filtered drift cards instead of static lists |
 | Audit Outputs | Markdown + visual HTML reports generated locally |
-| Lightweight Workflow | Fast popup/side panel flow without external setup |
+| Lightweight Workflow | Fast popup-first flow without external setup |
 | Dual Audience UX | Beginner clarity + Pro depth in one extension |
 
 ## ⚖️ Comparison with Existing Tool Types

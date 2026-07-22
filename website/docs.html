@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palext Docs | Feature Guides</title>
+  <meta
+    name="description"
+    content="Palext documentation with complete feature guides, free vs pro availability, export references, and audit workflows."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="website.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand" aria-label="Palext home">
+        <img src="../icons/icon48.png" alt="Palext logo" />
+        <span>Palext</span>
+      </a>
+      <nav class="site-nav" aria-label="Documentation navigation">
+        <a href="#getting-started">Getting started</a>
+        <a href="#audit-playbook">Playbook</a>
+        <a href="#export-reference">Exports</a>
+        <a href="#feature-matrix">Plan matrix</a>
+        <a href="#faq-docs">FAQ</a>
+      </nav>
+      <a class="btn btn-sm" href="index.html">Back to Home</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="docs-shell section">
+      <div class="container docs-layout">
+        <aside class="docs-sidebar reveal">
+          <p class="eyebrow">Docs Overview</p>
+          <h2>Feature Guides</h2>
+          <nav class="docs-nav" aria-label="Docs sections">
+            <a class="docs-nav-link" href="#getting-started">Getting started</a>
+            <a class="docs-nav-link" href="#audit-playbook">Audit playbook</a>
+            <a class="docs-nav-link" href="#export-reference">Export reference</a>
+            <a class="docs-nav-link" href="#feature-matrix">Plan matrix</a>
+            <a class="docs-nav-link" href="#faq-docs">FAQ</a>
+          </nav>
+        </aside>
+
+        <div class="docs-main">
+          <article id="getting-started" class="docs-route-card reveal">
+            <p class="eyebrow">Getting Started</p>
+            <h3>First successful audit in 4 steps</h3>
+            <ol class="docs-list">
+              <li>Install and pin Palext in Chrome.</li>
+              <li>Run a scan on any production page.</li>
+              <li>Inspect key components and verify spacing/contrast.</li>
+              <li>Export tokens or generate a report for handoff.</li>
+            </ol>
+          </article>
+
+          <article id="audit-playbook" class="docs-route-card reveal">
+            <p class="eyebrow">Audit Playbook</p>
+            <h3>Run a repeatable UI quality cycle</h3>
+            <div class="docs-mini-grid">
+              <section>
+                <h4>Discovery (Free)</h4>
+                <p>Capture baseline tokens and inspect visual system consistency.</p>
+              </section>
+              <section>
+                <h4>Triage (Free + Pro)</h4>
+                <p>Use contrast checks and Pro insights to prioritize the highest impact fixes.</p>
+              </section>
+              <section>
+                <h4>Delivery (Free + Pro)</h4>
+                <p>Ship with export formats for code and reports for stakeholder communication.</p>
+              </section>
+            </div>
+          </article>
+
+          <article id="export-reference" class="docs-route-card reveal">
+            <p class="eyebrow">Export Reference</p>
+            <h3>Choose the right output for each workflow</h3>
+            <div class="pricing-matrix" aria-label="Export formats and availability">
+              <div class="matrix-head">
+                <span>Output</span>
+                <span>Plan</span>
+                <span>Best used for</span>
+              </div>
+              <div class="matrix-row">
+                <span>CSS variables, SCSS, JSON</span>
+                <span><span class="pill">Free</span></span>
+                <span>Core implementation and baseline audits</span>
+              </div>
+              <div class="matrix-row">
+                <span>Tailwind, JS, TS, Less, Stylus</span>
+                <span><span class="pill pill-pro">Pro</span></span>
+                <span>Framework and token pipeline integration</span>
+              </div>
+              <div class="matrix-row">
+                <span>React UI (MUI, Chakra, Ant)</span>
+                <span><span class="pill pill-pro">Pro</span></span>
+                <span>Component library implementation</span>
+              </div>
+              <div class="matrix-row">
+                <span>Figma Tokens + DTCG</span>
+                <span><span class="pill pill-pro">Pro</span></span>
+                <span>Design tool and token standard alignment</span>
+              </div>
+              <div class="matrix-row">
+                <span>Audit report (.md + .html)</span>
+                <span><span class="pill pill-pro">Pro</span></span>
+                <span>Stakeholder-ready communication</span>
+              </div>
+            </div>
+          </article>
+
+          <article id="feature-matrix" class="docs-route-card reveal">
+            <p class="eyebrow">Plan Matrix</p>
+            <h3>Free vs Pro at a glance</h3>
+            <div class="pricing-matrix" aria-label="Plan matrix">
+              <div class="matrix-head">
+                <span>Capability</span>
+                <span>Free</span>
+                <span>Pro</span>
+              </div>
+              <div class="matrix-row">
+                <span>Monthly scans</span>
+                <span>10</span>
+                <span>Unlimited</span>
+              </div>
+              <div class="matrix-row">
+                <span>Saved snapshots</span>
+                <span>3</span>
+                <span>Unlimited</span>
+              </div>
+              <div class="matrix-row">
+                <span>Insights analyzer + recommendations</span>
+                <span><span class="pill pill-pro">Pro only</span></span>
+                <span>Included</span>
+              </div>
+              <div class="matrix-row">
+                <span>Audit report downloads</span>
+                <span><span class="pill pill-pro">Pro only</span></span>
+                <span>Markdown + Visual HTML</span>
+              </div>
+              <div class="matrix-row">
+                <span>Design tools + React export families</span>
+                <span><span class="pill pill-pro">Pro only</span></span>
+                <span>Included</span>
+              </div>
+            </div>
+          </article>
+
+          <article id="faq-docs" class="docs-route-card reveal">
+            <p class="eyebrow">FAQ</p>
+            <h3>Common implementation questions</h3>
+            <div class="faq-list">
+              <details>
+                <summary>Do we need to read all docs before using Palext?</summary>
+                <p>No. Start with Getting Started, then return here only for workflow-specific guidance.</p>
+              </details>
+              <details>
+                <summary>What is the fastest way to explain Pro value internally?</summary>
+                <p>Share the Plan Matrix and Export Reference sections first.</p>
+              </details>
+              <details>
+                <summary>Should docs and pricing contain the same details?</summary>
+                <p>Keep pricing concise and let docs hold the full operational detail.</p>
+              </details>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>Palext — Documentation</p>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="feature-showcase-mockups.html">Feature Designs</a>
+        <a href="pricing-mockup.html">Pricing</a>
+        <a href="tool-mode-mockup.html">Tool Preview</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="website.js"></script>
+</body>
+</html>

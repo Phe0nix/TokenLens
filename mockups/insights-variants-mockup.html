@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insights Score Preview</title>
+  <style>
+    :root {
+      --bg: #0a1018;
+      --bg2: #0f1926;
+      --card: #112133;
+      --line: #2c4561;
+      --text: #e8f2ff;
+      --muted: #93a8bf;
+      --accent: #4fb5d8;
+      --good: #24b26d;
+      --warn: #f59f0b;
+      --bad: #ef5a5a;
+      --tier-healthy: #24b26d;
+      --tier-good: #4fb5d8;
+      --tier-watch: #f59f0b;
+      --tier-risk: #ef5a5a;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 18px;
+      color: var(--text);
+      font-family: "Segoe UI", "IBM Plex Sans", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 14% -8%, rgba(79, 181, 216, 0.2), transparent 36%),
+        radial-gradient(circle at 93% 6%, rgba(36, 178, 109, 0.12), transparent 34%),
+        var(--bg);
+    }
+
+    .head {
+      max-width: 1360px;
+      margin: 0 auto 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .head h1 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: 0.2px;
+    }
+
+    .head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .wrap {
+      max-width: 940px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .variant {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(19, 33, 50, 0.95), rgba(13, 24, 36, 0.98));
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      min-height: 620px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
+    }
+
+    .variant-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .variant-title h2 {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: 0.2px;
+    }
+
+    .variant-tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg2);
+      padding: 10px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .score-split {
+      border: 1px solid #355172;
+      border-radius: 12px;
+      padding: 10px;
+      background:
+        radial-gradient(circle at 10% -18%, rgba(79, 181, 216, 0.2), transparent 38%),
+        linear-gradient(165deg, rgba(20, 37, 56, 0.98), rgba(14, 27, 42, 0.98));
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      gap: 10px;
+    }
+
+    .ring-col {
+      display: grid;
+      justify-items: center;
+      align-content: start;
+      gap: 7px;
+    }
+
+    .ring {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: conic-gradient(var(--ring-color) 0 calc(var(--score) * 1%), rgba(255, 255, 255, 0.12) calc(var(--score) * 1%) 100%);
+      display: grid;
+      place-items: center;
+      position: relative;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.2px;
+    }
+
+    .ring::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border-radius: 50%;
+      background: #102136;
+      border: 1px solid #33506d;
+    }
+
+    .ring span { position: relative; z-index: 1; }
+
+    .ring-label {
+      font-size: 12px;
+      color: #c4daef;
+      text-transform: uppercase;
+      letter-spacing: 0.16px;
+      font-weight: 700;
+    }
+
+    .summary-col {
+      display: grid;
+      gap: 7px;
+      align-content: start;
+    }
+
+    .score-head {
+      display: grid;
+      gap: 2px;
+    }
+
+    .score-head h3 {
+      margin: 0;
+      font-size: 15px;
+      letter-spacing: 0.14px;
+    }
+
+    .score-sub {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.42;
+    }
+
+    .short-list {
+      margin: 0;
+      padding-left: 14px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .short-list li {
+      color: #cfe2f5;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .full-analyze-btn {
+      border: 1px solid #3a5e83;
+      border-radius: 8px;
+      background: #17324a;
+      color: #d9ebff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12px;
+      text-transform: uppercase;
+      padding: 6px 8px;
+      cursor: pointer;
+      justify-self: start;
+    }
+
+    .full-analyze-btn:hover {
+      background: #1c3c57;
+      border-color: #4b74a0;
+    }
+
+    .signal-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .signal-chip {
+      border-radius: 8px;
+      border: 1px solid transparent;
+      padding: 6px;
+      text-align: center;
+      display: grid;
+      gap: 2px;
+    }
+
+    .signal-chip strong {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .signal-chip span {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14px;
+    }
+
+    .danger { background: rgba(239, 90, 90, 0.2); border-color: rgba(239, 90, 90, 0.5); color: #ffd5d8; }
+    .watch { background: rgba(245, 159, 11, 0.2); border-color: rgba(245, 159, 11, 0.5); color: #ffe3b6; }
+    .stable { background: rgba(36, 178, 109, 0.2); border-color: rgba(36, 178, 109, 0.5); color: #caf6df; }
+
+    .fix-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #cde1f7;
+      letter-spacing: 0.18px;
+      text-transform: uppercase;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .btn {
+      border: 1px solid #2f506f;
+      border-radius: 8px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #cce5ff;
+      background: #17324a;
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      color: var(--muted);
+      background: #122335;
+      border-color: #2b3f56;
+    }
+
+    .quick-cards {
+      display: grid;
+      gap: 6px;
+    }
+
+    .quick-card {
+      border: 1px solid #2f4763;
+      border-radius: 8px;
+      background: #102235;
+      padding: 7px;
+      display: grid;
+      gap: 3px;
+    }
+
+    .quick-card strong {
+      font-size: 13px;
+      color: #e8f2ff;
+    }
+
+    .quick-card span {
+      font-size: 12px;
+      color: #bdd2e6;
+      line-height: 1.4;
+    }
+
+    .final .score-split {
+      border-color: #3e668f;
+      background:
+        radial-gradient(circle at 8% -18%, rgba(79, 181, 216, 0.24), transparent 38%),
+        radial-gradient(circle at 96% -24%, rgba(36, 178, 109, 0.16), transparent 36%),
+        linear-gradient(165deg, rgba(21, 39, 58, 0.98), rgba(15, 27, 42, 0.98));
+    }
+
+    .final .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .ring-tier {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14px;
+      text-transform: uppercase;
+      border-radius: 999px;
+      border: 1px solid #3d5d80;
+      padding: 2px 7px;
+      color: #d3e7fb;
+      background: #16314a;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .ring-tier::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--tier-color, #4fb5d8);
+    }
+
+    .pill {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1px;
+      border-radius: 999px;
+      border: 1px solid #3d5d80;
+      color: #c9dff5;
+      background: #16314a;
+      padding: 2px 7px;
+    }
+
+    .pill.up { border-color: #43755f; color: #cef3df; background: rgba(36, 178, 109, 0.2); }
+    .pill.down { border-color: #8a4449; color: #ffd3d6; background: rgba(239, 90, 90, 0.18); }
+
+    .notes {
+      border-top: 1px solid #2a415b;
+      padding-top: 9px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 8, 14, 0.74);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 30;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      width: min(760px, 100%);
+      max-height: 88vh;
+      overflow: auto;
+      border: 1px solid #3b5f83;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #112235, #0d1a2a);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 17px;
+      letter-spacing: 0.16px;
+    }
+
+    .modal-title-wrap {
+      display: grid;
+      gap: 5px;
+    }
+
+    .modal-sub {
+      font-size: 12px;
+      color: #b9cfe4;
+      line-height: 1.42;
+    }
+
+    .close-btn {
+      border: 1px solid #3f5f82;
+      border-radius: 8px;
+      background: #17324a;
+      color: #d9ebff;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.12px;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .detail-card {
+      border: 1px solid #2f4763;
+      border-radius: 9px;
+      background: #102235;
+      padding: 8px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .detail-card.access { border-color: #7f3f4a; background: linear-gradient(180deg, #2a1b24, #1c1822); }
+    .detail-card.consistency { border-color: #3e648d; background: linear-gradient(180deg, #182739, #152334); }
+    .detail-card.maintain { border-color: #3c7a68; background: linear-gradient(180deg, #162b2a, #132321); }
+    .detail-card.governance { border-color: #625188; background: linear-gradient(180deg, #201d32, #191729); }
+
+    .detail-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #dceafb;
+    }
+
+    .weight {
+      border: 1px solid #3d5d80;
+      border-radius: 999px;
+      padding: 1px 6px;
+      font-size: 11px;
+      color: #c9dff5;
+      background: #16314a;
+    }
+
+    .detail-score {
+      font-size: 20px;
+      font-weight: 800;
+      color: #f2f8ff;
+      line-height: 1;
+    }
+
+    .detail-note {
+      font-size: 12px;
+      color: #bfd4ea;
+      line-height: 1.42;
+    }
+
+    .detail-fix-list {
+      margin: 0;
+      padding-left: 14px;
+      display: grid;
+      gap: 3px;
+    }
+
+    .detail-fix-list li {
+      font-size: 12px;
+      color: #d0e3f6;
+      line-height: 1.4;
+    }
+
+    .detail-meter {
+      height: 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(140, 168, 194, 0.35);
+      background: rgba(8, 15, 24, 0.7);
+      overflow: hidden;
+    }
+
+    .detail-meter span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+    }
+
+    .detail-card.access .detail-meter span { background: linear-gradient(90deg, #cf5b6e, #ef5a5a); }
+    .detail-card.consistency .detail-meter span { background: linear-gradient(90deg, #53a9eb, #4fb5d8); }
+    .detail-card.maintain .detail-meter span { background: linear-gradient(90deg, #33c89c, #24b26d); }
+    .detail-card.governance .detail-meter span { background: linear-gradient(90deg, #9f8ae1, #8272c8); }
+
+    .legend {
+      border: 1px dashed #365476;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 12px;
+      color: #c9dff5;
+      line-height: 1.45;
+    }
+
+    .legend ul {
+      margin: 6px 0 0;
+      padding-left: 14px;
+      display: grid;
+      gap: 3px;
+    }
+
+    .tier-item {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #2e4763;
+      border-radius: 7px;
+      padding: 4px 7px;
+      font-size: 12px;
+      color: #d5e7f9;
+      background: #102235;
+    }
+
+    .tier-item strong {
+      font-size: 12px;
+    }
+
+    .tier-item.tier-healthy { border-color: #3b745f; background: rgba(36, 178, 109, 0.18); }
+    .tier-item.tier-good { border-color: #3f6a96; background: rgba(79, 181, 216, 0.2); }
+    .tier-item.tier-watch { border-color: #8b6a2f; background: rgba(245, 159, 11, 0.2); }
+    .tier-item.tier-risk { border-color: #8a4449; background: rgba(239, 90, 90, 0.18); }
+
+    .tier-item.current {
+      border-left-width: 3px;
+      border-left-style: solid;
+    }
+
+    .tier-item.current.tier-healthy { border-left-color: #24b26d; }
+    .tier-item.current.tier-good { border-left-color: #4fb5d8; }
+    .tier-item.current.tier-watch { border-left-color: #f59f0b; }
+    .tier-item.current.tier-risk { border-left-color: #ef5a5a; }
+
+    .current-tier {
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: #cfe2f5;
+    }
+
+    .score-tier-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid #3d5d80;
+      border-radius: 999px;
+      padding: 1px 7px;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1px;
+      color: #d8e9fb;
+      background: #16314a;
+      margin-left: 6px;
+    }
+
+    .score-tier-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #4fb5d8;
+    }
+
+    .score-tier-badge.healthy::before { background: #24b26d; }
+    .score-tier-badge.good::before { background: #4fb5d8; }
+    .score-tier-badge.watch::before { background: #f59f0b; }
+    .score-tier-badge.risk::before { background: #ef5a5a; }
+
+    @media (max-width: 840px) {
+      .wrap { grid-template-columns: 1fr; }
+      .variant { min-height: 0; }
+      .score-split { grid-template-columns: 1fr; }
+      .ring-col { justify-items: start; grid-auto-flow: column; gap: 10px; }
+      .modal-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="head">
+    <h1>Insights Score Preview</h1>
+    <p>Score, key blockers, and next steps in one view.</p>
+  </div>
+
+  <div class="wrap">
+    <section class="variant final">
+      <div class="variant-title">
+        <h2>Final Score Layout</h2>
+        <span class="variant-tag">User friendly</span>
+      </div>
+      <div class="panel">
+        <section class="score-split" data-score="74">
+          <div class="ring-col">
+            <div class="ring"><span>74</span></div>
+            <div class="ring-label">System Health</div>
+            <div class="ring-tier">Watch</div>
+          </div>
+          <div class="summary-col">
+            <div class="score-head">
+              <h3>Score Snapshot</h3>
+              <p class="score-sub">Current health, biggest blockers, and fastest path to improve.</p>
+            </div>
+            <div class="chip-row">
+              <span class="pill up">+4 vs last scan</span>
+              <span class="pill">AA fails: 9</span>
+              <span class="pill down">Risk pairs: +4</span>
+            </div>
+            <ul class="short-list">
+              <li>Current range: Watch. Accessibility fixes will move this score fastest.</li>
+              <li>Top blocker: 9 live AA failures in high-traffic text and buttons.</li>
+              <li>Expected gain: fixing those first can move score into Good range.</li>
+            </ul>
+            <button class="full-analyze-btn" data-open-modal="scoreModal">Full score analyzer</button>
+          </div>
+        </section>
+
+        <div class="signal-strip">
+          <div class="signal-chip danger"><strong>9</strong><span>Critical</span></div>
+          <div class="signal-chip watch"><strong>14</strong><span>Watch</span></div>
+          <div class="signal-chip stable"><strong>31</strong><span>Stable</span></div>
+        </div>
+
+        <div class="fix-title">Quick Actions</div>
+        <div class="actions">
+          <button class="btn">Open WCAG overlays</button>
+          <button class="btn">Jump to failing tokens</button>
+          <button class="btn secondary">Create dev checklist</button>
+        </div>
+      </div>
+      <div class="notes">Use this score to track progress, prioritize fixes, and communicate release readiness.</div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="scoreModal" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="scoreModalTitle">
+      <div class="modal-head">
+        <div class="modal-title-wrap">
+          <h3 class="modal-title" id="scoreModalTitle">Full Score Analyzer</h3>
+          <div class="modal-sub">Detailed breakdown of what affects the score and what to fix next.</div>
+        </div>
+        <button class="close-btn" data-close-modal="scoreModal">Close</button>
+      </div>
+
+      <div class="modal-grid">
+        <article class="detail-card access">
+          <div class="detail-top"><span>Accessibility</span><span class="weight">45%</span></div>
+          <div class="detail-score">68</div>
+          <div class="detail-meter"><span style="width:68%"></span></div>
+          <div class="detail-note">Uses live WCAG fail rate, low-contrast token ratio, and risky foreground/background pairs below 3:1.</div>
+          <ul class="detail-fix-list">
+            <li>Fix button and body text pairs failing AA on top-traffic screens.</li>
+            <li>Re-scan live pages after each batch to confirm pass status.</li>
+          </ul>
+        </article>
+        <article class="detail-card consistency">
+          <div class="detail-top"><span>Consistency</span><span class="weight">30%</span></div>
+          <div class="detail-score">74</div>
+          <div class="detail-meter"><span style="width:74%"></span></div>
+          <div class="detail-note">Measures hardcoded style drift, token coverage, and value-scale entropy across spacing/radius/shadow.</div>
+          <ul class="detail-fix-list">
+            <li>Replace hardcoded styles with semantic tokens in shared components.</li>
+            <li>Reduce one-off spacing and radius values in repeated layouts.</li>
+          </ul>
+        </article>
+        <article class="detail-card maintain">
+          <div class="detail-top"><span>Maintainability</span><span class="weight">15%</span></div>
+          <div class="detail-score">81</div>
+          <div class="detail-meter"><span style="width:81%"></span></div>
+          <div class="detail-note">Looks at rules/declarations pressure, selector specificity, and inline style share.</div>
+          <ul class="detail-fix-list">
+            <li>Consolidate duplicate CSS blocks to reduce declaration density.</li>
+            <li>Flatten deep selectors in areas with high override churn.</li>
+          </ul>
+        </article>
+        <article class="detail-card governance">
+          <div class="detail-top"><span>Governance</span><span class="weight">10%</span></div>
+          <div class="detail-score">79</div>
+          <div class="detail-meter"><span style="width:79%"></span></div>
+          <div class="detail-note">Tracks semantic naming clarity, ownership readiness, and repeatable handoff practices.</div>
+          <ul class="detail-fix-list">
+            <li>Rename ambiguous tokens to semantic names in active component groups.</li>
+            <li>Attach owner and status tags for each high-impact remediation task.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="legend">
+        <div class="current-tier">Current range:<span class="score-tier-badge" id="scoreTierBadge">Watch</span></div>
+        Score tiers and interpretation:
+        <ul>
+          <li class="tier-item tier-healthy" data-tier="healthy"><strong>90-100</strong><span>Healthy baseline</span></li>
+          <li class="tier-item tier-good" data-tier="good"><strong>75-89</strong><span>Good, minor cleanup</span></li>
+          <li class="tier-item tier-watch" data-tier="watch"><strong>60-74</strong><span>Watch, structured fixes needed</span></li>
+          <li class="tier-item tier-risk" data-tier="risk"><strong>0-59</strong><span>High risk, prioritize remediation</span></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      const openButtons = Array.from(document.querySelectorAll('[data-open-modal]'));
+      const closeButtons = Array.from(document.querySelectorAll('[data-close-modal]'));
+
+      function openModal(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.add('open');
+        el.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeModal(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.remove('open');
+        el.setAttribute('aria-hidden', 'true');
+      }
+
+      openButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-open-modal');
+          if (id) openModal(id);
+        });
+      });
+
+      closeButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-close-modal');
+          if (id) closeModal(id);
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        const backdrop = e.target.closest('.modal-backdrop');
+        if (!backdrop) return;
+        if (e.target === backdrop) {
+          closeModal(backdrop.id);
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        const openBackdrop = document.querySelector('.modal-backdrop.open');
+        if (openBackdrop) closeModal(openBackdrop.id);
+      });
+
+      const getTier = (score) => {
+        if (score >= 90) return { key: 'healthy', label: 'Healthy', color: '#24b26d' };
+        if (score >= 75) return { key: 'good', label: 'Good', color: '#4fb5d8' };
+        if (score >= 60) return { key: 'watch', label: 'Watch', color: '#f59f0b' };
+        return { key: 'risk', label: 'High Risk', color: '#ef5a5a' };
+      };
+
+      document.querySelectorAll('.score-split[data-score]').forEach((block) => {
+        const score = Number(block.getAttribute('data-score') || 0);
+        const tier = getTier(score);
+        block.style.setProperty('--score', String(score));
+        block.style.setProperty('--ring-color', tier.color);
+        block.style.setProperty('--tier-color', tier.color);
+        const tierEl = block.querySelector('.ring-tier');
+        if (tierEl) tierEl.textContent = tier.label;
+      });
+
+      const currentScore = Number(document.querySelector('.score-split[data-score]')?.getAttribute('data-score') || 0);
+      const currentTier = getTier(currentScore);
+      document.querySelectorAll('.tier-item[data-tier]').forEach((item) => {
+        item.classList.toggle('current', item.getAttribute('data-tier') === currentTier.key);
+      });
+
+      const scoreTierBadge = document.getElementById('scoreTierBadge');
+      if (scoreTierBadge) {
+        scoreTierBadge.textContent = currentTier.label;
+        scoreTierBadge.classList.add(currentTier.key);
+      }
+    }());
+  </script>
+</body>
+</html>

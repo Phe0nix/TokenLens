@@ -1,7 +1,7 @@
 # 🔒 Privacy Policy — Palext
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Last_Updated-June_2026-0ea5e9?style=flat-square" />
+  <img src="https://img.shields.io/badge/Last_Updated-July_2026-0ea5e9?style=flat-square" />
   <img src="https://img.shields.io/badge/Compliance-Chrome_Extension_Policy-2ea44f?style=flat-square&logo=googlechrome&logoColor=white" />
   <img src="https://img.shields.io/badge/Data_Collected-None-22c55e?style=flat-square" />
 </p>
@@ -18,7 +18,21 @@ Palext is a Chrome extension that extracts design tokens from websites you visit
 
 **Extension Name:** Palext — Design Token Extractor  
 **Developer:** Phe0nix  
-**Repository:** https://github.com/Phe0nix/Palext
+**Repository:** https://github.com/Phe0nix/Palext  
+**Live Demo:** https://palext.vercel.app/
+
+---
+
+## 🧩 Free vs Pro Access (Privacy-First in both modes)
+
+Palext has Free and Pro feature access levels, but privacy behavior is identical in both.
+
+| Plan | Feature access summary | Data handling |
+|---|---|---|
+| Free | Core scanning, inspect workflow, core exports, limited quotas | Local-only processing and local-only storage |
+| Pro | Unlocks advanced exports, unlimited workflows, deeper audit utilities | Local-only processing and local-only storage |
+
+No matter which plan is active, Palext does not transmit scanned website data to external servers.
 
 ---
 
@@ -73,7 +87,6 @@ Chrome requires extensions to declare permissions. Here is why each permission P
 | `storage` | Saves your snapshots, preferences, and inspect results locally |
 | `clipboardWrite` | Copies exported token code or audit markdown to your clipboard when you click copy |
 | `scripting` | Re-injects the extraction script if the page was opened before the extension was installed |
-| `sidePanel` | Allows Palext to open and run in Chrome's side panel with the same local workflow |
 | `host_permissions` (http/https) | Allows the content script to run on normal web pages for token extraction |
 
 No permission is used beyond its stated purpose.

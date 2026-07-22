@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palext Tab Improvements Mockup</title>
+  <style>
+    :root {
+      --bg: #0d1724;
+      --bg2: #132334;
+      --bg3: #1b2d42;
+      --line: #2b4861;
+      --line-soft: rgba(156, 198, 226, 0.2);
+      --text: #eaf4ff;
+      --text2: #c7dcef;
+      --text3: #92b1c8;
+      --accent: #38a8a1;
+      --accent2: #7bd8d2;
+      --warn: #f2b86a;
+      --good: #64c38f;
+      --bad: #ea7f7f;
+      --shadow: 0 18px 42px rgba(4, 10, 18, 0.56);
+      --r: 12px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 88% 10%, rgba(56, 168, 161, 0.2), transparent 36%),
+        radial-gradient(circle at 8% 94%, rgba(95, 145, 185, 0.18), transparent 34%),
+        var(--bg);
+      padding: 24px;
+    }
+
+    .page {
+      width: min(1600px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(170deg, rgba(21, 37, 55, 0.96), rgba(12, 24, 37, 0.96));
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+    }
+
+    .hero p {
+      margin: 6px 0 0;
+      color: var(--text2);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .legend {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 10px;
+      color: var(--text2);
+      background: rgba(25, 42, 60, 0.78);
+    }
+
+    .section {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, rgba(22, 37, 54, 0.95), rgba(13, 24, 37, 0.95));
+      overflow: hidden;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line-soft);
+      background: rgba(22, 40, 57, 0.7);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .section-head p {
+      margin: 2px 0 0;
+      font-size: 10px;
+      color: var(--text3);
+    }
+
+    .section-body {
+      padding: 12px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .screen {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      background: rgba(19, 33, 49, 0.82);
+      display: grid;
+      gap: 8px;
+      min-height: 200px;
+    }
+
+    .screen-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent2);
+      font-weight: 700;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 4px;
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      background: rgba(14, 25, 37, 0.85);
+    }
+
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid rgba(139, 171, 194, 0.26);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--text2);
+      background: rgba(34, 52, 71, 0.78);
+    }
+
+    .tab .icon { font-size: 13px; line-height: 1; }
+
+    .tab.active {
+      color: #f3fffe;
+      border-color: rgba(56, 168, 161, 0.82);
+      background: rgba(56, 168, 161, 0.3);
+      box-shadow: 0 2px 8px rgba(56, 168, 161, 0.25);
+    }
+
+    .tab.active .icon { font-size: 15px; }
+
+    .tools {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tool {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(29, 47, 67, 0.9);
+      color: var(--text2);
+      font-size: 11px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .tool.active {
+      border-color: rgba(56, 168, 161, 0.75);
+      color: #e7fffd;
+      background: rgba(56, 168, 161, 0.3);
+    }
+
+    .hint {
+      min-height: 31px;
+      border: 1px dashed var(--line-soft);
+      border-radius: 8px;
+      background: rgba(16, 29, 42, 0.74);
+      padding: 7px 9px;
+      color: var(--text2);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .hint.empty {
+      color: var(--text3);
+      font-style: italic;
+    }
+
+    .cards2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .swatch-card {
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #122336;
+      min-height: 102px;
+    }
+
+    .tone {
+      height: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .meta {
+      padding: 6px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .hex-btn {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: rgba(20, 34, 49, 0.9);
+      color: var(--text);
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-size: 11px;
+      padding: 4px 7px;
+      cursor: pointer;
+    }
+
+    .mini-actions {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .mini {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      color: var(--text2);
+      background: rgba(33, 52, 71, 0.86);
+    }
+
+    .meta-sub {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      font-size: 9.5px;
+      color: var(--text2);
+    }
+
+    .format-line {
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: rgba(15, 28, 40, 0.84);
+      padding: 7px 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-size: 11px;
+    }
+
+    .format-line button {
+      border: 1px solid var(--line);
+      background: rgba(34, 52, 71, 0.86);
+      color: var(--text2);
+      border-radius: 7px;
+      font-size: 10px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    .list {
+      display: grid;
+      gap: 7px;
+    }
+
+    .row {
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      background: rgba(23, 40, 58, 0.84);
+      padding: 8px;
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 42px;
+      height: 30px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.24);
+    }
+
+    .row h4 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .row p {
+      margin: 2px 0 0;
+      font-size: 10px;
+      color: var(--text2);
+      line-height: 1.35;
+    }
+
+    .stack {
+      display: grid;
+      gap: 7px;
+    }
+
+    .tile {
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      background: rgba(22, 38, 54, 0.86);
+      padding: 8px;
+    }
+
+    .tile h4 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tile p {
+      margin: 4px 0 0;
+      font-size: 11px;
+      color: var(--text2);
+      line-height: 1.45;
+    }
+
+    .small-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .note {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(20, 35, 52, 0.86);
+      padding: 8px;
+      font-size: 10.5px;
+      color: var(--text2);
+      line-height: 1.45;
+    }
+
+    @media (max-width: 1300px) {
+      .section-body { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>Palext UI Decision Board - Full Tab Improvements</h1>
+      <p>This mockup includes your requested hint behavior, clearer active tab treatment, color format cycling preview, larger text readability, and tab-by-tab premium simplification variants.</p>
+      <div class="legend">
+        <span class="pill">Hints show only when clicked tool is active</span>
+        <span class="pill">Active tab has clear background + icon emphasis</span>
+        <span class="pill">Colors support HSL/RGBA/CMYK cycle preview</span>
+        <span class="pill">Two swatches per row variant included</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <header class="section-head">
+        <div>
+          <h2>Global Controls + Tabs</h2>
+          <p>Focused hint behavior and active-tab clarity options</p>
+        </div>
+      </header>
+      <div class="section-body">
+        <article class="screen">
+          <div class="screen-title">Variant A - Calm Minimal</div>
+          <div class="tabs">
+            <span class="tab active"><span class="icon">🎨</span> Colors</span>
+            <span class="tab"><span class="icon">Aa</span> Typography</span>
+            <span class="tab"><span class="icon">📐</span> Spacing</span>
+          </div>
+          <div class="tools" data-hint-group="g1">
+            <button class="tool" data-hint="Shows original website colors with no simulation." data-group="g1">👁 Color Vision</button>
+            <button class="tool" data-hint="Measure is unlimited on Pro." data-group="g1">📏 Measure</button>
+            <button class="tool" data-hint="Layout is clean by default: in-view highlights with optional labels." data-group="g1">🧱 Layout</button>
+          </div>
+          <div class="hint empty" id="hint-g1">Click any tool button to show only that button's hint.</div>
+          <div class="note">This demonstrates your exact requirement: not all text together, only per-button hint on click.</div>
+        </article>
+
+        <article class="screen">
+          <div class="screen-title">Variant B - Stronger Active State</div>
+          <div class="tabs">
+            <span class="tab"><span class="icon">🎨</span> Colors</span>
+            <span class="tab active"><span class="icon">Aa</span> Typography</span>
+            <span class="tab"><span class="icon">📐</span> Spacing</span>
+          </div>
+          <div class="tools" data-hint-group="g2">
+            <button class="tool" data-hint="Shows original website colors with no simulation." data-group="g2">👁 Color Vision</button>
+            <button class="tool" data-hint="Measure is unlimited on Pro." data-group="g2">📏 Measure</button>
+            <button class="tool" data-hint="Layout is clean by default: in-view highlights with optional labels." data-group="g2">🧱 Layout</button>
+          </div>
+          <div class="hint empty" id="hint-g2">Click any tool button to show only that button's hint.</div>
+          <div class="note">Use this if you want the active tab to be impossible to miss at first glance.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <header class="section-head">
+        <div>
+          <h2>Colors Tab Variants</h2>
+          <p>Bigger, clearer text + format cycling + two swatches per row option</p>
+        </div>
+      </header>
+      <div class="section-body">
+        <article class="screen">
+          <div class="screen-title">Variant A - Split Card (2 columns)</div>
+          <div class="cards2">
+            <div class="swatch-card">
+              <div class="tone" style="background:#2563eb"></div>
+              <div class="meta">
+                <div class="meta-top">
+                  <button class="hex-btn" data-cycle="#2563EB">#2563EB</button>
+                  <span class="mini-actions"><span class="mini">◎</span><span class="mini">⎘</span></span>
+                </div>
+                <div class="meta-sub"><span>Brand / Primary</span><span>W:AA B:Fail</span></div>
+              </div>
+            </div>
+            <div class="swatch-card">
+              <div class="tone" style="background:#14b8a6"></div>
+              <div class="meta">
+                <div class="meta-top">
+                  <button class="hex-btn" data-cycle="#14B8A6">#14B8A6</button>
+                  <span class="mini-actions"><span class="mini">◎</span><span class="mini">⎘</span></span>
+                </div>
+                <div class="meta-sub"><span>Accent / Action</span><span>W:AA B:Fail</span></div>
+              </div>
+            </div>
+            <div class="swatch-card">
+              <div class="tone" style="background:#f59e0b"></div>
+              <div class="meta">
+                <div class="meta-top">
+                  <button class="hex-btn" data-cycle="#F59E0B">#F59E0B</button>
+                  <span class="mini-actions"><span class="mini">◎</span><span class="mini">⎘</span></span>
+                </div>
+                <div class="meta-sub"><span>Warning / Orange</span><span>W:Large B:AA</span></div>
+              </div>
+            </div>
+            <div class="swatch-card">
+              <div class="tone" style="background:#0f172a"></div>
+              <div class="meta">
+                <div class="meta-top">
+                  <button class="hex-btn" data-cycle="#0F172A">#0F172A</button>
+                  <span class="mini-actions"><span class="mini">◎</span><span class="mini">⎘</span></span>
+                </div>
+                <div class="meta-sub"><span>Text / Strong</span><span>W:AAA B:Fail</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="format-line"><span id="format-preview-a">Click any color code to cycle: HEX -> HSL -> RGBA -> CMYK -> HEX</span><button type="button">Copy current</button></div>
+        </article>
+
+        <article class="screen">
+          <div class="screen-title">Variant B - List for readability</div>
+          <div class="list">
+            <div class="row"><div class="dot" style="background:#2563eb"></div><div><h4>Brand / Primary</h4><p>#2563EB · hsl(221, 83%, 54%)</p></div><span class="mini-actions"><span class="mini">◎</span><span class="mini">⎘</span></span></div>
+            <div class="row"><div class="dot" style="background:#14b8a6"></div><div><h4>Accent / Action</h4><p>#14B8A6 · hsl(174, 80%, 40%)</p></div><span class="mini-actions"><span class="mini">◎</span><span class="mini">⎘</span></span></div>
+            <div class="row"><div class="dot" style="background:#f59e0b"></div><div><h4>Warning / Orange</h4><p>#F59E0B · hsl(38, 92%, 50%)</p></div><span class="mini-actions"><span class="mini">◎</span><span class="mini">⎘</span></span></div>
+            <div class="row"><div class="dot" style="background:#0f172a"></div><div><h4>Text / Strong</h4><p>#0F172A · hsl(222, 47%, 11%)</p></div><span class="mini-actions"><span class="mini">◎</span><span class="mini">⎘</span></span></div>
+          </div>
+          <div class="note">Best when you prioritize clarity and professional audit readability over dense swatch browsing.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <header class="section-head">
+        <div>
+          <h2>Typography Tab Improvements</h2>
+          <p>Bigger hierarchy labels, cleaner sample spacing, stronger readability</p>
+        </div>
+      </header>
+      <div class="section-body">
+        <article class="screen">
+          <div class="screen-title">Variant A - Editorial Ladder</div>
+          <div class="stack">
+            <div class="tile"><h4>Display / 36px</h4><p style="font-size:20px; font-weight:700; color:#f3fbff;">The quick brown fox</p></div>
+            <div class="tile"><h4>Heading / 24px</h4><p style="font-size:16px; font-weight:700; color:#edf8ff;">The quick brown fox</p></div>
+            <div class="tile"><h4>Body / 16px</h4><p style="font-size:12px; line-height:1.55;">The quick brown fox jumps over the lazy dog.</p></div>
+          </div>
+        </article>
+        <article class="screen">
+          <div class="screen-title">Variant B - Utility Rows</div>
+          <div class="list">
+            <div class="row"><div class="dot" style="background:#20364e"></div><div><h4>Inter</h4><p>Primary UI family · 8 instances</p></div><span class="mini-actions"><span class="mini">◎</span><span class="mini">⎘</span></span></div>
+            <div class="row"><div class="dot" style="background:#20364e"></div><div><h4>Size 16px</h4><p>1rem · body text baseline</p></div><span class="mini-actions"><span class="mini">◎</span><span class="mini">⎘</span></span></div>
+            <div class="row"><div class="dot" style="background:#20364e"></div><div><h4>Weight 700</h4><p>Used in headings and actions</p></div><span class="mini-actions"><span class="mini">⎘</span></span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <header class="section-head">
+        <div>
+          <h2>Spacing + Radius Tab Improvements</h2>
+          <p>Less clutter, stronger value hierarchy, better scan speed</p>
+        </div>
+      </header>
+      <div class="section-body">
+        <article class="screen">
+          <div class="screen-title">Variant A - Bar + Value</div>
+          <div class="list">
+            <div class="row"><div class="dot" style="background:#264865"></div><div><h4>16px / 1rem</h4><p>Used 18 times · mostly padding</p></div><span class="mini">⎘</span></div>
+            <div class="row"><div class="dot" style="background:#376180"></div><div><h4>24px / 1.5rem</h4><p>Used 9 times · mostly gap</p></div><span class="mini">⎘</span></div>
+          </div>
+        </article>
+        <article class="screen">
+          <div class="screen-title">Variant B - Compact Chips</div>
+          <div class="small-grid">
+            <div class="tile"><h4>8px</h4><p>Small rhythm</p></div>
+            <div class="tile"><h4>12px</h4><p>Default inset</p></div>
+            <div class="tile"><h4>16px</h4><p>Body spacing</p></div>
+            <div class="tile"><h4>24px</h4><p>Section spacing</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <header class="section-head">
+        <div>
+          <h2>Effects, Variables, Assets, Insights, History</h2>
+          <p>Separate quick variants for each remaining tab</p>
+        </div>
+      </header>
+      <div class="section-body">
+        <article class="screen">
+          <div class="screen-title">Effects Tab Variants</div>
+          <div class="small-grid">
+            <div class="tile"><h4>Variant A</h4><p>Larger preview box + full shadow value line.</p></div>
+            <div class="tile"><h4>Variant B</h4><p>Compact tokens with expand-on-click details.</p></div>
+          </div>
+          <div class="note">Recommendation: A for clarity, B for dense projects.</div>
+        </article>
+
+        <article class="screen">
+          <div class="screen-title">Variables Tab Variants</div>
+          <div class="small-grid">
+            <div class="tile"><h4>Variant A</h4><p>Two-column name/value with search at top.</p></div>
+            <div class="tile"><h4>Variant B</h4><p>Grouped variable families with collapsible sections.</p></div>
+          </div>
+          <div class="note">Recommendation: B feels more premium and scalable.</div>
+        </article>
+
+        <article class="screen">
+          <div class="screen-title">Assets Tab Variants</div>
+          <div class="small-grid">
+            <div class="tile"><h4>Variant A</h4><p>Bigger thumbs, fewer cards per row, cleaner metadata.</p></div>
+            <div class="tile"><h4>Variant B</h4><p>Masonry grid + sticky actions bar.</p></div>
+          </div>
+          <div class="note">Recommendation: A for clarity and perceived quality.</div>
+        </article>
+
+        <article class="screen">
+          <div class="screen-title">Insights Tab Variants</div>
+          <div class="small-grid">
+            <div class="tile"><h4>Variant A</h4><p>Score cards first, then collapsible recommendations.</p></div>
+            <div class="tile"><h4>Variant B</h4><p>Single long feed with section anchors.</p></div>
+          </div>
+          <div class="note">Recommendation: A for reduced cognitive load.</div>
+        </article>
+
+        <article class="screen">
+          <div class="screen-title">History Tab Variants</div>
+          <div class="small-grid">
+            <div class="tile"><h4>Variant A</h4><p>Snapshot cards with primary and secondary action tiers.</p></div>
+            <div class="tile"><h4>Variant B</h4><p>Table-like compact rows with bulk actions.</p></div>
+          </div>
+          <div class="note">Recommendation: A for elegance, B for power users.</div>
+        </article>
+
+        <article class="screen">
+          <div class="screen-title">Decision Helper</div>
+          <div class="stack">
+            <div class="tile"><h4>Simple + Elegant baseline</h4><p>Global Variant A + Colors Variant A + Typography Variant A.</p></div>
+            <div class="tile"><h4>Data-heavy workflow</h4><p>Global Variant B + Colors Variant B + History Variant B.</p></div>
+            <div class="tile"><h4>Balanced recommendation</h4><p>Global Variant A + Colors A + Variables B + Insights A.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      function toRgba(hex) {
+        const h = hex.replace('#', '');
+        const r = parseInt(h.slice(0, 2), 16);
+        const g = parseInt(h.slice(2, 4), 16);
+        const b = parseInt(h.slice(4, 6), 16);
+        return `rgba(${r}, ${g}, ${b}, 1)`;
+      }
+
+      function toHsl(hex) {
+        const h = hex.replace('#', '');
+        let r = parseInt(h.slice(0, 2), 16) / 255;
+        let g = parseInt(h.slice(2, 4), 16) / 255;
+        let b = parseInt(h.slice(4, 6), 16) / 255;
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        let hh = 0;
+        let s = 0;
+        const l = (max + min) / 2;
+
+        if (max !== min) {
+          const d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          if (max === r) hh = (g - b) / d + (g < b ? 6 : 0);
+          else if (max === g) hh = (b - r) / d + 2;
+          else hh = (r - g) / d + 4;
+          hh /= 6;
+        }
+
+        return `hsl(${Math.round(hh * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
+      }
+
+      function toCmyk(hex) {
+        const h = hex.replace('#', '');
+        let r = parseInt(h.slice(0, 2), 16) / 255;
+        let g = parseInt(h.slice(2, 4), 16) / 255;
+        let b = parseInt(h.slice(4, 6), 16) / 255;
+        const k = 1 - Math.max(r, g, b);
+        if (k === 1) return 'cmyk(0, 0, 0, 100)';
+        const c = (1 - r - k) / (1 - k);
+        const m = (1 - g - k) / (1 - k);
+        const y = (1 - b - k) / (1 - k);
+        return `cmyk(${Math.round(c * 100)}, ${Math.round(m * 100)}, ${Math.round(y * 100)}, ${Math.round(k * 100)})`;
+      }
+
+      const formatPreview = document.getElementById('format-preview-a');
+      document.querySelectorAll('[data-cycle]').forEach((btn) => {
+        const hex = btn.getAttribute('data-cycle');
+        const values = [hex, toHsl(hex), toRgba(hex), toCmyk(hex)];
+        let idx = 0;
+        btn.addEventListener('click', () => {
+          idx = (idx + 1) % values.length;
+          btn.textContent = values[idx];
+          if (formatPreview) formatPreview.textContent = `Current format: ${values[idx]}`;
+        });
+      });
+
+      document.querySelectorAll('.tools').forEach((groupEl) => {
+        const group = groupEl.getAttribute('data-hint-group');
+        const hintEl = document.getElementById(`hint-${group}`);
+        groupEl.querySelectorAll('.tool').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            groupEl.querySelectorAll('.tool').forEach((x) => x.classList.remove('active'));
+            btn.classList.add('active');
+            if (hintEl) {
+              hintEl.textContent = btn.getAttribute('data-hint') || '';
+              hintEl.classList.remove('empty');
+            }
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spacing Tab Layout Mockups</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg2: #111d33;
+      --card: #12243f;
+      --text: #e6f0ff;
+      --text2: #a4b9d6;
+      --border: #2a3f60;
+      --accent: #55b8d9;
+      --accent2: #7ed0e8;
+      --good: #37c486;
+      --warn: #efb45d;
+      --radius: 12px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 700px at 20% -10%, #1b3152, var(--bg));
+    }
+
+    .wrap {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .variant {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(17,29,51,0.94), rgba(17,29,51,0.84));
+      box-shadow: 0 10px 22px rgba(4, 10, 21, 0.35);
+    }
+
+    .head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 9px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+    }
+
+    .tag {
+      font-size: 11px;
+      color: var(--text2);
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .chip, .btn {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #173055;
+      color: var(--text2);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+    }
+
+    .chip.good { color: #b6ffd7; border-color: #2f7d61; }
+    .chip.warn { color: #ffe2b9; border-color: #8a6531; }
+    .btn { color: #d4f4ff; }
+
+    .rows {
+      display: grid;
+      gap: 8px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 72px 1fr auto auto;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--card);
+      padding: 8px 9px;
+    }
+
+    .value {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--text);
+    }
+
+    .meta {
+      font-size: 10px;
+      color: var(--text2);
+    }
+
+    .inspect {
+      font-size: 10px;
+      color: var(--accent2);
+    }
+
+    .bar {
+      height: 7px;
+      border-radius: 6px;
+      background: #0e182a;
+      overflow: hidden;
+      border: 1px solid #223756;
+      margin-top: 4px;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #3c7fb6);
+    }
+
+    .subhead {
+      margin: 8px 0 6px;
+      font-size: 10px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: var(--text2);
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 16px;
+      display: grid;
+      gap: 4px;
+      color: var(--text2);
+      font-size: 10px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--card);
+      padding: 10px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .analysis {
+      border: 1px dashed #355980;
+      border-radius: 9px;
+      background: rgba(23, 48, 85, 0.45);
+      padding: 8px;
+      margin-bottom: 9px;
+    }
+
+    .analysis.collapsed {
+      display: none;
+    }
+
+    @media (max-width: 980px) {
+      .wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="variant">
+      <div class="head">
+        <h2 class="title">Variant 1: Minimal List</h2>
+        <span class="tag">Best scan speed</span>
+      </div>
+      <div class="toolbar">
+        <span class="chip good">86% on 4px grid</span>
+        <span class="chip">12 values</span>
+        <button class="btn">Copy vars</button>
+      </div>
+      <div class="rows">
+        <div class="row">
+          <div class="value">16px</div>
+          <div class="meta">1rem · 24 uses<div class="bar"><span style="width:100%"></span></div></div>
+          <div class="inspect">Inspect</div>
+          <div class="inspect">Details</div>
+        </div>
+        <div class="row">
+          <div class="value">12px</div>
+          <div class="meta">0.75rem · 18 uses<div class="bar"><span style="width:75%"></span></div></div>
+          <div class="inspect">Inspect</div>
+          <div class="inspect">Details</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="variant">
+      <div class="head">
+        <h2 class="title">Variant 2: Split Sections</h2>
+        <span class="tag">Balanced guidance</span>
+      </div>
+      <div class="toolbar">
+        <span class="chip good">Most used: 16px</span>
+        <button class="btn">Copy vars</button>
+      </div>
+      <div class="subhead">Top used</div>
+      <div class="rows">
+        <div class="row">
+          <div class="value">16px</div>
+          <div class="meta">24 uses</div>
+          <div class="inspect">Inspect</div>
+          <div class="inspect">Details</div>
+        </div>
+      </div>
+      <div class="subhead">Needs review</div>
+      <ul class="list">
+        <li>14px is close to 15px</li>
+        <li>Suggested merge: 14px + 15px to 16px</li>
+      </ul>
+      <div class="subhead">All values</div>
+      <div class="meta">4px, 8px, 12px, 14px, 15px, 16px, 24px...</div>
+    </section>
+
+    <section class="variant">
+      <div class="head">
+        <h2 class="title">Variant 3: Card Grid</h2>
+        <span class="tag">Visual-first</span>
+      </div>
+      <div class="toolbar">
+        <span class="chip">12 values</span>
+        <button class="btn">Copy vars</button>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="value">16px</div>
+          <div class="meta">1rem · 24 uses</div>
+          <div class="inspect">Inspect</div>
+        </article>
+        <article class="card">
+          <div class="value">12px</div>
+          <div class="meta">0.75rem · 18 uses</div>
+          <div class="inspect">Inspect</div>
+        </article>
+        <article class="card">
+          <div class="value">8px</div>
+          <div class="meta">0.5rem · 15 uses</div>
+          <div class="inspect">Inspect</div>
+        </article>
+        <article class="card">
+          <div class="value">24px</div>
+          <div class="meta">1.5rem · 7 uses</div>
+          <div class="inspect">Inspect</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="variant">
+      <div class="head">
+        <h2 class="title">Variant 4: Progressive Disclosure</h2>
+        <span class="tag">Recommended</span>
+      </div>
+      <div class="toolbar">
+        <button class="btn">Copy vars</button>
+        <button class="btn">Show analysis</button>
+        <span class="chip">Analysis collapsed by default</span>
+      </div>
+
+      <div class="analysis collapsed">
+        <div class="toolbar" style="margin:0;">
+          <span class="chip">Scale: 4px</span>
+          <span class="chip good">86% on-grid</span>
+          <span class="chip warn">2 near duplicates</span>
+        </div>
+        <ul class="list">
+          <li>Merge 14px and 15px into 16px</li>
+          <li>Normalize 10px to 8px or 12px</li>
+        </ul>
+      </div>
+
+      <div class="rows">
+        <div class="row">
+          <div class="value">16px</div>
+          <div class="meta">1rem · 24 uses<div class="bar"><span style="width:100%"></span></div></div>
+          <div class="inspect">Inspect</div>
+          <div class="inspect">Details</div>
+        </div>
+        <div class="row">
+          <div class="value">12px</div>
+          <div class="meta">0.75rem · 18 uses<div class="bar"><span style="width:75%"></span></div></div>
+          <div class="inspect">Inspect</div>
+          <div class="inspect">Details</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

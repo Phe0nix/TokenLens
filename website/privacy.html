@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palext | Privacy Policy</title>
+  <meta name="description" content="Palext privacy policy covering local storage, permissions, data access, and what the extension never collects." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="website.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand" aria-label="Palext home">
+        <img src="../icons/icon48.png" alt="Palext logo" />
+        <span>Palext</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="docs.html">Docs</a>
+        <a href="pricing-mockup.html">Pricing</a>
+        <a href="tool-mode-mockup.html">Tool Preview</a>
+      </nav>
+      <a class="btn btn-sm" href="index.html#get-started">Get Palext</a>
+    </div>
+  </header>
+
+  <main class="section docs-shell">
+    <div class="container docs-layout">
+      <aside class="docs-sidebar reveal">
+        <p class="eyebrow">Policy</p>
+        <h2>Privacy Policy</h2>
+        <nav class="docs-nav" aria-label="Privacy sections">
+          <a class="docs-nav-link" href="#overview">Overview</a>
+          <a class="docs-nav-link" href="#data-access">Data access</a>
+          <a class="docs-nav-link" href="#storage">Local storage</a>
+          <a class="docs-nav-link" href="#permissions">Permissions</a>
+          <a class="docs-nav-link" href="#contact">Contact</a>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <article id="overview" class="docs-route-card reveal">
+          <p class="eyebrow">Overview</p>
+          <h3>Palext keeps data local to your browser</h3>
+          <p class="policy-copy">Palext extracts design tokens from websites you visit, but it does not send that information to any server. The extension operates locally in your browser and stores only the data needed to make the tool useful.</p>
+        </article>
+
+        <article id="data-access" class="docs-route-card reveal">
+          <p class="eyebrow">Data Access</p>
+          <h3>What the extension reads</h3>
+          <div class="pricing-matrix" aria-label="Privacy data table">
+            <div class="matrix-head">
+              <span>Data</span>
+              <span>Purpose</span>
+              <span>Stored</span>
+            </div>
+            <div class="matrix-row"><span>Computed CSS styles</span><span>Token extraction</span><span>Locally only</span></div>
+            <div class="matrix-row"><span>Page URL and title</span><span>Snapshot labeling</span><span>Locally only</span></div>
+            <div class="matrix-row"><span>Saved snapshots</span><span>History comparison</span><span>Locally only</span></div>
+            <div class="matrix-row"><span>Inspect results</span><span>Token inspection</span><span>Locally only</span></div>
+          </div>
+        </article>
+
+        <article id="storage" class="docs-route-card reveal">
+          <p class="eyebrow">Storage</p>
+          <h3>What is saved</h3>
+          <p class="policy-copy">Palext uses chrome.storage.local to save snapshots, export preferences, UI mode, and temporary inspect state. You can clear saved data from the extension itself whenever you want.</p>
+        </article>
+
+        <article id="permissions" class="docs-route-card reveal">
+          <p class="eyebrow">Permissions</p>
+          <h3>Why permissions are needed</h3>
+          <div class="docs-mini-grid">
+            <section><h4>activeTab</h4><p>Reads styles from the current page when you trigger a scan.</p></section>
+            <section><h4>storage</h4><p>Saves snapshots, preferences, and history locally.</p></section>
+            <section><h4>scripting</h4><p>Injects extraction code when needed for supported pages.</p></section>
+          </div>
+        </article>
+
+        <article class="docs-route-card reveal">
+          <p class="eyebrow">Never</p>
+          <h3>What Palext never does</h3>
+          <div class="docs-mini-grid">
+            <section><h4>No analytics</h4><p>Palext does not run tracking or telemetry.</p></section>
+            <section><h4>No third-party sharing</h4><p>It does not send data to external services or APIs.</p></section>
+            <section><h4>No ads</h4><p>The extension does not display advertising.</p></section>
+          </div>
+        </article>
+
+        <article id="contact" class="docs-route-card reveal">
+          <p class="eyebrow">Contact</p>
+          <h3>Questions about this policy</h3>
+          <p class="policy-copy">If you have a privacy question, open an issue in the repository: https://github.com/Phe0nix/Palext/issues</p>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>Palext — Privacy Policy</p>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="docs.html">Docs</a>
+        <a href="pricing-mockup.html">Pricing</a>
+        <a href="tool-mode-mockup.html">Tool Preview</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="website.js"></script>
+</body>
+</html>

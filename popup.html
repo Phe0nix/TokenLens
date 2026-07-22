@@ -20,14 +20,21 @@
     </div>
   </div>
   <div class="header-btns">
-    <button class="mode-btn" id="modeBtn" aria-label="Free plan — click to learn about Pro" title="Pro features coming soon">Free</button>
-    <button class="icon-btn" id="sidePanelBtn" aria-label="Open Palext in the side panel" title="Open in side panel"><span class="sidepanel-icon" aria-hidden="true"><span></span></span></button>
-    <button class="icon-btn" id="inspectBtn" aria-label="Pick an element on the page to see its tokens" title="Pick Element">⊕</button>
+    <button class="mode-btn" id="modeBtn" aria-label="Test mode active" title="Test mode active. Pro gating disabled for QA.">Test Mode</button>
+    <button class="icon-btn text-btn" id="inspectBtn" aria-label="Pick an element on the page to see its tokens" title="Pick Element">Inspect</button>
 
-    <button class="icon-btn" id="refreshBtn" aria-label="Re-scan page" title="Re-scan">↺</button>
-    <button class="icon-btn" id="saveBtn" aria-label="Save this site's tokens" title="Save">🔖</button>
-    <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">☀️</button>
-    <button class="icon-btn text-btn" id="replayTourBtn" aria-label="Replay quick tour" title="Replay tour">Tour</button>
+    <button class="icon-btn text-btn" id="refreshBtn" aria-label="Re-scan page" title="Re-scan">Scan</button>
+    <button class="icon-btn text-btn" id="saveBtn" aria-label="Save this site's tokens" title="Save">Save</button>
+    <div class="tools-menu" id="globalPageTools" aria-label="Page tools">
+      <button class="icon-btn text-btn" id="toolsMenuBtn" aria-label="Open page tools" aria-expanded="false" aria-haspopup="menu" title="Page tools">Tools</button>
+      <div class="tools-submenu hidden" id="toolsSubmenu" role="menu" aria-label="Page tools submenu">
+        <button class="tiny-btn page-tool-btn" id="globalToggleColorBlindBtn" role="menuitem">Color Vision</button>
+        <button class="tiny-btn page-tool-btn" id="globalToggleMeasureModeBtn" role="menuitem">Measure</button>
+        <button class="tiny-btn page-tool-btn" id="globalToggleLayoutOverlayBtn" role="menuitem">Layout</button>
+        <button class="tiny-btn page-tool-btn" id="openExportModalBtn" role="menuitem" aria-label="Open export options">Export</button>
+      </div>
+    </div>
+    <button class="icon-btn hidden" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">☀️</button>
   </div>
 </header>
 
@@ -35,46 +42,35 @@
 <nav aria-label="Token categories">
   <div class="tabs" role="tablist">
     <button class="tab-btn active" data-tab="colors" role="tab" aria-selected="true">
-      🎨 Colors <span class="tab-count" id="cnt_colors">0</span>
+      <span class="tab-icon" aria-hidden="true">🎨</span><span class="tab-label">Colors</span> <span class="tab-count" id="cnt_colors">0</span>
     </button>
     <button class="tab-btn" data-tab="fonts" role="tab" aria-selected="false">
-      Aa Typography <span class="tab-count" id="cnt_fonts">0</span>
+      <span class="tab-icon" aria-hidden="true">Aa</span><span class="tab-label">Typography</span> <span class="tab-count" id="cnt_fonts">0</span>
     </button>
     <button class="tab-btn" data-tab="spacing" role="tab" aria-selected="false">
-      ⬜ Spacing + Radius <span class="tab-count" id="cnt_spacing">0</span>
+      <span class="tab-icon" aria-hidden="true">⬜</span><span class="tab-label">Spacing + Radius</span> <span class="tab-count" id="cnt_spacing">0</span>
     </button>
     <button class="tab-btn" data-tab="shadows" role="tab" aria-selected="false">
-      🌑 Effects <span class="tab-count" id="cnt_shadows">0</span>
+      <span class="tab-icon" aria-hidden="true">🌑</span><span class="tab-label">Effects</span> <span class="tab-count" id="cnt_shadows">0</span>
     </button>
     <button class="tab-btn" data-tab="vars" role="tab" aria-selected="false">
-      — Variables <span class="tab-count" id="cnt_vars">0</span>
+      <span class="tab-icon" aria-hidden="true">—</span><span class="tab-label">Variables</span> <span class="tab-count" id="cnt_vars">0</span>
     </button>
     <button class="tab-btn" data-tab="assets" role="tab" aria-selected="false">
-      🖼️ Assets <span class="tab-count" id="cnt_assets">0</span>
+      <span class="tab-icon" aria-hidden="true">🖼️</span><span class="tab-label">Assets</span> <span class="tab-count" id="cnt_assets">0</span>
     </button>
     <button class="tab-btn" data-tab="insights" role="tab" aria-selected="false">
-      ✨ Insights <span class="tab-count" id="cnt_insights">0</span>
+      <span class="tab-icon" aria-hidden="true">✨</span><span class="tab-label">Insights</span> <span class="tab-count" id="cnt_insights">0</span>
     </button>
     <button class="tab-btn" data-tab="history" role="tab" aria-selected="false">
-      🕘 History <span class="tab-count" id="cnt_history">0</span>
+      <span class="tab-icon" aria-hidden="true">🕘</span><span class="tab-label">History</span> <span class="tab-count" id="cnt_history">0</span>
     </button>
   </div>
 </nav>
 
 <!-- Export bar -->
-<div class="export-bar" id="exportBar" aria-label="Export options">
+<div class="export-bar hidden" id="exportBar" aria-label="Export options">
   <span class="exp-meta" id="lastExportHint" aria-live="polite">Last used: CSS</span>
-  <button class="exp-btn" id="openExportModalBtn" aria-label="Open export options">Export</button>
-</div>
-
-<!-- View options -->
-<div class="export-bar view-options-bar" id="viewOptionsBar" aria-label="View options">
-  <span class="export-label">Units:</span>
-  <div class="unit-toggle" role="group" aria-label="Display unit">
-    <button class="unit-btn active" data-unit="px" aria-pressed="true">px</button>
-    <button class="unit-btn" data-unit="rem" aria-pressed="false">rem</button>
-    <button class="unit-btn" data-unit="em" aria-pressed="false">em</button>
-  </div>
 </div>
 
 <!-- Error -->
@@ -145,12 +141,71 @@
         </div>
       </div>
 
+      <div id="exportAuditFormatGroup" class="hidden">
+        <label class="export-modal-label">Audit download format</label>
+        <select id="exportAuditFormatSelect" class="exp-select" aria-label="Audit download format">
+          <option value="markdown" selected>Markdown (.md)</option>
+          <option value="html">Visual HTML (.html)</option>
+        </select>
+      </div>
+
       <p class="exp-modal-note" id="exportModalNote">Copy or download token output for the selected format.</p>
     </div>
 
     <div class="export-modal-foot">
       <button class="btn-ghost" id="exportCopyBtn">Copy</button>
       <button class="exp-btn" id="exportDownloadBtn">Download</button>
+    </div>
+  </div>
+</div>
+
+<!-- Spacing details modal -->
+<div class="export-modal-overlay hidden" id="spacingDetailsOverlay" aria-hidden="true">
+  <div class="export-modal spacing-details-modal" role="dialog" aria-modal="true" aria-labelledby="spacingDetailsTitle">
+    <div class="export-modal-head">
+      <div>
+        <h3 id="spacingDetailsTitle">Spacing Details</h3>
+        <p id="spacingDetailsSubtitle">Scale consistency, cleanup hints, and all spacing values in one clean view.</p>
+      </div>
+      <button class="icon-btn" id="closeSpacingDetailsBtn" aria-label="Close spacing details" title="Close">✕</button>
+    </div>
+
+    <div class="export-modal-body spacing-details-body" id="spacingDetailsBody"></div>
+  </div>
+</div>
+
+<!-- Pro plans modal -->
+<div class="pro-plan-overlay hidden" id="proPlanOverlay" aria-hidden="true">
+  <div class="pro-plan-modal" role="dialog" aria-modal="true" aria-labelledby="proPlanTitle">
+    <div class="pro-plan-head">
+      <div>
+        <h3 id="proPlanTitle">Upgrade to Pro</h3>
+        <p id="proPlanSubtitle">Unlock advanced exports, audits, and workflow power.</p>
+      </div>
+      <button class="icon-btn" id="closeProPlanBtn" aria-label="Close Pro plans" title="Close">✕</button>
+    </div>
+
+    <div class="pro-plan-body">
+      <p class="pro-plan-pitch" id="proPlanPitch">You are currently on Free. Upgrade to Pro to remove limits and save hours during audits and handoff.</p>
+
+      <div class="pro-plan-grid" role="group" aria-label="Pro pricing options">
+        <button class="pro-price-card" id="proMonthlyBtn">
+          <span class="pro-price-name">Pro Monthly</span>
+          <span class="pro-price-main">$4.99<span>/mo</span></span>
+          <span class="pro-price-sub">Flexible billing</span>
+        </button>
+        <button class="pro-price-card pro-price-featured" id="proAnnualBtn">
+          <span class="pro-badge-small">Best Value</span>
+          <span class="pro-price-name">Pro Annual</span>
+           <span class="pro-price-main">$50<span>/yr</span></span>
+           <span class="pro-price-sub">Save 17% vs monthly</span>
+        </button>
+      </div>
+
+      <div class="pro-missing-wrap">
+        <div class="pro-missing-title" id="proMissingTitle">What you are missing on Free</div>
+        <ul class="pro-missing-list" id="proMissingList"></ul>
+      </div>
     </div>
   </div>
 </div>

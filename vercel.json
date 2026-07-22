@@ -1,0 +1,38 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/website/index.html"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/website/index.html"
+    },
+    {
+      "source": "/docs",
+      "destination": "/website/docs.html"
+    },
+    {
+      "source": "/docs.html",
+      "destination": "/website/docs.html"
+    },
+    {
+      "source": "/pricing-mockup",
+      "destination": "/website/pricing-mockup.html"
+    },
+    {
+      "source": "/pricing-mockup.html",
+      "destination": "/website/pricing-mockup.html"
+    },
+    {
+      "source": "/tool-mode-mockup",
+      "destination": "/website/tool-mode-mockup.html"
+    },
+    {
+      "source": "/tool-mode-mockup.html",
+      "destination": "/website/tool-mode-mockup.html"
+    }
+  ]
+}

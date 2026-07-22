@@ -1,0 +1,290 @@
+:root {
+  --bg: #0b1220;
+  --bg2: #111b2f;
+  --card: #15223a;
+  --line: #28415e;
+  --text: #e8f2ff;
+  --muted: #9fb5ce;
+  --accent: #23b3a6;
+  --accent-2: #57d8ca;
+  --warn: #f0b25c;
+  --radius: 12px;
+  --radius-xl: 18px;
+  --shadow: 0 18px 44px rgba(5, 10, 18, 0.55);
+  --font: "Segoe UI", "Trebuchet MS", sans-serif;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% -8%, rgba(35, 179, 166, 0.18), transparent 34%),
+    radial-gradient(circle at 110% 120%, rgba(87, 216, 202, 0.16), transparent 30%),
+    var(--bg);
+}
+
+.gallery-page {
+  min-height: 100vh;
+  padding: 28px;
+}
+.gallery-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+}
+.gallery-head h1 {
+  margin: 0;
+  font-size: 34px;
+}
+.gallery-head p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+.phase-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+.phase-card {
+  background: linear-gradient(170deg, color-mix(in srgb, var(--card) 86%, #fff 14%), var(--card));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.phase-card h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.phase-card p {
+  margin: 8px 0 14px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.phase-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 30%, var(--card)), color-mix(in srgb, var(--accent) 14%, var(--card)));
+  color: #f2fffd;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.mock-stage {
+  min-height: 100vh;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+}
+.mock-shell {
+  width: min(1160px, 100%);
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 20px;
+}
+
+.panel {
+  width: 420px;
+  height: 600px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 48%, var(--line));
+  background: linear-gradient(170deg, rgba(11, 20, 34, 0.97), rgba(10, 16, 28, 0.97));
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.drag-handle {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  letter-spacing: 0.24px;
+  color: color-mix(in srgb, var(--muted) 70%, #fff);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg2) 94%, var(--accent) 6%);
+}
+
+.top {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  gap: 8px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.site {
+  min-width: 0;
+}
+.site b {
+  display: block;
+  font-size: 13px;
+}
+.site span {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--accent) 20%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+}
+
+.btn {
+  border: 1px solid var(--line);
+  color: var(--text);
+  background: color-mix(in srgb, var(--card) 92%, var(--accent) 8%);
+  border-radius: 9px;
+  padding: 6px 9px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.btn.primary {
+  border-color: color-mix(in srgb, var(--accent) 56%, var(--line));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 30%, var(--card)), color-mix(in srgb, var(--accent) 10%, var(--card)));
+}
+.btn.warn {
+  border-color: color-mix(in srgb, var(--warn) 56%, var(--line));
+}
+
+.tabs, .subtabs {
+  padding: 8px 10px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--line);
+}
+.chip {
+  border-radius: 999px;
+  font-size: 11px;
+  padding: 6px 10px;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, #fff 30%);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.chip.active {
+  color: #f5fffd;
+  background: color-mix(in srgb, var(--accent) 24%, var(--card));
+  border-color: color-mix(in srgb, var(--accent) 64%, var(--line));
+}
+
+.tools {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.content {
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  background: color-mix(in srgb, var(--card) 92%, #fff 8%);
+}
+.card h4 {
+  margin: 0;
+  font-size: 12px;
+}
+.card p {
+  margin: 5px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.42;
+}
+.swatches {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+.swatch {
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.side-note {
+  background: color-mix(in srgb, var(--card) 92%, #fff 8%);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  padding: 16px;
+}
+.side-note h3 {
+  margin: 0;
+  font-size: 20px;
+}
+.side-note p {
+  margin: 8px 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.side-note ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.phase-tag {
+  display: inline-flex;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.22px;
+  color: #d2fff8;
+  background: color-mix(in srgb, var(--accent) 28%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--accent) 58%, var(--line));
+}
+
+.phase3 .top,
+.phase3 .tabs,
+.phase3 .subtabs,
+.phase3 .tools {
+  border-bottom-color: color-mix(in srgb, var(--line) 65%, #fff 35%);
+}
+.phase3 .site b {
+  font-size: 14px;
+}
+.phase3 .site span {
+  font-size: 12px;
+}
+.phase3 .chip,
+.phase3 .btn {
+  font-size: 12px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.phase3 .card h4 {
+  font-size: 13px;
+}
+.phase3 .card p {
+  font-size: 12px;
+}
+
+@media (max-width: 980px) {
+  .mock-shell {
+    grid-template-columns: 1fr;
+  }
+  .panel {
+    margin: 0 auto;
+  }
+}

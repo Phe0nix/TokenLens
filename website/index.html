@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palext | Design Token Extractor</title>
+  <meta
+    name="description"
+    content="Palext extracts design tokens from live websites, runs accessibility audits, and exports to developer-ready formats with polished visual reports."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="website.css" />
+</head>
+<body>
+  <div class="bg-orb bg-orb-a" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-b" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand" aria-label="Palext home">
+        <img src="./images/icon48.png" alt="Palext logo" />
+        <span>Palext</span>
+      </a>
+      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#compare">Compare</a>
+        <a href="docs.html">Docs</a>
+        <a href="tool-mode-mockup.html">Tool Preview</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-sm" href="#get-started">Get Palext</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Chrome Extension for Design + Dev Teams</p>
+          <h1>
+            Turn any live website into
+            <span>clear design tokens</span>
+            and shareable audits.
+          </h1>
+          <p class="hero-copy">
+            Extract design tokens, catch accessibility issues, and export production-ready outputs
+            in minutes instead of hours.
+          </p>
+          <div class="hero-story">
+            <div class="hero-story-card hero-story-card-main">
+              <span class="story-kicker">Live workflow</span>
+              <strong>Scan</strong>
+              <p>Capture styles from real pages and turn them into usable tokens.</p>
+            </div>
+            <div class="hero-story-card">
+              <span class="story-kicker">Free</span>
+              <strong>Explore</strong>
+              <p>Learn the product with core inspection and export basics.</p>
+            </div>
+            <div class="hero-story-card">
+              <span class="story-kicker">Pro</span>
+              <strong>Ship faster</strong>
+              <p>Unlock unlimited scans, reports, and advanced workflow tools.</p>
+            </div>
+          </div>
+          <div class="hero-actions" id="get-started">
+            <a class="btn" href="https://chrome.google.com/webstore/detail/your-extension-id" target="_blank" rel="noreferrer">Install Extension</a>
+            <a class="btn btn-ghost" href="docs.html">Explore Docs</a>
+            <a class="btn btn-ghost" href="#compare">See Workflow Impact</a>
+          </div>
+          <div class="hero-metrics">
+            <article>
+              <strong>10+</strong>
+              <span>Export formats</span>
+            </article>
+            <article>
+              <strong>2</strong>
+              <span>Audit outputs</span>
+            </article>
+            <article>
+              <strong>15-25 min</strong>
+              <span>Typical full audit pass</span>
+            </article>
+          </div>
+        </div>
+
+        <aside class="hero-panel-grid reveal" aria-label="Live product preview cards">
+          <article class="hero-panel hero-card hero-card-audit">
+            <div class="panel-top">
+              <span class="chip">Live Scan</span>
+              <span class="chip chip-alt">WCAG + Drift</span>
+            </div>
+            <h2>Audit Snapshot</h2>
+            <ul>
+              <li><span>System consistency</span><b>86/100</b></li>
+              <li><span>Palette accessibility</span><b>79/100</b></li>
+              <li><span>Live AA issues</span><b>7 nodes</b></li>
+              <li><span>Hardcoded drift</span><b>12 occurrences</b></li>
+            </ul>
+            <p>
+              Prioritize top issue groups, assign owners, and export an elegant report for
+              designers, engineers, and stakeholders.
+            </p>
+          </article>
+
+          <div class="hero-panel-lower">
+            <article class="hero-panel hero-card hero-card-glance">
+              <h3>Free vs Pro at a glance</h3>
+              <ul class="glance-list">
+                <li><span>Monthly scans</span><b>10 Free / Unlimited Pro</b></li>
+                <li><span>Exports</span><b>CSS + JSON / 10+ formats Pro</b></li>
+                <li><span>Audit depth</span><b>Core checks / Reports + AI Pro</b></li>
+              </ul>
+            </article>
+
+            <div class="hero-mini-stack" aria-label="Additional proof cards">
+              <article class="hero-panel hero-card hero-card-export">
+                <h3>Export Preview</h3>
+                <ul class="export-list">
+                  <li><code>tokens.css</code><span>1.8 KB</span></li>
+                  <li><code>tokens.json</code><span>4.2 KB</span></li>
+                  <li><code>figma-tokens.json</code><span>6.1 KB</span></li>
+                </ul>
+              </article>
+
+              <article class="hero-panel hero-card hero-card-activity">
+                <h3>Recent Scan Activity</h3>
+                <ul class="activity-list">
+                  <li><span>linkedin.com scanned</span><b>2m ago</b></li>
+                  <li><span>7 AA issues found</span><b>reviewed</b></li>
+                  <li><span>Report exported</span><b>just now</b></li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="trust-strip reveal">
+      <div class="container trust-items">
+        <p>Built for design and dev handoff workflows</p>
+        <p>Fast to learn, deep enough for production teams</p>
+      </div>
+    </section>
+
+    <section class="section how-it-works-section">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">How It Works</p>
+          <h2>From live page to token-ready output in one flow</h2>
+        </div>
+        <div class="how-it-works reveal">
+          <article>
+            <span class="how-step">01</span>
+            <h3>Scan the page</h3>
+            <p>Open Palext on any live website to capture colors, type, spacing, and UI structure.</p>
+          </article>
+          <article>
+            <span class="how-step">02</span>
+            <h3>Review what matters</h3>
+            <p>Use inspect, layout, accessibility, and snapshot tools to understand what is changing.</p>
+          </article>
+          <article>
+            <span class="how-step">03</span>
+            <h3>Export or report</h3>
+            <p>Send the result into code, design tokens, or a polished audit report for the team.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Why Teams Pick Palext</p>
+          <h2>Core capabilities that move audits from guesswork to action</h2>
+        </div>
+        <div class="feature-stage reveal">
+          <div class="feature-flow" aria-label="Palext workflow stages">
+            <div class="feature-flow-step">
+              <span class="flow-no">01</span>
+              <strong>Capture</strong>
+              <small>Inspect + Tokens</small>
+            </div>
+            <div class="feature-flow-step">
+              <span class="flow-no">02</span>
+              <strong>Review</strong>
+              <small>Contrast + Drift</small>
+            </div>
+            <div class="feature-flow-step">
+              <span class="flow-no">03</span>
+              <strong>Deliver</strong>
+              <small>Export + Reports</small>
+            </div>
+          </div>
+          <div class="editorial-stack">
+            <article class="editorial-item">
+              <figure class="editorial-shot editorial-shot-feature1">
+                <img src="./images/feature1.jpg" alt="Palext feature one screenshot showing inspect and token capture UI" loading="lazy" />
+              </figure>
+              <div class="editorial-body">
+                <p class="eyebrow">Feature 1</p>
+                <h3>Inspect and token capture on live UI</h3>
+                <p>Move from visual guessing to exact values using computed style extraction and point-and-click inspection.</p>
+                <ul class="editorial-points">
+                  <li><span class="feature-item-title"><span class="feature-icon" aria-hidden="true">◉</span>Computed colors, type, spacing, radius, shadow, and gradients</span><span class="plan-badge free">Free</span></li>
+                  <li><span class="feature-item-title"><span class="feature-icon" aria-hidden="true">⌖</span>Element inspect mode for immediate value lookup</span><span class="plan-badge free">Free</span></li>
+                  <li><span class="feature-item-title"><span class="feature-icon" aria-hidden="true">◎</span>Locate color and typography instances on page</span><span class="plan-badge pro">Pro</span></li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="editorial-item editorial-item-alt">
+              <div class="editorial-body">
+                <p class="eyebrow">Feature 2</p>
+                <h3>Accessibility and drift review in one place</h3>
+                <p>Identify contrast risk, compare changes, and focus on issues that matter before handoff.</p>
+                <ul class="editorial-points">
+                  <li><span class="feature-item-title"><span class="feature-icon" aria-hidden="true">◍</span>Color blindness preview and quick contrast visibility checks</span><span class="plan-badge free">Free</span></li>
+                  <li><span class="feature-item-title"><span class="feature-icon" aria-hidden="true">⇄</span>Snapshot history and drift compare workflows</span><span class="plan-badge pro">Pro</span></li>
+                  <li><span class="feature-item-title"><span class="feature-icon" aria-hidden="true">✦</span>Insights analyzer with recommendations</span><span class="plan-badge pro">Pro</span></li>
+                </ul>
+              </div>
+              <figure class="editorial-shot editorial-shot-feature2">
+                <img src="./images/feature2.jpg" alt="Palext feature two screenshot showing review and accessibility workflow" loading="lazy" />
+              </figure>
+            </article>
+
+            <article class="editorial-item">
+              <figure class="editorial-shot">
+                <img src="./images/feature3.jpg" alt="Palext export workflow surface" loading="lazy" />
+              </figure>
+              <div class="editorial-body">
+                <p class="eyebrow">Feature 3</p>
+                <h3>Export-ready outputs for dev and design workflows</h3>
+                <p>Start with core formats in Free, then scale to framework and design-system exports in Pro.</p>
+                <ul class="editorial-points">
+                  <li><span class="feature-item-title"><span class="feature-icon" aria-hidden="true">{ }</span>Core exports: CSS variables, SCSS, JSON</span><span class="plan-badge free">Free</span></li>
+                  <li><span class="feature-item-title"><span class="feature-icon" aria-hidden="true">⚙</span>Advanced formats: JS, TS, Less, Stylus, Tailwind</span><span class="plan-badge pro">Pro</span></li>
+                  <li><span class="feature-item-title"><span class="feature-icon" aria-hidden="true">◇</span>React UI plus Figma Tokens and DTCG</span><span class="feature-tags"><span class="mini-flag">Most used</span><span class="plan-badge pro">Pro</span></span></li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <div class="timeline-tail" aria-label="Additional workflow capabilities">
+            <article class="timeline-tail-item">
+              <span class="flow-no">04</span>
+              <h3>Snapshot intelligence for team handoff</h3>
+              <p>Track what changed between scans and keep a reusable history baseline.</p>
+              <div class="timeline-tags"><span class="plan-badge free">3 snapshots Free</span><span class="plan-badge pro">Unlimited Pro</span></div>
+            </article>
+            <article class="timeline-tail-item">
+              <span class="flow-no">05</span>
+              <h3>Delivery layer with reports and automation</h3>
+              <p>Generate markdown and visual HTML reports and unlock Smart Apply workflows.</p>
+              <div class="timeline-tags"><span class="plan-badge pro">Reports</span><span class="plan-badge pro">Smart Apply</span></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Pricing</p>
+          <h2>Simple, transparent pricing</h2>
+        </div>
+
+        <div class="billing-toggle-wrap reveal">
+          <div class="billing-toggle" role="group" aria-label="Billing period toggle">
+            <button class="billing-btn active" data-billing="monthly" aria-pressed="true">Monthly</button>
+            <button class="billing-btn" data-billing="annual" aria-pressed="false">Annual</button>
+          </div>
+          <p class="billing-hint">Annual saves 17%</p>
+        </div>
+
+        <div class="pricing-cards pricing-two-col">
+          <article class="price-card reveal">
+            <p class="price-name">Free Explorer</p>
+            <h3 class="price-main">$0 <span>forever</span></h3>
+            <p class="price-copy">Built for evaluation and light use.</p>
+            <ul>
+              <li>Up to 10 scans per month</li>
+              <li>Up to 3 snapshots</li>
+              <li>Core exports: CSS, SCSS, JSON</li>
+              <li>Basic inspect + Layout tool</li>
+              <li>Color blindness preview toggle</li>
+            </ul>
+          </article>
+
+          <article class="price-card featured reveal">
+            <p class="price-name">Pro Builder</p>
+            <h3 class="price-main"><span class="price-value" data-price-pro>$4.99</span> <span class="price-cycle" data-cycle-pro>/ month</span></h3>
+            <p class="price-copy" data-price-pro-note>Best for solo designers and developers shipping regularly. Billed monthly.</p>
+            <ul>
+              <li>Unlimited scans and snapshots</li>
+              <li>Full export formats + React UI family</li>
+              <li>Visual HTML + Markdown audit reports</li>
+              <li>Measure + WCAG overlays + theme personalization</li>
+              <li>History power tools and Smart Apply (Beta)</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="pricing-links reveal">
+          <a class="btn btn-ghost" href="pricing-mockup.html" rel="noreferrer">Open Pricing</a>
+          <a class="btn btn-ghost" href="tool-mode-mockup.html" rel="noreferrer">Open Free vs Pro Preview</a>
+        </div>
+
+        <div class="pricing-matrix reveal" aria-label="Feature availability by plan">
+          <h3>Detailed Free vs Pro comparison</h3>
+          <div class="matrix-head">
+            <span>Workflow capability</span>
+            <span>Free</span>
+            <span>Pro</span>
+          </div>
+          <div class="matrix-row">
+            <span>Monthly scans</span>
+            <span>10</span>
+            <span>Unlimited</span>
+          </div>
+          <div class="matrix-row">
+            <span>Snapshot history</span>
+            <span>3 snapshots</span>
+            <span>Unlimited</span>
+          </div>
+          <div class="matrix-row">
+            <span>Export formats</span>
+            <span>Core (CSS/SCSS/JSON)</span>
+            <span>All formats + React + Figma + DTCG</span>
+          </div>
+          <div class="matrix-row">
+            <span>Audit reports</span>
+            <span><span class="pill pill-pro">Pro only</span></span>
+            <span>Markdown + Visual HTML</span>
+          </div>
+          <div class="matrix-row">
+            <span>Insights analyzer + recommendations</span>
+            <span><span class="pill pill-pro">Pro only</span></span>
+            <span>Included</span>
+          </div>
+          <div class="matrix-row">
+            <span>Theme personalization + Smart Apply beta</span>
+            <span><span class="pill pill-pro">Pro only</span></span>
+            <span>Included</span>
+          </div>
+          <div class="matrix-row">
+            <span>Audit report download format</span>
+            <span><span class="pill pill-pro">Pro only</span></span>
+            <span>Markdown + Visual HTML</span>
+          </div>
+          <div class="matrix-row">
+            <span>Design tools export (Figma Tokens + DTCG)</span>
+            <span><span class="pill pill-pro">Pro only</span></span>
+            <span>Included</span>
+          </div>
+          <div class="matrix-row">
+            <span>React UI export (MUI, Chakra, Ant)</span>
+            <span><span class="pill pill-pro">Pro only</span></span>
+            <span>Included</span>
+          </div>
+          <p class="matrix-foot">Need implementation details? Visit the full <a href="docs.html#feature-matrix">feature matrix in docs</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="compare" class="section section-contrast">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Compare</p>
+          <h2>Workflow impact by plan</h2>
+        </div>
+
+        <div class="pricing-matrix reveal" aria-label="Detailed plan comparison">
+          <div class="matrix-head">
+            <span>Category</span>
+            <span>Free</span>
+            <span>Pro</span>
+          </div>
+          <div class="matrix-row">
+            <span>Best for</span>
+            <span>Light checks and exploration</span>
+            <span>Production audits and handoff</span>
+          </div>
+          <div class="matrix-row">
+            <span>Audit depth</span>
+            <span>Basic extraction + inspect</span>
+            <span>Full analyzer + recommendations</span>
+          </div>
+          <div class="matrix-row">
+            <span>Export depth</span>
+            <span>Core formats only</span>
+            <span>All formats + framework families</span>
+          </div>
+          <div class="matrix-row">
+            <span>Report readiness</span>
+            <span>Manual notes</span>
+            <span>Structured markdown + visual report</span>
+          </div>
+          <div class="matrix-row">
+            <span>Monthly cost</span>
+            <span>$0</span>
+            <span><strong>$4.99</strong></span>
+          </div>
+          <div class="matrix-row">
+            <span>Annual cost</span>
+            <span>Not applicable</span>
+            <span><strong>$50/year</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section section-alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2>Questions teams ask before rollout</h2>
+        </div>
+        <div class="faq-list">
+          <details class="reveal">
+            <summary>What is included in Free?</summary>
+            <p>Free is for evaluation and light usage: up to 10 scans per month, 3 snapshots, core exports, inspect mode, layout tools, and color blindness preview.</p>
+          </details>
+          <details class="reveal">
+            <summary>What does Pro unlock?</summary>
+            <p>Pro removes scan and snapshot limits and adds the full export family, audit reports, insights, theme personalization, Smart Apply beta, and production workflow utilities.</p>
+          </details>
+          <details class="reveal">
+            <summary>Is the $50 price monthly or yearly?</summary>
+            <p>The annual option is $50 per year. The pricing card can also show a monthly view for comparison.</p>
+          </details>
+          <details class="reveal">
+            <summary>Is Palext only for designers?</summary>
+            <p>No. It is built for both designers and developers with shared language and actionable export outputs.</p>
+          </details>
+          <details class="reveal">
+            <summary>Can we use it for accessibility triage?</summary>
+            <p>Yes. Palext highlights contrast risk, live AA failures, and provides clear fix-focused sections in reports.</p>
+          </details>
+          <details class="reveal">
+            <summary>Is Team Scale available now?</summary>
+            <p>Not yet. Team Scale is marked coming soon so visitors understand it is planned, not currently purchasable.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section docs-promo">
+      <div class="container docs-promo-card reveal">
+        <div>
+          <p class="eyebrow">Documentation</p>
+          <h2>Clear guides, zero fluff.</h2>
+          <p class="hero-copy">Read step-by-step feature docs whenever you need implementation details.</p>
+        </div>
+        <div class="docs-promo-actions">
+          <a class="btn" href="docs.html">Open Documentation</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>Palext — Design Token Extractor</p>
+      <div>
+        <a href="docs.html">Docs</a>
+        <a href="pricing-mockup.html">Pricing</a>
+        <a href="tool-mode-mockup.html">Tool Preview</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="website.js"></script>
+</body>
+</html>
