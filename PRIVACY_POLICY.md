@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Last_Updated-July_2026-0ea5e9?style=flat-square" />
   <img src="https://img.shields.io/badge/Compliance-Chrome_Extension_Policy-2ea44f?style=flat-square&logo=googlechrome&logoColor=white" />
-  <img src="https://img.shields.io/badge/Data_Collected-None-22c55e?style=flat-square" />
+  <img src="https://img.shields.io/badge/Data_Processing-Local_+_License_Validation-22c55e?style=flat-square" />
 </p>
 
 ---
@@ -29,8 +29,8 @@ Palext has Free and Pro feature access levels, but privacy behavior is identical
 
 | Plan | Feature access summary | Data handling |
 |---|---|---|
-| Free | Core scanning, inspect workflow, core exports, limited quotas | Local-only processing and local-only storage |
-| Pro | Unlocks advanced exports, unlimited workflows, deeper audit utilities | Local-only processing and local-only storage |
+| Free | Core scanning, inspect workflow, core exports, limited quotas | Local processing with browser storage |
+| Pro | Unlocks advanced exports, unlimited workflows, deeper audit utilities | Local processing with browser storage + license validation |
 
 No matter which plan is active, Palext does not transmit scanned website data to external servers.
 
@@ -48,13 +48,14 @@ When you open Palext on a web page, the extension reads the **computed CSS style
 | Inspect element styles | Element token view | Locally only | ❌ Never |
 | Export preferences, selected format/family, and UI mode | Remembering your settings | Locally only | ❌ Never |
 | Accessibility diagnostics (contrast pass/fail counts, risky pairs) | Build on-device insights and audit reports | Locally only | ❌ Never |
+| License key + instance id (Pro users only) | Subscription validation | `chrome.storage.sync` + validation API request | Shared only with Lemon Squeezy for license verification |
 
 ---
 
 ## 🚫 What Palext Never Does
 
-- ❌ Does **not** collect or transmit any personal information
-- ❌ Does **not** send any data to external servers or third parties
+- ❌ Does **not** collect page content, form input, passwords, or personal profile data
+- ❌ Does **not** send scanned page styles, snapshots, or token exports to external servers
 - ❌ Does **not** track your browsing history or behavior
 - ❌ Does **not** use cookies or tracking pixels
 - ❌ Does **not** access login credentials, form inputs, or private content
@@ -65,13 +66,19 @@ When you open Palext on a web page, the extension reads the **computed CSS style
 
 ## 💾 Local Storage
 
-Palext uses the browser's built-in **`chrome.storage.local`** API to save:
+Palext uses the browser's built-in **`chrome.storage.local`** and **`chrome.storage.sync`** APIs.
+
+Stored in **`chrome.storage.local`**:
 
 - Saved page snapshots (when you click the bookmark button)
 - Export preferences and UI mode selection
 - Inspect results temporarily captured during element inspection
 
-This data is stored entirely on your device, never leaves your browser, and is accessible only to the Palext extension itself. You can clear all stored data at any time from the extension's History tab.
+Stored in **`chrome.storage.sync`**:
+
+- Pro license status and activation metadata (license key + instance id)
+
+Page scan data is stored locally and accessible only to the Palext extension. Pro license metadata may also sync via Chrome Sync (if enabled in your browser profile) and is used for license verification. You can clear saved extension data at any time from the extension's History tab.
 
 Palext's generated outputs (token exports, Markdown audits, and visual HTML audits) are created entirely in your browser from page style data and only leave your device if you explicitly choose to copy or download them.
 
@@ -95,9 +102,11 @@ No permission is used beyond its stated purpose.
 
 ## 🌐 Third-Party Services
 
-Palext does **not** integrate with, connect to, or send data to any third-party service, API, or analytics platform.
+Palext does **not** use analytics, telemetry, ad networks, or third-party data-sharing SDKs.
 
-The extension operates entirely offline and locally within your browser.
+Palext Pro uses Lemon Squeezy's license validation endpoint to verify license status when a Pro key is activated/validated. This validation request includes license metadata (license key and instance id) and does not include scanned page styles, snapshot content, or extracted token output.
+
+All page scanning and token extraction still run locally in your browser.
 
 Exports (including CSS/SCSS/Tailwind/MUI/Ant/Chakra/Figma/DTCG/JSON/TS/JS output, plus Markdown and visual HTML audits) are generated locally in your browser from the page styles you choose to scan.
 
@@ -105,7 +114,7 @@ Exports (including CSS/SCSS/Tailwind/MUI/Ant/Chakra/Figma/DTCG/JSON/TS/JS output
 
 ## 🧒 Children's Privacy
 
-Palext does not knowingly collect any information from anyone, including children under 13. Since no data is collected at all, this extension is safe for use by all age groups.
+Palext does not knowingly collect personal information from anyone, including children under 13. Core extension scanning and token extraction run locally in-browser.
 
 ---
 
@@ -124,5 +133,5 @@ If you have any questions about this privacy policy or how Palext works, please 
 ---
 
 <p align="center">
-  <sub>Palext is built with user privacy as a core principle. No data leaves your device. Ever.</sub>
+  <sub>Palext is built with user privacy as a core principle. Scanned page styles remain local to your device.</sub>
 </p>

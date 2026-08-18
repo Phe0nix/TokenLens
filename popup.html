@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="header-btns">
-    <button class="mode-btn" id="modeBtn" aria-label="Test mode active" title="Test mode active. Pro gating disabled for QA.">Test Mode</button>
+    <button class="mode-btn" id="modeBtn" aria-label="Current plan is Free. Click to view plans." title="Current plan: Free. Click to view plans.">Free</button>
     <button class="icon-btn text-btn" id="inspectBtn" aria-label="Pick an element on the page to see its tokens" title="Pick Element">Inspect</button>
 
     <button class="icon-btn text-btn" id="refreshBtn" aria-label="Re-scan page" title="Re-scan">Scan</button>
@@ -205,6 +205,30 @@
       <div class="pro-missing-wrap">
         <div class="pro-missing-title" id="proMissingTitle">What you are missing on Free</div>
         <ul class="pro-missing-list" id="proMissingList"></ul>
+      </div>
+
+      <div class="pro-license-wrap">
+        <div class="pro-license-sep"></div>
+        <div class="pro-license-label">Already have a license?</div>
+        <div class="pro-license-row">
+          <input class="pro-license-input" id="proLicenseInput" type="text" placeholder="Paste your license key here" />
+          <button class="pro-license-btn" id="proActivateBtn">Activate</button>
+        </div>
+        <div class="pro-license-msg">Activate a purchased license to unlock Pro features instantly.</div>
+      </div>
+
+      <div class="pro-active-body" id="proActiveBody">
+        <div class="pro-active-status">
+          <span class="pro-active-icon">✓</span>
+          <div class="pro-active-status-text">
+            <div class="pro-active-headline">All Pro features are unlocked</div>
+            <div class="pro-active-sub">Your license is active and validated.</div>
+          </div>
+        </div>
+        <div class="pro-active-features-wrap">
+          <div class="pro-active-features-title">What you have access to</div>
+          <ul class="pro-active-features-list" id="proActiveFeaturesList"></ul>
+        </div>
       </div>
     </div>
   </div>

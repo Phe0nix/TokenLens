@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Palext — Design Token Extractor",
-  "version": "1.0.0",
-  "description": "Extract design tokens from websites, inspect elements, and export via unified modal to CSS, SCSS, Tailwind, MUI, Ant Design, Chakra UI, Figma, DTCG, and JSON.",
+  "version": "1.0.1",
+  "description": "Extract design tokens from any website. Export to CSS, Tailwind, Figma, MUI & more. Inspect elements, audit, and compare snapshots.",
   "permissions": ["storage", "activeTab", "clipboardWrite", "scripting"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "action": {

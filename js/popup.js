@@ -1,83 +1,88 @@
 // popup.js - Palext UI logic
 
-// ── Pro feature gating ─────────────────────────────────────────────
-// PRO_GATING_ENABLED is the master switch. While it is `false`, every Pro
-// feature stays UNLOCKED so the product can be tested freely before launch.
-// When you are ready to monetize, set this to `true` and flip the individual
-// `gated` attributes below to `true` for the features you want behind the
-// paywall. `isProLocked()` resolves both, so no other code needs to change.
-const PRO_GATING_ENABLED = true;
-const DEV_PRO_OVERRIDE_KEY = 'tl_dev_force_pro';
-let devForcePro = false;
+const _uR42 = 'tl_x7k1';
+const _lsKey = '_ls_license_key';
+const _lsInst = '_ls_instance_id';
+let _mN77 = false;
 
-// Every Pro feature is registered here. The `gated` attribute is the per-feature
-// lock flag — it is `false` now (gate OFF / free for testing). Set it to `true`
-// later (together with PRO_GATING_ENABLED = true) to lock that feature.
-const PRO_FEATURES = {
-  reactExport:         { label: 'React UI export',          gated: true },
-  tailwindExport:      { label: 'Tailwind export',          gated: true },
-  figmaExport:         { label: 'Figma Tokens export',      gated: true },
-  dtcgExport:          { label: 'DTCG export',              gated: true },
-  advancedExport:      { label: 'Advanced export formats',  gated: true },
-  customExport:        { label: 'Custom export builder',    gated: false },
-  smartApply:          { label: 'Smart Apply preview',      gated: true },
-  themePersonalization:{ label: 'Theme personalization',    gated: true },
-  scanUnlimited:       { label: 'Unlimited monthly scans',  gated: true },
-  unlimitedSnapshots:  { label: 'Unlimited snapshots',      gated: true },
-  driftCompare:        { label: 'Snapshot drift compare',   gated: true },
-  colorInstances:      { label: 'Locate color on page',     gated: true },
-  typographyInstances: { label: 'Locate type on page',      gated: true },
-  measureUnlimited:    { label: 'Unlimited measurements',   gated: true },
-  layoutAdvanced:      { label: 'Advanced layout overlay',  gated: false },
-  assetExtraction:     { label: 'Asset extraction',         gated: true },
-  auditReport:         { label: 'Audit report export',      gated: true },
-  insightsAnalyzer:    { label: 'Insights full analyzer',   gated: true },
-  insightsRecommendations: { label: 'Insights recommendations', gated: true }
+const _pT10 = {
+  reactExport:         { label: 'React UI export',                   gated: true },
+  tailwindExport:      { label: 'Tailwind export',                    gated: true },
+  figmaExport:         { label: 'Figma Tokens export',               gated: true },
+  dtcgExport:          { label: 'DTCG export',                       gated: true },
+  advancedExport:      { label: 'Advanced export formats',           gated: true },
+  customExport:        { label: 'Custom export builder',             gated: false },
+  smartApply:          { label: 'Smart Apply preview',               gated: true },
+  themePersonalization:{ label: 'Theme personalization',             gated: true },
+  scanUnlimited:       { label: 'Unlimited monthly scans',           gated: true },
+  unlimitedSnapshots:  { label: 'Unlimited snapshots',               gated: true },
+  driftCompare:        { label: 'Snapshot drift compare',            gated: true },
+  snapshotCrawl:       { label: 'Cross-page snapshot crawl',         gated: true },
+  colorInstances:      { label: 'Locate color on page',              gated: true },
+  typographyInstances: { label: 'Locate type on page',               gated: true },
+  locateOnPage:        { label: 'Locate any token on the live page', gated: true },
+  measureUnlimited:    { label: 'Unlimited measurements',            gated: true },
+  layoutAdvanced:      { label: 'Advanced layout overlay',           gated: false },
+  assetExtraction:     { label: 'Asset extraction',                  gated: true },
+  auditReport:         { label: 'Audit report export',               gated: true },
+  insightsAnalyzer:    { label: 'Insights full analyzer',            gated: true },
+  insightsRecommendations: { label: 'Insights recommendations',      gated: true },
+  componentImpact:     { label: 'Component impact map',              gated: true },
+  a11yTaskPacks:       { label: 'Accessibility task packs',          gated: true }
 };
 
-// Returns true only when global gating is on AND the feature is marked gated.
-// During testing (PRO_GATING_ENABLED = false) this always returns false.
-function isProLocked(featureKey) {
-  const feature = PRO_FEATURES[featureKey];
+function _qL55(featureKey) {
+  const feature = _pT10[featureKey];
   if (!feature) return false;
-  if (!PRO_GATING_ENABLED) return false;
-  if (devForcePro) return false;
+  if (_mN77) return false;
   return feature.gated === true;
 }
 
-async function loadDevPlanOverride() {
+async function _bS12() {
   try {
-    const data = await chrome.storage.local.get(DEV_PRO_OVERRIDE_KEY);
-    devForcePro = !!data[DEV_PRO_OVERRIDE_KEY];
+    const data = await chrome.storage.sync.get([_uR42, _lsKey, _lsInst]);
+    _mN77 = !!data[_uR42];
+    if (_mN77 && data[_lsKey]) {
+      await _validateLicenseKey(data[_lsKey], data[_lsInst]);
+    }
   } catch (_) {
-    devForcePro = false;
+    _mN77 = false;
   }
 }
 
-async function setDevPlanOverride(enabled) {
-  devForcePro = !!enabled;
+async function _validateLicenseKey(licenseKey, instanceId) {
+  if (!licenseKey) return;
   try {
-    await chrome.storage.local.set({ [DEV_PRO_OVERRIDE_KEY]: devForcePro });
-  } catch (_) {}
+    const response = await fetch('https://api.lemonsqueezy.com/v1/licenses/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ license_key: licenseKey, instance_id: instanceId })
+    });
+    const result = await response.json();
+    if (!result.valid) {
+      _mN77 = false;
+      await chrome.storage.sync.set({ [_uR42]: false });
+      showToast('Your license expired or was revoked. Free mode activated.');
+    }
+  } catch (_) {
+  }
 }
 
-// Adds a small "PRO" badge to a registered Pro element so testers can see which
-// features are paid, without blocking them while gating is off.
 function tagProElement(el, featureKey) {
   if (!el || el.querySelector(':scope > .pro-badge')) return;
-  const feature = PRO_FEATURES[featureKey];
+  const feature = _pT10[featureKey];
   if (!feature) return;
   const badge = document.createElement('span');
   badge.className = 'pro-badge';
   badge.textContent = 'PRO';
-  badge.title = isProLocked(featureKey)
+  badge.title = _qL55(featureKey)
     ? `${feature.label} — upgrade to Pro to unlock`
-    : `${feature.label} — Pro feature (free during testing)`;
+    : `${feature.label} — Pro feature`;
   el.appendChild(badge);
 }
 
 function featureLabel(featureKey) {
-  const feature = PRO_FEATURES[featureKey];
+  const feature = _pT10[featureKey];
   return feature ? feature.label : 'Pro feature';
 }
 
@@ -104,7 +109,7 @@ function familyToFeatureKey(familyId) {
 
 function isFamilyLocked(familyId) {
   const featureKey = familyToFeatureKey(familyId);
-  return featureKey ? isProLocked(featureKey) : false;
+  return featureKey ? _qL55(featureKey) : false;
 }
 
 function targetToFeatureKey(targetId) {
@@ -119,7 +124,7 @@ function syncExportChipLocks() {
   targetChips.forEach(chip => {
     const target = chip.dataset.target || '';
     const featureKey = targetToFeatureKey(target);
-    const locked = featureKey ? isProLocked(featureKey) : false;
+    const locked = featureKey ? _qL55(featureKey) : false;
     chip.classList.toggle('pro-locked', locked);
     chip.setAttribute('title', locked ? 'Pro feature' : '');
   });
@@ -128,15 +133,15 @@ function syncExportChipLocks() {
   familyChips.forEach(chip => {
     const family = chip.dataset.family || '';
     const featureKey = familyToFeatureKey(family);
-    const locked = featureKey ? isProLocked(featureKey) : false;
+    const locked = featureKey ? _qL55(featureKey) : false;
     chip.classList.toggle('pro-locked', locked);
     chip.setAttribute('title', locked ? 'Pro feature' : '');
   });
 }
 
 function lockedFeatureLabels(limit = 7) {
-  return Object.entries(PRO_FEATURES)
-    .filter(([key]) => isProLocked(key))
+  return Object.entries(_pT10)
+    .filter(([key]) => _qL55(key))
     .map(([key]) => featureLabel(key))
     .slice(0, limit);
 }
@@ -144,6 +149,32 @@ function lockedFeatureLabels(limit = 7) {
 function openProPlanModal(featureKey = null) {
   const overlay = document.getElementById('proPlanOverlay');
   if (!overlay) return;
+
+  const title = document.getElementById('proPlanTitle');
+  const subtitle = document.getElementById('proPlanSubtitle');
+
+  if (_mN77) {
+    // Pro mode: show active features summary, hide upgrade UI
+    overlay.dataset.plan = 'pro';
+    if (title) title.textContent = 'You\'re on Pro';
+    if (subtitle) subtitle.textContent = 'Your license is active.';
+
+    const featuresList = document.getElementById('proActiveFeaturesList');
+    if (featuresList) {
+      featuresList.innerHTML = Object.values(_pT10)
+        .filter(f => f.gated)
+        .map(f => `<li>${escapeHtmlText(f.label)}</li>`)
+        .join('');
+    }
+
+    openLayer(overlay, { focusEl: document.getElementById('closeProPlanBtn') });
+    return;
+  }
+
+  // Free mode: upgrade view
+  delete overlay.dataset.plan;
+  if (title) title.textContent = 'Upgrade to Pro';
+  if (subtitle) subtitle.textContent = 'Unlock advanced exports, audits, and workflow power.';
 
   const missingTitle = document.getElementById('proMissingTitle');
   const missingList = document.getElementById('proMissingList');
@@ -163,10 +194,10 @@ function openProPlanModal(featureKey = null) {
   }
 
   if (missingList) {
-    const labels = lockedFeatureLabels(7);
+    const labels = lockedFeatureLabels(20);
     const unique = triggeredLabel ? [triggeredLabel, ...labels.filter(v => v !== triggeredLabel)] : labels;
-    const rows = unique.slice(0, 6).map(label => `<li>🔒 ${escapeHtmlText(label)}</li>`).join('');
-    missingList.innerHTML = rows || '<li>🔒 Advanced Pro features are currently locked on Free.</li>';
+    const rows = unique.slice(0, 10).map(label => `<li>${escapeHtmlText(label)}</li>`).join('');
+    missingList.innerHTML = rows || '<li>Advanced Pro features are currently locked on Free.</li>';
   }
 
   openLayer(overlay, {
@@ -350,7 +381,7 @@ function closeTopInteractiveLayer() {
 }
 
 function notifyProLock(featureKey, toastMsg) {
-  if (!isProLocked(featureKey)) return false;
+  if (!_qL55(featureKey)) return false;
   showToast(toastMsg || `${featureLabel(featureKey)} is a Pro feature.`);
   openProPlanModal(featureKey);
   return true;
@@ -371,9 +402,9 @@ let layoutOverlayEnabled = false;
 let layoutInViewOnly = true;
 let layoutLabelsEnabled = false;
 let previewInProgress = false;
-let colorGroupView = false; // FREE: semantic color grouping toggle (Colors tab)
+let colorGroupView = false;
 let eyedropperPickedColor = '';
-let pageAssets = null; // PRO: cached extracted assets { images, svgs, icons }
+let pageAssets = null;
 let currentSiteMeta = { title: '', url: '', favicon: '' };
 const MEASURE_FREE_DAILY_LIMIT = 3;
 const MEASURE_QUOTA_STORAGE_KEY = 'tl_measure_quota';
@@ -536,7 +567,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const redirectedToFloating = await maybeLaunchFloatingSurfaceOnOpen();
   if (redirectedToFloating) return;
 
-  await loadDevPlanOverride();
+  await _bS12();
   await loadSaved();
   await loadPrefs();
   bindEvents();
@@ -647,31 +678,32 @@ function syncUnitButtons() {
   });
 }
 
-// Adds PRO badges to registered Pro UI so testers see what is paid (gating off).
 function applyProBadges() {
-  const assetsTab = document.querySelector('[data-tab="assets"]');
-  if (assetsTab && !assetsTab.querySelector('.pro-badge')) tagProElement(assetsTab, 'assetExtraction');
+  // Pro badge on tabs removed; plan status shown in drag bar instead
 }
 
 function applyUiMode() {
-  const isTestMode = !PRO_GATING_ENABLED;
-  const isProOverride = PRO_GATING_ENABLED && devForcePro;
-  document.body.setAttribute('data-mode', isTestMode ? 'test' : (isProOverride ? 'pro' : 'free'));
+  const isPro = !!_mN77;
+  document.body.setAttribute('data-mode', isPro ? 'pro' : 'free');
 
   const modeBtn = document.getElementById('modeBtn');
   if (modeBtn) {
-    modeBtn.textContent = isTestMode ? 'Test Mode' : (isProOverride ? 'Pro (Dev)' : 'Free Plan');
-    modeBtn.setAttribute('title', isTestMode
-      ? 'Test mode is active. Pro gating is disabled for QA.'
-      : (isProOverride
-        ? 'Developer Pro override is enabled. Shift+Alt click to switch back to Free.'
-        : 'Current plan: Free. Click to upgrade to Pro. Shift+Alt click to enable developer Pro override.'));
-    modeBtn.setAttribute('aria-label', isTestMode
-      ? 'Test mode is active. Pro gating disabled for testing.'
-      : (isProOverride
-        ? 'Developer Pro override enabled. Shift and Alt click to switch to Free mode.'
-        : 'Current plan is Free. Click to upgrade to Pro. Shift and Alt click for developer Pro mode.'));
-    modeBtn.classList.toggle('is-test', isTestMode);
+    modeBtn.textContent = isPro ? 'Pro' : 'Free';
+    modeBtn.setAttribute('title', isPro
+      ? 'Current plan: Pro.'
+      : 'Current plan: Free. Click to view plans.');
+    modeBtn.setAttribute('aria-label', isPro
+      ? 'Current plan is Pro.'
+      : 'Current plan is Free. Click to view plans.');
+    modeBtn.classList.remove('is-test');
+    modeBtn.classList.toggle('is-pro', isPro);
+  }
+
+  if (IS_EMBEDDED_SURFACE) {
+    try {
+      const plan = isPro ? 'pro' : 'free';
+      window.parent.postMessage({ type: 'PALEXT_PLAN_UPDATE', plan }, '*');
+    } catch (_) {}
   }
 
   document.querySelectorAll('[data-export-format]').forEach(btn => {
@@ -683,7 +715,7 @@ function applyUiMode() {
 
   const themeBtn = document.getElementById('themeBtn');
   if (themeBtn) {
-    const themeLocked = isProLocked('themePersonalization');
+    const themeLocked = _qL55('themePersonalization');
     themeBtn.classList.toggle('hidden', themeLocked);
     themeBtn.classList.toggle('pro-locked', themeLocked);
     themeBtn.setAttribute('title', themeLocked ? 'Theme personalization is a Pro feature.' : 'Toggle theme');
@@ -701,7 +733,7 @@ async function saveSite(currentTokens) {
   if (!currentTokens) return;
 
   const deduped = savedSites.filter(s => s.url !== currentTokens.url);
-  const maxSnapshots = isProLocked('unlimitedSnapshots') ? FREE_SNAPSHOT_LIMIT : 999;
+  const maxSnapshots = _qL55('unlimitedSnapshots') ? FREE_SNAPSHOT_LIMIT : 999;
   if (deduped.length >= maxSnapshots) {
     showToast(`Free plan stores up to ${FREE_SNAPSHOT_LIMIT} snapshots. Upgrade to Pro for unlimited history.`);
     openProPlanModal('unlimitedSnapshots');
@@ -762,7 +794,7 @@ async function writeScanQuota(monthKey, used) {
 }
 
 function isScanLimitedPlan() {
-  return isProLocked('scanUnlimited');
+  return _qL55('scanUnlimited');
 }
 
 async function refreshScanQuotaState() {
@@ -1233,7 +1265,7 @@ function todayKey() {
 }
 
 function isMeasureLimitedPlan() {
-  return isProLocked('measureUnlimited');
+  return _qL55('measureUnlimited');
 }
 
 async function getActiveHostName() {
@@ -1920,7 +1952,6 @@ function buildColorSwatch(color) {
   return swatch;
 }
 
-// PRO: highlight every element on the page using a given color.
 async function locateColorOnPage(hex) {
   if (notifyProLock('colorInstances', 'Locating colors on the page is a Pro feature.')) return;
   const result = await sendActionToActiveTab({ type: 'HIGHLIGHT_COLOR', hex });
@@ -1933,7 +1964,6 @@ async function locateColorOnPage(hex) {
     : `${hex}: no visible elements currently use this exact color.`);
 }
 
-// PRO: highlight every element using a font family / size.
 async function locateFontOnPage(target) {
   if (notifyProLock('typographyInstances', 'Locating typography on the page is a Pro feature.')) return;
   const result = await sendActionToActiveTab({ type: 'HIGHLIGHT_FONT', target });
@@ -3505,7 +3535,6 @@ function renderVars(panel) {
   panel.appendChild(section);
 }
 
-// PRO: fetch images, SVGs and icons from the active page.
 async function loadAssets(force = false) {
   if (pageAssets && !force) return pageAssets;
   const result = await sendActionToActiveTab({ type: 'EXTRACT_ASSETS' });
@@ -3518,7 +3547,7 @@ async function loadAssets(force = false) {
 }
 
 function renderAssets(panel) {
-  if (isProLocked('assetExtraction')) {
+  if (_qL55('assetExtraction')) {
     panel.innerHTML = '<p class="empty">Asset extraction is a Pro feature. Upgrade to browse and download images, SVGs and icons.</p><div style="margin-top:8px;"><button class="tiny-btn wcag-toggle" id="openAssetsProBtn">✨ Unlock in Pro</button></div>';
     panel.querySelector('#openAssetsProBtn')?.addEventListener('click', () => openProPlanModal('assetExtraction'));
     return;
@@ -4194,8 +4223,8 @@ function renderInsights(panel) {
   const data = buildInsightsData();
   const section = makeSection('Insights');
   section.classList.add('insight-vd-layout');
-  const insightsAnalyzerLocked = isProLocked('insightsAnalyzer');
-  const insightsRecommendationsLocked = isProLocked('insightsRecommendations');
+  const insightsAnalyzerLocked = _qL55('insightsAnalyzer');
+  const insightsRecommendationsLocked = _qL55('insightsRecommendations');
 
   const totalTokenCount =
     (tokens.colors || []).length +
@@ -4951,7 +4980,7 @@ function renderHistory(panel) {
 
   const toolbar = document.createElement('div');
   toolbar.className = 'history-toolbar';
-  const historyToolsLocked = isProLocked('driftCompare');
+  const historyToolsLocked = _qL55('driftCompare');
   toolbar.innerHTML = `
     <button class="tiny-btn ${historyToolsLocked ? 'pro-locked' : ''}" data-action="diff-url" title="${historyToolsLocked ? 'Pro feature' : 'Compare current page with a saved URL snapshot'}">Compare URL${historyToolsLocked ? ' <span class="btn-pro-badge">PRO</span>' : ''}</button>
     <button class="tiny-btn ${historyToolsLocked ? 'pro-locked' : ''}" data-action="diff-latest" title="${historyToolsLocked ? 'Pro feature' : 'Diff against latest snapshot'}">Diff Latest${historyToolsLocked ? ' <span class="btn-pro-badge">PRO</span>' : ''}</button>
@@ -5195,8 +5224,8 @@ function renderHistory(panel) {
     const applyBtnLabel = isActivePrev ? '✓ Previewing' : previewInProgress ? 'Applying…' : 'Apply to page (Beta)';
     const applyBtnDisabled = (previewInProgress && !isActivePrev) ? ' disabled' : '';
     const confidence = estimatePreviewConfidence(entry.tokens, tokens);
-    const isDiffLockedRow = isProLocked('driftCompare');
-    const isSmartApplyLocked = isProLocked('smartApply');
+    const isDiffLockedRow = _qL55('driftCompare');
+    const isSmartApplyLocked = _qL55('smartApply');
     const tokenSummary = entry.tokens || {};
     const statChips = [
       `${(tokenSummary.colors || []).length} colors`,
@@ -6003,7 +6032,6 @@ function exportBundle() {
   showToast(`Bundle export started: ${builtList.length} files downloading.`);
 }
 
-// PRO: build a shareable Markdown design-system audit report.
 function buildAuditReportMarkdown() {
   if (!tokens) return null;
   const data = buildInsightsData();
@@ -6973,7 +7001,7 @@ function updateLastExportHint() {
 
 function isFormatLocked(format) {
   const featureKey = formatToFeatureKey(format);
-  return featureKey ? isProLocked(featureKey) : false;
+  return featureKey ? _qL55(featureKey) : false;
 }
 
 function populateFamilyFormats(familyId) {
@@ -7014,7 +7042,7 @@ function handleExportFamilyClick(e) {
   if (!e.target.matches('[data-family]')) return;
   const family = e.target.dataset.family;
   const featureKey = familyToFeatureKey(family);
-  if (featureKey && isProLocked(featureKey)) {
+  if (featureKey && _qL55(featureKey)) {
     notifyProLock(featureKey, `${featureLabel(featureKey)} is a Pro feature.`);
     return;
   }
@@ -7084,7 +7112,7 @@ function syncExportModalState() {
   });
 
   const targetFeature = targetToFeatureKey(target);
-  if (targetFeature && isProLocked(targetFeature)) {
+  if (targetFeature && _qL55(targetFeature)) {
     target = 'format';
     targetChips.forEach(chip => {
       const isFormat = chip.dataset.target === 'format';
@@ -7397,19 +7425,6 @@ function bindEvents() {
   });
 
   document.getElementById('modeBtn')?.addEventListener('click', async (e) => {
-    if (e && e.shiftKey && e.altKey && PRO_GATING_ENABLED) {
-      await setDevPlanOverride(!devForcePro);
-      await Promise.all([refreshMeasureQuotaState(), refreshScanQuotaState()]);
-      applyUiMode();
-      updateGlobalPageToolsUi();
-      if (tokens) renderTokens(activeTab);
-      showToast(devForcePro ? 'Developer override: Pro mode enabled.' : 'Developer override: Free mode enabled.');
-      return;
-    }
-    if (!PRO_GATING_ENABLED) {
-      showToast('Test mode active: Pro gating is disabled for now.');
-      return;
-    }
     openProPlanModal();
   });
   closeProBtn?.addEventListener('click', () => closeProPlanModal());
@@ -7417,10 +7432,41 @@ function bindEvents() {
     if (e.target === proOverlay) closeProPlanModal();
   });
   proMonthlyBtn?.addEventListener('click', () => {
-    showToast('Pro Monthly selected. Billing setup is coming soon.');
+    chrome.tabs.create({ url: 'https://palextpro.lemonsqueezy.com/checkout/buy/25b02039-3680-47f0-bc9a-32aaa80d4fa6' });
   });
   proAnnualBtn?.addEventListener('click', () => {
-    showToast('Pro Annual selected. Billing setup is coming soon.');
+    chrome.tabs.create({ url: 'https://palextpro.lemonsqueezy.com/checkout/buy/aa1d3335-f48b-4be3-8285-6c438b6b1da2' });
+  });
+  
+  const proActivateBtn = document.getElementById('proActivateBtn');
+  const proLicenseInput = document.getElementById('proLicenseInput');
+  proActivateBtn?.addEventListener('click', async () => {
+    const key = (proLicenseInput?.value || '').trim();
+    if (!key) {
+      showToast('Please enter a license key.');
+      return;
+    }
+    const instanceId = crypto.randomUUID?.() || `${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    try {
+      const response = await fetch('https://api.lemonsqueezy.com/v1/licenses/activate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ license_key: key, instance_name: 'Palext Chrome Extension' })
+      });
+      const result = await response.json();
+      if (result.valid) {
+        _mN77 = true;
+        await chrome.storage.sync.set({ [_uR42]: true, [_lsKey]: key, [_lsInst]: instanceId });
+        proLicenseInput.value = '';
+        showToast('License activated! Pro mode is now active.');
+        closeProPlanModal();
+        applyUiMode();
+      } else {
+        showToast(result.error || 'Invalid license key. Please check and try again.');
+      }
+    } catch (err) {
+      showToast('Could not activate license. Check your connection and try again.');
+    }
   });
 
   document.getElementById('themeBtn')?.addEventListener('click', () => {
@@ -7697,7 +7743,7 @@ function bindEvents() {
     if (!e.target.matches('[data-target]')) return;
     const target = e.target.dataset.target || '';
     const featureKey = targetToFeatureKey(target);
-    if (featureKey && isProLocked(featureKey)) {
+    if (featureKey && _qL55(featureKey)) {
       notifyProLock(featureKey, `${featureLabel(featureKey)} is a Pro feature.`);
       return;
     }

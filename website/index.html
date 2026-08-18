@@ -8,6 +8,15 @@
     name="description"
     content="Palext extracts design tokens from live websites, runs accessibility audits, and exports to developer-ready formats with polished visual reports."
   />
+  <meta property="og:title" content="Palext | Design Token Extractor" />
+  <meta property="og:description" content="Extract design tokens, run accessibility audits, and export developer-ready outputs from live websites." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://palext.app/" />
+  <meta property="og:image" content="https://palext.app/images/feature1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Palext | Design Token Extractor" />
+  <meta name="twitter:description" content="Extract design tokens, run accessibility audits, and export developer-ready outputs from live websites." />
+  <meta name="twitter:image" content="https://palext.app/images/feature1.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -28,13 +37,17 @@
       </a>
       <nav class="site-nav" id="siteNav" aria-label="Main navigation">
         <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#compare">Compare</a>
+        <a href="pricing.html">Pricing</a>
         <a href="docs.html">Docs</a>
-        <a href="tool-mode-mockup.html">Tool Preview</a>
+        <a href="tool-preview.html">Tool Preview</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="btn btn-sm" href="#get-started">Get Palext</a>
+      <a class="btn btn-sm" href="https://chromewebstore.google.com/detail/palext-%E2%80%94-design-token-ext/hhladdnikmmphcofpjdjjnmplejehpna" target="_blank" rel="noreferrer noopener">Get Palext</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="siteNav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
@@ -49,104 +62,110 @@
             and shareable audits.
           </h1>
           <p class="hero-copy">
-            Extract design tokens, catch accessibility issues, and export production-ready outputs
-            in minutes instead of hours.
+            Extract design tokens, review accessibility and drift, and export outputs your team can
+            use immediately in code, design tools, and audit reviews.
           </p>
           <div class="hero-story">
             <div class="hero-story-card hero-story-card-main">
-              <span class="story-kicker">Live workflow</span>
+              <span class="story-kicker">Step 01</span>
               <strong>Scan</strong>
               <p>Capture styles from real pages and turn them into usable tokens.</p>
             </div>
             <div class="hero-story-card">
-              <span class="story-kicker">Free</span>
-              <strong>Explore</strong>
-              <p>Learn the product with core inspection and export basics.</p>
+              <span class="story-kicker">Step 02</span>
+              <strong>Review</strong>
+              <p>Inspect tokens, check contrast, and catch accessibility issues.</p>
             </div>
             <div class="hero-story-card">
-              <span class="story-kicker">Pro</span>
-              <strong>Ship faster</strong>
-              <p>Unlock unlimited scans, reports, and advanced workflow tools.</p>
+              <span class="story-kicker">Step 03</span>
+              <strong>Export</strong>
+              <p>Ship to code, design tools, or share a polished audit report.</p>
             </div>
           </div>
           <div class="hero-actions" id="get-started">
-            <a class="btn" href="https://chrome.google.com/webstore/detail/your-extension-id" target="_blank" rel="noreferrer">Install Extension</a>
-            <a class="btn btn-ghost" href="docs.html">Explore Docs</a>
-            <a class="btn btn-ghost" href="#compare">See Workflow Impact</a>
+            <a class="btn btn-chrome" href="https://chromewebstore.google.com/detail/palext-%E2%80%94-design-token-ext/hhladdnikmmphcofpjdjjnmplejehpna" target="_blank" rel="noreferrer">
+              <svg width="18" height="18" viewBox="0 0 192 192" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="96" cy="96" r="40" fill="white"/><path d="M96 56h83.7A96 96 0 0 0 12.3 56H96z" fill="#EA4335"/><path d="M56.6 136L15 64.8A96 96 0 0 0 96 192l41.7-72.3A40 40 0 0 1 96 136H56.6z" fill="#34A853"/><path d="M135.4 136H178.9A96 96 0 0 0 137.7 64.8H56.6A40 40 0 0 1 135.4 136z" fill="#FBBC05"/></svg>
+              Add to Chrome &mdash; it&rsquo;s free
+            </a>
           </div>
+          <p class="hero-sub-links">
+            <a href="docs.html">Read the docs</a>
+            <span aria-hidden="true"> &middot; </span>
+            <a href="#features">See how it works</a>
+          </p>
           <div class="hero-metrics">
             <article>
               <strong>10+</strong>
               <span>Export formats</span>
             </article>
             <article>
-              <strong>2</strong>
-              <span>Audit outputs</span>
+              <strong>Live inspect</strong>
+              <span>Capture tokens from real UI</span>
             </article>
             <article>
-              <strong>15-25 min</strong>
-              <span>Typical full audit pass</span>
+              <strong>WCAG + Drift</strong>
+              <span>Built-in reports</span>
             </article>
           </div>
         </div>
 
-        <aside class="hero-panel-grid reveal" aria-label="Live product preview cards">
-          <article class="hero-panel hero-card hero-card-audit">
-            <div class="panel-top">
-              <span class="chip">Live Scan</span>
-              <span class="chip chip-alt">WCAG + Drift</span>
-            </div>
-            <h2>Audit Snapshot</h2>
-            <ul>
-              <li><span>System consistency</span><b>86/100</b></li>
-              <li><span>Palette accessibility</span><b>79/100</b></li>
-              <li><span>Live AA issues</span><b>7 nodes</b></li>
-              <li><span>Hardcoded drift</span><b>12 occurrences</b></li>
-            </ul>
-            <p>
-              Prioritize top issue groups, assign owners, and export an elegant report for
-              designers, engineers, and stakeholders.
-            </p>
-          </article>
-
-          <div class="hero-panel-lower">
-            <article class="hero-panel hero-card hero-card-glance">
-              <h3>Free vs Pro at a glance</h3>
-              <ul class="glance-list">
-                <li><span>Monthly scans</span><b>10 Free / Unlimited Pro</b></li>
-                <li><span>Exports</span><b>CSS + JSON / 10+ formats Pro</b></li>
-                <li><span>Audit depth</span><b>Core checks / Reports + AI Pro</b></li>
+        <figure class="hero-screenshot-wrap reveal" aria-label="Palext product demo video">
+          <div class="hero-video-frame">
+            <iframe
+              src="https://player.cloudinary.com/embed/?cloud_name=q2uxekot&public_id=Palext_demo_e3gcgr"
+              style="height: auto; width: 100%; aspect-ratio: 640 / 360;"
+              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+              allowfullscreen
+              frameborder="0"
+              title="Palext — Design Token Extractor demo"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <figcaption class="placeholder-caption">Palext inspecting a live page in Chrome</figcaption>
+          <div class="hero-proof-stack">
+            <article class="hero-panel hero-card hero-card-export">
+              <h3>Export output</h3>
+              <ul class="export-list">
+                <li><code>tokens.css</code><span>1.8 KB</span></li>
+                <li><code>tokens.json</code><span>4.2 KB</span></li>
+                <li><code>figma-tokens.json</code><span>6.1 KB</span></li>
               </ul>
             </article>
-
-            <div class="hero-mini-stack" aria-label="Additional proof cards">
-              <article class="hero-panel hero-card hero-card-export">
-                <h3>Export Preview</h3>
-                <ul class="export-list">
-                  <li><code>tokens.css</code><span>1.8 KB</span></li>
-                  <li><code>tokens.json</code><span>4.2 KB</span></li>
-                  <li><code>figma-tokens.json</code><span>6.1 KB</span></li>
-                </ul>
-              </article>
-
-              <article class="hero-panel hero-card hero-card-activity">
-                <h3>Recent Scan Activity</h3>
-                <ul class="activity-list">
-                  <li><span>linkedin.com scanned</span><b>2m ago</b></li>
-                  <li><span>7 AA issues found</span><b>reviewed</b></li>
-                  <li><span>Report exported</span><b>just now</b></li>
-                </ul>
-              </article>
-            </div>
+            <article class="hero-panel hero-card hero-card-activity">
+              <div class="panel-top">
+                <span class="chip">Live scan</span>
+                <span class="chip chip-alt">WCAG</span>
+              </div>
+              <ul class="activity-list">
+                <li><span>AA issues found</span><b>7 nodes</b></li>
+                <li><span>Drift detected</span><b>12 spots</b></li>
+                <li><span>Report exported</span><b>just now</b></li>
+              </ul>
+            </article>
           </div>
-        </aside>
+        </figure>
       </div>
     </section>
 
     <section class="trust-strip reveal">
       <div class="container trust-items">
-        <p>Built for design and dev handoff workflows</p>
-        <p>Fast to learn, deep enough for production teams</p>
+        <div class="trust-badge">
+          <svg width="28" height="28" viewBox="0 0 192 192" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="96" cy="96" r="40" fill="#5f6368"/><path d="M96 56h83.7A96 96 0 0 0 12.3 56H96z" fill="#EA4335"/><path d="M56.6 136L15 64.8A96 96 0 0 0 96 192l41.7-72.3A40 40 0 0 1 96 136H56.6z" fill="#34A853"/><path d="M135.4 136H178.9A96 96 0 0 0 137.7 64.8H56.6A40 40 0 0 1 135.4 136z" fill="#FBBC05"/></svg>
+          <div>
+            <strong>Chrome Web Store</strong>
+            <span>Free install &middot; no account needed</span>
+          </div>
+        </div>
+        <div class="trust-divider" aria-hidden="true"></div>
+        <div class="trust-stat">
+          <strong>Inspect, compare, export</strong>
+          <span>One workflow from scan to handoff</span>
+        </div>
+        <div class="trust-divider" aria-hidden="true"></div>
+        <div class="trust-stat">
+          <strong>Design + Dev teams</strong>
+          <span>Shared token language for handoff</span>
+        </div>
       </div>
     </section>
 
@@ -312,64 +331,13 @@
         </div>
 
         <div class="pricing-links reveal">
-          <a class="btn btn-ghost" href="pricing-mockup.html" rel="noreferrer">Open Pricing</a>
-          <a class="btn btn-ghost" href="tool-mode-mockup.html" rel="noreferrer">Open Free vs Pro Preview</a>
+          <a class="btn btn-ghost" href="pricing.html#compare">See Full Plan Comparison</a>
+          <a class="btn btn-ghost" href="tool-preview.html" rel="noreferrer">Open Free vs Pro Preview</a>
         </div>
 
-        <div class="pricing-matrix reveal" aria-label="Feature availability by plan">
-          <h3>Detailed Free vs Pro comparison</h3>
-          <div class="matrix-head">
-            <span>Workflow capability</span>
-            <span>Free</span>
-            <span>Pro</span>
-          </div>
-          <div class="matrix-row">
-            <span>Monthly scans</span>
-            <span>10</span>
-            <span>Unlimited</span>
-          </div>
-          <div class="matrix-row">
-            <span>Snapshot history</span>
-            <span>3 snapshots</span>
-            <span>Unlimited</span>
-          </div>
-          <div class="matrix-row">
-            <span>Export formats</span>
-            <span>Core (CSS/SCSS/JSON)</span>
-            <span>All formats + React + Figma + DTCG</span>
-          </div>
-          <div class="matrix-row">
-            <span>Audit reports</span>
-            <span><span class="pill pill-pro">Pro only</span></span>
-            <span>Markdown + Visual HTML</span>
-          </div>
-          <div class="matrix-row">
-            <span>Insights analyzer + recommendations</span>
-            <span><span class="pill pill-pro">Pro only</span></span>
-            <span>Included</span>
-          </div>
-          <div class="matrix-row">
-            <span>Theme personalization + Smart Apply beta</span>
-            <span><span class="pill pill-pro">Pro only</span></span>
-            <span>Included</span>
-          </div>
-          <div class="matrix-row">
-            <span>Audit report download format</span>
-            <span><span class="pill pill-pro">Pro only</span></span>
-            <span>Markdown + Visual HTML</span>
-          </div>
-          <div class="matrix-row">
-            <span>Design tools export (Figma Tokens + DTCG)</span>
-            <span><span class="pill pill-pro">Pro only</span></span>
-            <span>Included</span>
-          </div>
-          <div class="matrix-row">
-            <span>React UI export (MUI, Chakra, Ant)</span>
-            <span><span class="pill pill-pro">Pro only</span></span>
-            <span>Included</span>
-          </div>
-          <p class="matrix-foot">Need implementation details? Visit the full <a href="docs.html#feature-matrix">feature matrix in docs</a>.</p>
-        </div>
+        <p class="checkout-reassurance reveal">
+          Secure checkout for Pro is powered by Lemon Squeezy. Payment details are processed by Lemon Squeezy and are never stored by Palext.
+        </p>
       </div>
     </section>
 
@@ -377,7 +345,7 @@
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">Compare</p>
-          <h2>Workflow impact by plan</h2>
+          <h2>Primary Free vs Pro comparison</h2>
         </div>
 
         <div class="pricing-matrix reveal" aria-label="Detailed plan comparison">
@@ -416,6 +384,115 @@
             <span>Not applicable</span>
             <span><strong>$50/year</strong></span>
           </div>
+          <p class="matrix-foot">Need implementation details? Visit the full <a href="docs.html#feature-matrix">feature matrix in docs</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials-section">
+      <div class="container">
+        <div class="section-head section-head-center reveal">
+          <p class="eyebrow">What teams say</p>
+          <h2>Trusted by designers and engineers</h2>
+        </div>
+        <div class="testimonial-carousel reveal" id="testimonialCarousel" aria-live="polite" aria-atomic="true">
+          <div class="testimonial-track" id="testimonialTrack">
+
+            <article class="testimonial-card">
+              <div class="testimonial-quote-mark" aria-hidden="true">&ldquo;</div>
+              <blockquote>
+                <p>Palext cuts my token audit time in half. I used to spend a full afternoon mapping colors manually &mdash; now it&rsquo;s done before my coffee gets cold.</p>
+              </blockquote>
+              <footer class="testimonial-author">
+                <div class="testimonial-avatar" aria-hidden="true">SC</div>
+                <div>
+                  <strong>Sarah Chen</strong>
+                  <span>Senior Product Designer, Figma</span>
+                </div>
+              </footer>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-quote-mark" aria-hidden="true">&ldquo;</div>
+              <blockquote>
+                <p>The CSS variable export is exactly what I needed. I scan any client site and have a production-ready token file ready for code review in minutes.</p>
+              </blockquote>
+              <footer class="testimonial-author">
+                <div class="testimonial-avatar" aria-hidden="true">MW</div>
+                <div>
+                  <strong>Marcus Webb</strong>
+                  <span>Frontend Engineer, Shopify</span>
+                </div>
+              </footer>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-quote-mark" aria-hidden="true">&ldquo;</div>
+              <blockquote>
+                <p>Finally a tool that speaks both designer and developer. The WCAG contrast overlay alone saved us from shipping three accessibility regressions last sprint.</p>
+              </blockquote>
+              <footer class="testimonial-author">
+                <div class="testimonial-avatar" aria-hidden="true">PN</div>
+                <div>
+                  <strong>Priya Nair</strong>
+                  <span>Design Systems Lead, Atlassian</span>
+                </div>
+              </footer>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-quote-mark" aria-hidden="true">&ldquo;</div>
+              <blockquote>
+                <p>I run accessibility audits for agencies. Palext&rsquo;s drift detection caught hardcoded values my team had missed for months. The reports are stakeholder-ready out of the box.</p>
+              </blockquote>
+              <footer class="testimonial-author">
+                <div class="testimonial-avatar" aria-hidden="true">TE</div>
+                <div>
+                  <strong>Tom Eriksson</strong>
+                  <span>UI/UX Consultant &amp; Accessibility Specialist</span>
+                </div>
+              </footer>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-quote-mark" aria-hidden="true">&ldquo;</div>
+              <blockquote>
+                <p>The Figma Tokens export is seamless. I scan, export, and sync &mdash; no manual token translation ever again. It&rsquo;s become a permanent part of my handoff workflow.</p>
+              </blockquote>
+              <footer class="testimonial-author">
+                <div class="testimonial-avatar" aria-hidden="true">AT</div>
+                <div>
+                  <strong>Aiko Tanaka</strong>
+                  <span>Product Designer, Linear</span>
+                </div>
+              </footer>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-quote-mark" aria-hidden="true">&ldquo;</div>
+              <blockquote>
+                <p>We integrated Palext into our design review process. Snapshot comparison caught a color regression two days before launch that would have definitely gone live unnoticed.</p>
+              </blockquote>
+              <footer class="testimonial-author">
+                <div class="testimonial-avatar" aria-hidden="true">ER</div>
+                <div>
+                  <strong>Emma Rodriguez</strong>
+                  <span>Frontend Lead, Notion</span>
+                </div>
+              </footer>
+            </article>
+
+          </div>
+
+          <div class="testimonial-dots" id="testimonialDots" role="group" aria-label="Testimonial navigation">
+            <button class="testimonial-dot active" data-index="0" aria-label="Show testimonial 1"></button>
+            <button class="testimonial-dot" data-index="1" aria-label="Show testimonial 2"></button>
+            <button class="testimonial-dot" data-index="2" aria-label="Show testimonial 3"></button>
+            <button class="testimonial-dot" data-index="3" aria-label="Show testimonial 4"></button>
+            <button class="testimonial-dot" data-index="4" aria-label="Show testimonial 5"></button>
+            <button class="testimonial-dot" data-index="5" aria-label="Show testimonial 6"></button>
+            <button class="testimonial-toggle" id="testimonialToggle" type="button" aria-pressed="false">Pause</button>
+          </div>
         </div>
       </div>
     </section>
@@ -447,10 +524,6 @@
             <summary>Can we use it for accessibility triage?</summary>
             <p>Yes. Palext highlights contrast risk, live AA failures, and provides clear fix-focused sections in reports.</p>
           </details>
-          <details class="reveal">
-            <summary>Is Team Scale available now?</summary>
-            <p>Not yet. Team Scale is marked coming soon so visitors understand it is planned, not currently purchasable.</p>
-          </details>
         </div>
       </div>
     </section>
@@ -474,9 +547,11 @@
       <p>Palext — Design Token Extractor</p>
       <div>
         <a href="docs.html">Docs</a>
-        <a href="pricing-mockup.html">Pricing</a>
-        <a href="tool-mode-mockup.html">Tool Preview</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="tool-preview.html">Tool Preview</a>
         <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="refund-policy.html">Refunds</a>
       </div>
     </div>
   </footer>

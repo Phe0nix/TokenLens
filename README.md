@@ -14,9 +14,16 @@
   <a href="https://palext.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-palext.vercel.app-0f8f80?style=for-the-badge" alt="Palext Live Demo" /></a>
 </p>
 
+## 🔗 Quick Links
+
+- Chrome Web Store: https://chromewebstore.google.com/detail/palext-%E2%80%94-design-token-ext/hhladdnikmmphcofpjdjjnmplejehpna
+- Website: https://palext.vercel.app/
+- Privacy Policy: https://palext.vercel.app/privacy.html
+- Docs: https://palext.vercel.app/docs.html
+
 ## 🛍️ Install from Chrome Web Store
 
-- Chrome Web Store listing: Coming soon
+- Chrome Web Store listing: https://chromewebstore.google.com/detail/palext-%E2%80%94-design-token-ext/hhladdnikmmphcofpjdjjnmplejehpna
 - Live demo: https://palext.vercel.app/
 
 ## 🎯 What Palext Does
@@ -29,7 +36,7 @@
 | 🕘 History | Save/load/delete snapshots, interactive diff cards, impact filters, drift metrics, sample toggles |
 | 📦 Exports | CSS, SCSS, Tailwind, MUI theme, Ant Design theme, Chakra theme, Figma Tokens JSON, DTCG JSON, JSON, TypeScript/JS token objects, Markdown audit, visual HTML audit |
 | 🧭 Surfaces | Popup workflow with inspect overlays on the active page |
-| ⚙️ UX Modes | Beginner and Pro modes for progressive complexity |
+| ⚙️ Plan UX | Free and Pro plan flows with clear in-product feature gating |
 
 ## 🌟 Free vs Pro Experience
 

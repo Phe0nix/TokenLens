@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Palext | Privacy Policy</title>
   <meta name="description" content="Palext privacy policy covering local storage, permissions, data access, and what the extension never collects." />
+  <meta property="og:title" content="Palext | Privacy Policy" />
+  <meta property="og:description" content="Learn how Palext handles local data, permissions, and Lemon Squeezy checkout privacy." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://palext.app/privacy.html" />
+  <meta property="og:image" content="https://palext.app/images/feature3.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Palext | Privacy Policy" />
+  <meta name="twitter:description" content="Learn how Palext handles local data, permissions, and Lemon Squeezy checkout privacy." />
+  <meta name="twitter:image" content="https://palext.app/images/feature3.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -14,17 +23,16 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="index.html" class="brand" aria-label="Palext home">
-        <img src="../icons/icon48.png" alt="Palext logo" />
+        <img src="./images/icon48.png" alt="Palext logo" />
         <span>Palext</span>
       </a>
       <nav class="site-nav" aria-label="Main navigation">
         <a href="index.html#features">Features</a>
-        <a href="index.html#pricing">Pricing</a>
         <a href="docs.html">Docs</a>
-        <a href="pricing-mockup.html">Pricing</a>
-        <a href="tool-mode-mockup.html">Tool Preview</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="tool-preview.html">Tool Preview</a>
       </nav>
-      <a class="btn btn-sm" href="index.html#get-started">Get Palext</a>
+      <a class="btn btn-sm" href="https://chromewebstore.google.com/detail/palext-%E2%80%94-design-token-ext/hhladdnikmmphcofpjdjjnmplejehpna" target="_blank" rel="noreferrer noopener">Get Palext</a>
     </div>
   </header>
 
@@ -38,6 +46,7 @@
           <a class="docs-nav-link" href="#data-access">Data access</a>
           <a class="docs-nav-link" href="#storage">Local storage</a>
           <a class="docs-nav-link" href="#permissions">Permissions</a>
+          <a class="docs-nav-link" href="#payments">Payments</a>
           <a class="docs-nav-link" href="#contact">Contact</a>
         </nav>
       </aside>
@@ -46,7 +55,8 @@
         <article id="overview" class="docs-route-card reveal">
           <p class="eyebrow">Overview</p>
           <h3>Palext keeps data local to your browser</h3>
-          <p class="policy-copy">Palext extracts design tokens from websites you visit, but it does not send that information to any server. The extension operates locally in your browser and stores only the data needed to make the tool useful.</p>
+          <p class="policy-copy">Palext extracts design tokens locally in your browser. Scanned page styles, snapshots, and exported token output stay on-device. Pro license activation and validation use Lemon Squeezy endpoints, but those requests do not include scanned page data.</p>
+          <p class="policy-copy" style="margin-top: 10px; font-size: 0.88rem; color: var(--muted);">Last updated: August 2026</p>
         </article>
 
         <article id="data-access" class="docs-route-card reveal">
@@ -62,13 +72,14 @@
             <div class="matrix-row"><span>Page URL and title</span><span>Snapshot labeling</span><span>Locally only</span></div>
             <div class="matrix-row"><span>Saved snapshots</span><span>History comparison</span><span>Locally only</span></div>
             <div class="matrix-row"><span>Inspect results</span><span>Token inspection</span><span>Locally only</span></div>
+            <div class="matrix-row"><span>Pro license key + instance metadata</span><span>Subscription verification</span><span>Stored in Chrome Sync for activation state</span></div>
           </div>
         </article>
 
         <article id="storage" class="docs-route-card reveal">
           <p class="eyebrow">Storage</p>
           <h3>What is saved</h3>
-          <p class="policy-copy">Palext uses chrome.storage.local to save snapshots, export preferences, UI mode, and temporary inspect state. You can clear saved data from the extension itself whenever you want.</p>
+          <p class="policy-copy">Palext uses chrome.storage.local for snapshots, export preferences, UI mode, and temporary inspect state. Pro activation status and license metadata are stored with chrome.storage.sync so they can be revalidated. You can clear saved extension data whenever you want.</p>
         </article>
 
         <article id="permissions" class="docs-route-card reveal">
@@ -85,10 +96,29 @@
           <p class="eyebrow">Never</p>
           <h3>What Palext never does</h3>
           <div class="docs-mini-grid">
-            <section><h4>No analytics</h4><p>Palext does not run tracking or telemetry.</p></section>
-            <section><h4>No third-party sharing</h4><p>It does not send data to external services or APIs.</p></section>
-            <section><h4>No ads</h4><p>The extension does not display advertising.</p></section>
+            <section><h4>No analytics</h4><p>Palext does not run tracking or telemetry of any kind.</p></section>
+            <section><h4>No browsing data shared</h4><p>The extension never sends scanned page styles, extracted tokens, or saved snapshot content to any external service or API.</p></section>
+            <section><h4>No ads</h4><p>The extension does not display advertising or sell data.</p></section>
           </div>
+        </article>
+
+        <article id="payments" class="docs-route-card reveal">
+          <p class="eyebrow">Payments</p>
+          <h3>How Pro purchases are handled</h3>
+          <p class="policy-copy">Palext Pro is sold through <strong>Lemon Squeezy</strong>, a third-party payment processor. When you click to upgrade, you are taken to a Lemon Squeezy-hosted checkout page. Palext never receives, processes, or stores your payment card details.</p>
+          <div class="pricing-matrix" style="margin-top: 14px;" aria-label="Payment data table">
+            <div class="matrix-head">
+              <span>Data collected at checkout</span>
+              <span>Collected by</span>
+              <span>Purpose</span>
+            </div>
+            <div class="matrix-row"><span>Name and email address</span><span>Lemon Squeezy</span><span>Purchase receipt and license delivery</span></div>
+            <div class="matrix-row"><span>Billing address</span><span>Lemon Squeezy</span><span>Tax calculation and compliance</span></div>
+            <div class="matrix-row"><span>Payment card details</span><span>Lemon Squeezy</span><span>Transaction processing (never seen by Palext)</span></div>
+            <div class="matrix-row"><span>License key + instance metadata</span><span>Palext + Lemon Squeezy validation</span><span>Verifying Pro status inside the extension</span></div>
+          </div>
+          <p class="policy-copy" style="margin-top: 14px;">After a successful purchase, Lemon Squeezy emails you a license key. That key and activation metadata are stored in browser extension storage so Palext can validate and restore Pro access. Validation requests only include license metadata and do not include scanned page styles, snapshots, or exported outputs.</p>
+          <p class="policy-copy" style="margin-top: 10px;">Lemon Squeezy operates under its own privacy policy: <a href="https://www.lemonsqueezy.com/privacy" target="_blank" rel="noreferrer noopener" style="color: var(--accent); font-weight: 700;">lemonsqueezy.com/privacy</a></p>
         </article>
 
         <article id="contact" class="docs-route-card reveal">
@@ -106,8 +136,10 @@
       <div>
         <a href="index.html">Home</a>
         <a href="docs.html">Docs</a>
-        <a href="pricing-mockup.html">Pricing</a>
-        <a href="tool-mode-mockup.html">Tool Preview</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="tool-preview.html">Tool Preview</a>
+        <a href="terms.html">Terms</a>
+        <a href="refund-policy.html">Refunds</a>
       </div>
     </div>
   </footer>

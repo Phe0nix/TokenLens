@@ -477,6 +477,7 @@
   let floatingToolStyle = null;
   let floatingToolManualPos = null;
   let floatingToolCollapsed = false;
+  let floatingPlanListenerAdded = false;
   let wcagOverlayActive = false;
   let wcagOverlayNodes = [];
   let colorBlindMode = 'off';
@@ -1303,11 +1304,35 @@
       #__tl_tool_frame__.is-collapsed .tltf-drag{
         border-bottom-color:transparent;
       }
+      #__tl_tool_frame__ .tltf-left{
+        display:flex;
+        align-items:center;
+        gap:6px;
+      }
       #__tl_tool_frame__ .tltf-title{
         color:#d9eeff;
         font:700 11px/1 -apple-system,'Segoe UI',system-ui,sans-serif;
         letter-spacing:0.24px;
         text-transform:uppercase;
+      }
+      #__tl_tool_frame__ .tltf-plan-badge{
+        font:700 8.5px/1 -apple-system,'Segoe UI',system-ui,sans-serif;
+        letter-spacing:0.35px;
+        text-transform:uppercase;
+        padding:2px 5px;
+        border-radius:4px;
+        border:1px solid rgba(140,190,230,0.38);
+        color:rgba(185,215,245,0.65);
+        background:transparent;
+        user-select:none;
+      }
+      #__tl_tool_frame__ .tltf-plan-badge[data-plan="pro"]{
+        border-color:rgba(57,168,162,0.6);
+        color:rgba(100,210,204,0.92);
+      }
+      #__tl_tool_frame__ .tltf-plan-badge[data-plan="test"]{
+        border-color:rgba(89,196,157,0.5);
+        color:rgba(143,231,199,0.8);
       }
       #__tl_tool_frame__ .tltf-head-actions{
         display:flex;
@@ -1391,7 +1416,10 @@
     host.id = '__tl_tool_frame__';
     host.innerHTML = `
       <div class="tltf-drag" role="toolbar" aria-label="Palext panel controls">
-        <span class="tltf-title">Palext</span>
+        <div class="tltf-left">
+          <span class="tltf-title">Palext</span>
+          <span class="tltf-plan-badge" id="tltf-plan-badge" data-plan="free">Free</span>
+        </div>
         <div class="tltf-head-actions">
           <button class="tltf-collapse" data-act="collapse" title="Collapse panel" aria-label="Collapse panel" aria-expanded="true">—</button>
           <button class="tltf-close" data-act="close" title="Close panel" aria-label="Close panel">✕</button>
@@ -1399,6 +1427,31 @@
       </div>
       <iframe title="Palext" src="${chrome.runtime.getURL('popup.html?embedded=1')}"></iframe>
     `;
+
+    // Set initial plan badge from storage
+    try {
+      chrome.storage.sync.get('tl_x7k1', (data) => {
+        const badge = host.querySelector('#tltf-plan-badge');
+        if (badge) {
+          const isPro = !!(data && data['tl_x7k1']);
+          badge.textContent = isPro ? 'Pro' : 'Free';
+          badge.dataset.plan = isPro ? 'pro' : 'free';
+        }
+      });
+    } catch (_) {}
+
+    // Listen for plan updates from the embedded popup iframe
+    if (!floatingPlanListenerAdded) {
+      floatingPlanListenerAdded = true;
+      window.addEventListener('message', (e) => {
+        if (!e.data || e.data.type !== 'PALEXT_PLAN_UPDATE') return;
+        const b = floatingToolHost && floatingToolHost.querySelector('#tltf-plan-badge');
+        if (!b) return;
+        const plan = e.data.plan || 'free';
+        b.textContent = plan === 'pro' ? 'Pro' : plan === 'test' ? 'Test' : 'Free';
+        b.dataset.plan = plan;
+      });
+    }
 
     const savedPos = await new Promise((resolve) => {
       try {
@@ -3284,7 +3337,19 @@
         if (r.width < 4 || r.height < 4) return;
         const clone = svg.cloneNode(true);
         if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-        const markup = new XMLSerializer().serializeToString(clone);
+
+        const svgNodes = [clone, ...Array.from(clone.querySelectorAll('svg'))];
+        svgNodes.forEach((node) => {
+          const rawW = String(node.getAttribute('width') || '').trim().toLowerCase();
+          const rawH = String(node.getAttribute('height') || '').trim().toLowerCase();
+          if (rawW === 'auto') node.removeAttribute('width');
+          if (rawH === 'auto') node.removeAttribute('height');
+        });
+
+        let markup = new XMLSerializer().serializeToString(clone);
+        markup = markup
+          .replace(/\swidth\s*=\s*(['"])\s*auto\s*\1/gi, '')
+          .replace(/\sheight\s*=\s*(['"])\s*auto\s*\1/gi, '');
         if (markup.length > 60000) return;
         const key = markup.slice(0, 200);
         if (seenSvg.has(key)) return;
